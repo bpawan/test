@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bsf="http://xmlns.fja.com/ipl/bsf/types" xmlns:d0="http://xmlns.fja.com/ipl/ccshared/lb/types/types" xmlns:fndUtil="http://xmlns.fja.com/ipl/foundation/util/types" xmlns:fundsFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/fundsfilterdef/types" xmlns:util="http://xmlns.fja.com/ipl/util/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/fundsfilterdef/types">
+
+  <xs:import namespace="http://xmlns.fja.com/ipl/foundation/util/types" schemaLocation="foundationUtilTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/util/types" schemaLocation="utilTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/bsf/types" schemaLocation="bsfTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lb/types/types" schemaLocation="lifeUtilTypes.xsd"/>
+
+
+  <xs:element name="fundsInfoView" type="fundsFilterDef:FundsInfoView"/>
+  <xs:complexType name="FundsInfoView">
+    <xs:annotation>
+      <xs:documentation>Short information about a funds.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [fundsId, fundsName, isin, wkn] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="0" name="fundsName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name of the funds.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isin" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>International Securities Identification Number.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="wkn" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>National Securities Identification Number (Wertpapierkennummer) used in Germany.&lt;p/&gt;
+                WKN was replaced by ISIN in 2003. However, for technical and practical reasons it is still in use.
+                Even newly introduced papers do have a WKN.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="0" name="fundsId" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- specific filterLocalKeyEntity for tree FundsInfo -->
+  <xs:complexType name="FundsInfoViewLocalKeyEntity">
+    <xs:annotation>
+      <xs:documentation>specific filterLocalKeyEntity for FundsInfo</xs:documentation>
+    </xs:annotation>
+
+    <xs:complexContent>
+      <xs:extension base="util:LocalKeyEntityData">
+        <xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="fundsAllocationView" type="fundsFilterDef:FundsAllocationView"/>
+  <xs:complexType name="FundsAllocationView">
+    <xs:annotation>
+      <xs:documentation>The complex type FundsAllocation contains the allocation percentage of the funds in a given portfolio.
+        This allocation does not know about the portfolio itself.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [fundsId, fundsName, isin, wkn, percentage] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="0" name="fundsName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name of the funds.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isin" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>International Securities Identification Number.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="wkn" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>National Securities Identification Number (Wertpapierkennummer) used in Germany.&lt;p/&gt;
+                WKN was replaced by ISIN in 2003. However, for technical and practical reasons it is still in use.
+                Even newly introduced papers do have a WKN.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="percentage" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>The allocation percentage (P) of the given funds in the portfolio. 0&amp;lt;=P&amp;lt;=100.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="0" name="fundsId" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- specific filterLocalKeyEntity for tree FundsAllocation -->
+  <xs:complexType name="FundsAllocationViewLocalKeyEntity">
+    <xs:annotation>
+      <xs:documentation>specific filterLocalKeyEntity for FundsAllocation</xs:documentation>
+    </xs:annotation>
+
+    <xs:complexContent>
+      <xs:extension base="util:LocalKeyEntityData">
+        <xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="fundsDetailsView" type="fundsFilterDef:FundsDetailsView"/>
+  <xs:complexType name="FundsDetailsView">
+    <xs:annotation>
+      <xs:documentation>detailed information about a funds.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [fundsId, fundsName, isin, wkn, riskClass] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="0" name="fundsName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name of the funds.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isin" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>International Securities Identification Number.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="wkn" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>National Securities Identification Number (Wertpapierkennummer) used in Germany.&lt;p/&gt;
+                WKN was replaced by ISIN in 2003. However, for technical and practical reasons it is still in use.
+                Even newly introduced papers do have a WKN.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="riskClass" type="d0:CVSlvFondsRisikoklasse">
+            <xs:annotation>
+              <xs:documentation>Risk classification of the funds.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="0" name="fundsId" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- specific filterLocalKeyEntity for tree FundsDetails -->
+  <xs:complexType name="FundsDetailsViewLocalKeyEntity">
+    <xs:annotation>
+      <xs:documentation>specific filterLocalKeyEntity for FundsDetails</xs:documentation>
+    </xs:annotation>
+
+    <xs:complexContent>
+      <xs:extension base="util:LocalKeyEntityData">
+        <xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

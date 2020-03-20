@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:util="http://xmlns.fja.com/ipl/util/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.fja.com/ipl/util/types">
+
+  <xs:simpleType name="operationMessageOrigin">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BUSINESS"/>
+      <xs:enumeration value="TECHNICAL"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="conversationalStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEW"/>
+      <xs:enumeration value="DELETED"/>
+      <xs:enumeration value="UNDEFINED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="operationMessageSeverity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UNDEFINED"/>
+      <xs:enumeration value="INFO"/>
+      <xs:enumeration value="CONFIRM"/>
+      <xs:enumeration value="WARNING"/>
+      <xs:enumeration value="ERROR"/>
+      <xs:enumeration value="FATAL"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="domainType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="STRING"/>
+      <xs:enumeration value="LONG"/>
+      <xs:enumeration value="INT"/>
+      <xs:enumeration value="DOUBLE"/>
+      <xs:enumeration value="RESOURCEID"/>
+      <xs:enumeration value="DATE"/>
+      <xs:enumeration value="MONETARYAMOUNT"/>
+      <xs:enumeration value="BUSINESSKEY"/>
+      <xs:enumeration value="ENUM"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="CausingAttribute_3_2_0">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="attributeName" type="xs:string"/>
+      <xs:element minOccurs="0" name="objectType" type="xs:string"/>
+      <xs:element minOccurs="0" name="businessKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="objectExternalReference" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Parameter_3_2_0">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="type" type="util:domainType"/>
+      <xs:element minOccurs="1" name="valueString" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OperationMessageDefinition_3_2_0">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="messageId" type="xs:string"/>
+      <xs:element minOccurs="0" name="descriptionKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="resolvingInstructionKey" type="xs:string"/>
+      <xs:element name="defaultOperationMessageSeverity" type="util:operationMessageSeverity"/>
+      <xs:element name="defaultOperationMessageOrigin" type="util:operationMessageOrigin"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OperationMessage_3_2_0">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="businessObjectClass" type="xs:string"/>
+      <xs:element minOccurs="0" name="businessObjectId" type="xs:string"/>
+      <xs:element minOccurs="0" name="componentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="serviceName" type="xs:string"/>
+      <xs:element minOccurs="0" name="operationName" type="xs:string"/>
+      <xs:element minOccurs="0" name="machineId" type="xs:string"/>
+      <xs:element minOccurs="0" name="processId" type="xs:string"/>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string"/>
+      <xs:element minOccurs="0" name="userId" type="xs:string"/>
+      <xs:element minOccurs="0" name="timeStamp" type="xs:long"/>
+      <xs:element minOccurs="0" name="localizedMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="causingClass" type="xs:string"/>
+      <xs:element minOccurs="0" name="causingMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="causingStackTrace" type="xs:string"/>
+      <xs:element minOccurs="0" name="origin" type="util:operationMessageOrigin"/>
+      <xs:element minOccurs="0" name="severity" type="util:operationMessageSeverity"/>
+      <xs:element minOccurs="0" name="operationMessageDefinition" type="util:OperationMessageDefinition_3_2_0"/>
+      <xs:element minOccurs="0" name="parameters">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="parameter" type="util:Parameter_3_2_0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="causingAttributes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="causingAttribute" type="util:CausingAttribute_3_2_0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="stackTraceString" type="xs:string"/>
+      <xs:element minOccurs="0" name="correlationId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="BusinessObjectBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="objectStatus" type="util:conversationalStatusType"/>
+      <xs:element minOccurs="0" name="objectExternalReference" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LocalKeyEntity">
+    <xs:complexContent>
+      <xs:extension base="util:BusinessObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="version" type="xs:integer"/>
+          <xs:element minOccurs="0" name="logIdLast" type="xs:integer"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="LocalKeyEntityData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="version" type="xs:integer"/>
+      <xs:element minOccurs="0" name="logIdLast" type="xs:integer"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ConversationalDataView">
+    <xs:sequence>			<xs:element minOccurs="0" name="objectStatus" type="util:conversationalStatusType"/>
+      <xs:element minOccurs="0" name="clientObjectKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="objectBusinessKey" type="xs:string"/>
+      <xs:element minOccurs="0" ref="util:attributeList"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChangeVector_3_2_0">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="xmlId" type="xs:ID"/>
+      <xs:element minOccurs="0" name="objectStatus" type="util:conversationalStatusType"/>
+      <xs:element minOccurs="0" name="clientObjectKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="objectBusinessKey" type="xs:string"/>
+      <xs:element name="attributeMap">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="hasModifications" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CdvReference_3_2_0">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="objectStatus" type="util:conversationalStatusType"/>
+      <xs:element minOccurs="0" name="clientObjectKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="objectBusinessKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AttributeListEntry">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="key" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="value" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="attributeList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry" type="util:AttributeListEntry"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="stackTrace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry" type="util:IplStackTraceElement"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="IplStackTraceElement">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="declaringClass" type="xs:string"/>
+      <xs:element minOccurs="1" name="methodName" type="xs:string"/>
+      <xs:element minOccurs="1" name="fileName" type="xs:string"/>
+      <xs:element minOccurs="1" name="lineNumber" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MergeableBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="objectStatus" type="xs:string"/>
+      <xs:element minOccurs="0" name="objectExternalReference" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Duration">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="years" nillable="false" type="xs:int"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="months" nillable="false" type="xs:int"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="days" nillable="false" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

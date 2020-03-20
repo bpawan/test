@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bsf="http://xmlns.fja.com/ipl/bsf/types" xmlns:d0="http://xmlns.fja.com/ipl/ccshared/lb/types/types" xmlns:defaultValueResultFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/defaultvalueresultfilterdef/types" xmlns:fndUtil="http://xmlns.fja.com/ipl/foundation/util/types" xmlns:util="http://xmlns.fja.com/ipl/util/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/defaultvalueresultfilterdef/types">
+
+  <xs:import namespace="http://xmlns.fja.com/ipl/foundation/util/types" schemaLocation="foundationUtilTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/util/types" schemaLocation="utilTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/bsf/types" schemaLocation="bsfTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lb/types/types" schemaLocation="lifeUtilTypes.xsd"/>
+
+
+  <xs:element name="lvDefaultValueResult" type="defaultValueResultFilterDef:LvDefaultValueResult"/>
+  <xs:complexType name="LvDefaultValueResult">
+    <xs:annotation>
+      <xs:documentation>Die Rows in Table lv repräsentieren einen oder mehrere Vertragsstände; temporal
+        identifiziert durch das Field lvId. Die Vertragsstände sind von 1 beginnend durchnummeriert,
+        wobei es auch Lücken geben darf. Welche Vertragsstände eine Row repräsentiert ist durch die
+        Fields bearbId und bearbIdAbg determiniert.Constraint prv_kzprod: für Verträge muss es genau
+        einemit kz_prod=1 geben.Constraint kzPF_jurVT: Wenn lv.pd.kzPF gesetzt ist, dann ist bei allen
+        Vertragsteilen das Field vtTypPF gesetzt.Constraint lv_vt_tf_kzH_EXIST: Von den aktiven VTs
+        eines Vertrags muss mindestens ein VT einen Tarif haben, der SLW_HT_H oder SLW_HT_W hat.Constraint
+        lv_vt_vtTypPF_UNIQUE: Innerhalb jener Vertragsteile, denen ein Tarif mit SLW_HT_h zugeordnet
+        ist, ist der vtTypPF UNIQUE.Constraint lv_mandantId: Wenn es in Table slw ein Schlüsselverzeichnis
+        'mandantid' gibt (d.h. mindestens eine Row mit slvId = 'mandantid' case-insensitive), so muss
+        lv.mandantId ungleich 0 sein.Constraint lv_pd_mandantId: Wenn lv.mandantId ungleich 0 ist, so
+        muss pd.mandantId = lv.mandantId sein.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [hvGruppe, jurLV, partnerLV, lvId] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <xs:element minOccurs="0" name="localKeyEntityData" type="defaultValueResultFilterDef:LvDefaultValueResultLocalKeyEntity"/>
+          <xs:element minOccurs="0" name="hvGruppe" type="defaultValueResultFilterDef:HvGruppeDefaultValueResult">
+          </xs:element>
+          <xs:element minOccurs="0" name="jurLV" type="defaultValueResultFilterDef:JurLVDefaultValueResult">
+          </xs:element>
+          <xs:element minOccurs="0" name="partnerLV">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="partnerLV" type="defaultValueResultFilterDef:PartnerLVDefaultValueResult">
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="0" name="lvId" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- specific filterLocalKeyEntity for tree Lv -->
+  <xs:complexType name="LvDefaultValueResultLocalKeyEntity">
+    <xs:annotation>
+      <xs:documentation>specific filterLocalKeyEntity for Lv</xs:documentation>
+    </xs:annotation>
+
+    <xs:complexContent>
+      <xs:extension base="util:LocalKeyEntityData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="beguenstId" type="xs:short"/>
+          <xs:element minOccurs="0" name="dokNwId" type="xs:int"/>
+          <xs:element minOccurs="0" name="hvGruppeId" type="xs:short"/>
+          <xs:element minOccurs="0" name="vtId" type="xs:short"/>
+          <xs:element minOccurs="0" name="vbId" type="xs:short"/>
+          <xs:element minOccurs="0" name="drittrechtId" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HvGruppeDefaultValueResult">
+    <xs:annotation>
+      <xs:documentation>Im Rahmen der bAV können unterschiedliche Zahlweisen für Arbeitgeber (AG) und Arbeitnehmer (AN)
+        vorgegeben werden. Die notwendigen Informationen werden pro HV bzw. in einer hvGruppe geführt,
+        die die eigentliche HV und die zugehörigen ZV zusammenfasst. Die hvGruppe entspricht bei
+        Pensionsfondsprodukten der Vertragsschicht für den AG bzw. dem AN. Die Entität hvGruppe enthält
+        die Zahlweise und alle sonstigen Größen, die für die HV und die zugeordneten ZV geführt werden
+        müssen.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [btgAuftReg, vt, kzVorbelDeDa] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="0" name="btgAuftReg">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="btgAuftReg" type="defaultValueResultFilterDef:BtgAuftRegDefaultValueResult">
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="vt">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="vt" type="defaultValueResultFilterDef:VtDefaultValueResult">
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzVorbelDeDa" type="d0:CVSlvJaNein">
+            <xs:annotation>
+              <xs:documentation>Kennzeichen, ob im aktuellen Kontext die Vorbelegung bereits erfolgt ist</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="0" name="hvGruppeId" type="xs:short"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BtgAuftRegDefaultValueResult">
+    <xs:annotation>
+      <xs:documentation>Die Entität beinhaltet die Regelungen zur Aufteilung des Vermögens (d.h. der verschiedenen Beitrags- und Vermögenswerte) auf die einzelnen Finanzierungstypen. Die Regeln werden pro HvGruppe geführt.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [finTyp, betragsArt, gueab, guebis, auftlgFormel, parAnteil, parUnterGr, parOberGr, zahlweise, kzErlaub, kzAktBearb] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="1" name="finTyp" type="d0:CVSlvFinTyp">
+            <xs:annotation>
+              <xs:documentation>Finanzierungstyp</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="betragsArt" type="d0:CVSlvBetragsArtAGAN">
+            <xs:annotation>
+              <xs:documentation>Betragsart: z.B. Beitrag, Auszahlung, Abfluss, Zufluss</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="gueab" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Finanzierungstyp und Aufteilungsformel wird erst ab Zeitpunkt 'Gültig ab' berücksichtigt</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="guebis" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Finanzierungstyp und Aufteilungsformel wird zu Zeitpunkten ab dem 'Gültig bis' - Datum nicht mehr berücksichtigt</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="auftlgFormel" type="d0:CVSlvAuftlgFormelAGAN">
+            <xs:annotation>
+              <xs:documentation>Formel / Formelausprägung als Verweis auf die Aufteilungsregel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="parAnteil" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Parameter Anteil für Aufteilungsformel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="parUnterGr" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Parameter Untergrenze für Aufteilungsformel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="parOberGr" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Parameter Obergrenze für Aufteilungsformel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="zahlweise" type="d0:CVSlvZahlweise">
+            <xs:annotation>
+              <xs:documentation>Zahlweise, auf die sich die in parOberGr (und parUnterGr) eingegebenen Werte beziehen</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzErlaub" type="d0:CVSlvJaNein">
+            <xs:annotation>
+              <xs:documentation>Kennzeichen für Änderungserlaubnis</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzAktBearb" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Steuert, ob ein Datensatz (z.B. ein VT) vom SB in der aktuellen Bearbeitung angelegt wurde.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="0" name="regId" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VtDefaultValueResult">
+    <xs:annotation>
+      <xs:documentation>Die Rows in Table vt repräsentieren einen oder mehrere Stände eines; temporal identifiziert durch die Fields lvId und vtId.Für welchediese Row gültig ist, wird durch die Fields bearbId und bearbIdAbg determiniert.Constraint kzrv_ISSET: wenn rvQuote oder rvId gesetzt sind, so ist auch kzRV gesetzt.Constraint pantsum: die Summe der prozentualen Anteile an Fonds müssen zusammen 1.0 ergeben, sofern der Vertragsteilstand überhaupt Fonds hat und nicht beitragsfrei istConstraint proz_antsum: die Summe der prozentualen Anteile der Provisionen müssen zusammen 1.0 ergebenConstraint vpVT_VP1: jeder Vertragsteil muss genau eine erstehaben, es sei denn, er hat keinen ZustandConstraint VP2: ein Vertragsteilstand muss eine VP2 haben, sofern derdies vorsieht.Constraint VP1_NE_VP2: VP1 und VP2 können nicht der selbe Partner sein.Constraint uebSatz_RANGE: uebSatz muss zwischen 0.0 und 1.0 sein, sofern dereine zweite versicherte Person vorsieht.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [steuAuftReg, vtueb] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="0" name="steuAuftReg">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="steuAuftReg" type="defaultValueResultFilterDef:SteuAuftRegDefaultValueResult">
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="vtueb" type="xs:short">
+            <xs:annotation>
+              <xs:documentation>Jeder Vertragsteil (mit Ausnahme des 'obersten') hat genau einen übergeordneten Vertragsteil, wodurch sich eine Hierarchie von Vertragsteilen (und daher auch Tarifen) ergibt. Der 'oberste' Vertragsteil, von welchem es immer genau einen geben muß, wirdHauptversicherunggenannt.Da die Hauptversicherung im Laufe des Vertrags wechseln kann und dieser Wechsel revisionssicher sein sollte, ist vtueb keine Column der TablejurVT, sondern der Tablevt.Zusammen mit dem Field lvId identifiziert das Field vtueb temporal den übergeordneten Vertragsteil dieses Vertragsteilstandes, bei der Hauptversicherung zeigt vtueb auf sich selbst (d.h. vtId = vtueb).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="0" name="vtId" type="xs:short"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SteuAuftRegDefaultValueResult">
+    <xs:annotation>
+      <xs:documentation>steuAuftReg = SteuerAufteilungRegelung Die Entität beinhaltet die Regelungen zur Aufteilung von Beiträgen auf die verschiedenen Beitragstypen. Die Regeln werden auf Vertragsteilebene geführt.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [beitragsTyp, betragsArt, gueab, guebis, auftlgFormel, parAnteil, parUnterGr, parOberGr, kzErlaub, kzAktBearb] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="1" name="beitragsTyp" type="d0:CVSlvBtgTyp">
+            <xs:annotation>
+              <xs:documentation>Steuerlicher Beitragstyp</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="betragsArt" type="d0:CVSlvBetragsArt">
+            <xs:annotation>
+              <xs:documentation>Betragsart: z.B. Beitrag, Auszahlung, Abfluss, Zufluss</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="gueab" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Beitragstyp und Aufteilungsformel wird erst ab Zeitpunkt 'Gültig ab' berücksichtigt</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="guebis" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Beitragstyp und Aufteilungsformel wird zu Zeitpunkten ab dem 'Gültig bis' - Datum nicht mehr berücksichtigt</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="auftlgFormel" type="d0:CVSlvAuftlgFormel">
+            <xs:annotation>
+              <xs:documentation>Formel / Formelausprägung als Verweis auf die steuerliche Aufteilungsregel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="parAnteil" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Parameter Anteil für Aufteilungsformel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="parUnterGr" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Parameter Untergrenze für Aufteilungsformel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="parOberGr" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Parameter Obergrenze für Aufteilungsformel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzErlaub" type="d0:CVSlvKzErlaub">
+            <xs:annotation>
+              <xs:documentation>Kennzeichen für Änderungserlaubnis (Sachbearbeiter, Zulagen-SNT, Initialbefüllung, etc. - mehrfache Erlaubnis möglich)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzAktBearb" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Steuert, ob ein Datensatz (z.B. ein VT) vom SB in der aktuellen Bearbeitung angelegt wurde</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="1" name="regId" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="JurLVDefaultValueResult">
+    <xs:annotation>
+      <xs:documentation>Die Rows in Table jurLV repräsentieren jeweils genau einen Vertrag. Der 'Vertrag' kann aktiv oder abgegangen oder auch ein bearbeiteter oder abgelehnter Antrag sein; maßgebend dafür ist das Field lvStatus desjenigen zugehörigen, der die höchste Bearbeitungsnummer in Field bearbId hat.Constraint mandId_lvIdExt_UNI: Die Kombination ausundbilden nebem dem Primary Key auch eine eineindeutige Identifizierungsmöglichkeit.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [kzbAV, deDat, daDat, kzSteuBehDeDa] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="0" name="kzbAV" type="d0:CVSlvBAVKz">
+            <xs:annotation>
+              <xs:documentation>Kennzeichen für betriebliche Altersversorgung</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="deDat" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Das Datum des Diensteintritts</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="daDat" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Das Datum des Dienstaustritts</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzSteuBehDeDa" type="d0:CVSlvSteuBehDeDa">
+            <xs:annotation>
+              <xs:documentation>Auswahlkennzeichen, mit dem die Vorbelegung bei der letzten Durchführung gesteuert wurde</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PartnerLVDefaultValueResult">
+    <xs:annotation>
+      <xs:documentation>Partner werden einzelnen Verträgen bzw. Vertragsteilen zugeordnet. Dabei wird auch festgehalten, welche Rolle er spielt.Beitragszahler: Der Beitragszahler ist ein Partner zum LV-Vertrag, der die Beiträge bezahlt. Der Beitragszahler kann vom Versicherungsnehmer abweichen.Drittberechtigter: Der Drittberechtigte (z.B. Vormund, Pfandgläubiger) ist ein Partner, der ein berechtigtes Interesse an einer Leistung aus dem Versicherungsvertrag hat. Dabei kann es sich z.B. um eine Abtretung oder um eine Pfändung handeln. In diesem Fall nennt man den Partner auch Zessionar.Leistungsempfaenger: Der Leistungsempfänger ist ein Partner, der vertraglich vereinbarte Leistungen bezogen auf einen LV-Vertragsteil erhält (z.B. Rentenempfänger). Im Unterschied zum Bezugsberechtigten werden hier die Empfänger regelmäßig wiederkehrender Leistungen geführt.Partner-Vertrags-Beziehung: über diese Entität werden Partner einzelnen Verträgen bzw. Vertragsteilen zugeordnet. Dabei wird auch festgehalten, welche Rolle ein Partner im jeweiligen Vertrag / Vertragsteil spielt.Versicherungs-Nehmer: Der Versicherungsnehmer (VN) ist der Partner, der den LV-Vertrag abgeschlossen und somit alle Rechte und Ansprüche daraus hat (rechtlicher Vertrags-Partner des Versicherungsunternehmens).Vorauszahlung-Empfaenger: Der Partner, an den die Vorauszahlung ausbezahlt wird. Zu jeder Vorauszahlung muß es immer einen Vorauszahlungsempfänger geben.Zustell-Adressat: Eine Partner-Beziehung in der Rolle des Zustelladressaten muß eine Partner-Adresse zugeordnet haben, über die in Vertragsangelegenheiten mit dem jeweiligen Partner korrespondiert wird.Zustell-Bevollmaechtigter: Eine Partner-Beziehung in der Rolle des Zustellbevollmächtigten</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [partnerId, rollenId, kontoId, kzHauptVN, anschriftId, gebDat, partnerIdExt, sex, landId, kzAktBearb, kzPartnerArt, kiStAMInfoDat] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="0" name="kontoId" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>ID der zugeordneten Bankverbindung zum Partner</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzHauptVN" type="d0:CVSlvJaNein">
+            <xs:annotation>
+              <xs:documentation>Dieses Kennzeichen gibt an, ob der jeweilige Versicherungsnehmer der sog. 'Haupt-VN' ist</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="anschriftId" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>ID der zugeordneten Anschrift zum Partner</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="gebDat" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Das Geburtsdatum ist der Termin, an dem die natürliche Person geboren wurde.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="partnerIdExt" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>externe Darstellung der Identifikation eines Partners</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="sex" type="d0:CVSlvGeschlecht">
+            <xs:annotation>
+              <xs:documentation>Identifizierender Schlüssel für das Geschlecht einer natürlichen Person.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="landId" type="d0:CVSlvLand">
+            <xs:annotation>
+              <xs:documentation>Wohnsitzland des Partners. Schlüssel für den in definierenden Daten hinterlegten Wert für "Land"</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzAktBearb" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Steuert, ob ein Datensatz (z.B. ein VT) in der aktuellen Bearbeitung angelegt wurde.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kzPartnerArt" type="d0:CVSlvPartnerArt">
+            <xs:annotation>
+              <xs:documentation>Kennzeichnung, ob es sich um eine juristische oder natürliche Person</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kiStAMInfoDat" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Datum eines Hinweisschreiben für das Widerspruchsrecht bzgl. der KiStAM-Abfrage</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <!-- id properties -->
+          <xs:element minOccurs="0" name="partnerId" type="xs:int"/>
+          <xs:element minOccurs="1" name="rollenId" type="d0:CVSlvPartnerrolle"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="aktStandDefaultValueResult" type="defaultValueResultFilterDef:AktStandDefaultValueResult"/>
+  <xs:complexType name="AktStandDefaultValueResult">
+    <xs:annotation>
+      <xs:documentation>Für einige Vertragsdaten vergibt Life Factory Kunstschlüssel. Die Rows in Table aktStand enthalten jeweils die letzten vergebenen Nummern eines Vertrages:</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [genLast, sbIdLast, ktoBewIdLast, zahlEmpfId, ktoBelegIdLast, mahnIdLast, eaKlauselIdLast, schwebeIdLast, regIdLast, kindIdLast, schichtIdLast, regIdBtgLast, tabselbv, sntNwId, prvIdLast] -->
+    <xs:complexContent>
+      <xs:extension base="util:ChangeVector_3_2_0">
+        <xs:sequence>
+          <!-- xmlId -->
+          <!-- no xmlId required -->
+          <!-- localKeyEntity -->
+          <!-- no localKeyEntity available -->
+          <xs:element minOccurs="0" name="genLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Letzte vergebene Generationsnummer am VB</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="sbIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Letzte vergebene Kennzeichnung einer Sammelbewegung (=sbId)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ktoBewIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Nummer der letzten durchgefuehrten Kontobewegung</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="zahlEmpfId" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Nummer des zuletzt erzeugten Zahlungsempfängers</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ktoBelegIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>ktoBelegIdLast</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="mahnIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Die ID der zuletzt erzeugten Mahnung in einem Vertrag.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="eaKlauselIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Die letzte vergebene laufende Nummer in eaKlausel (lfdnr).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="schwebeIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Die letzte vergebene Identifikation für Schwebenachweise.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="regIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Die letzte vergebene laufende Nummer in steuAuftReg</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="kindIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Die letzte vergebene kindId</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="schichtIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Die letzte vergebene schichtId</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="regIdBtgLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Die letzte vergebene regIdBtgLast</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="tabselbv" type="xs:long">
+            <xs:annotation>
+              <xs:documentation>Performanceoptimierung: In der Tabelle AKTSTAND wird in einem Bitfeld die Informationen gehalten wird, ob eine Tabelle für diesen Vertrag schon beschreiben wurde. Dadurch kann das Anlesen der Tabelle teilweise enfallen</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="sntNwId" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Letzte vergebene Identifikation für Schnittstellennachweise</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="prvIdLast" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Die letzte vergebene laufende Nummer in prv</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

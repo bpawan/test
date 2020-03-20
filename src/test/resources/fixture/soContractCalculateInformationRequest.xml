@@ -1,0 +1,30 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lif="http://xmlns.fja.com/ipl/ccshared/lc/sc/lifecontracttransactionalservice" xmlns:typ="http://xmlns.fja.com/ipl/ccshared/lc/sc/types" xmlns:typ1="http://xmlns.fja.com/ipl/bsf/types">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <lif:soContractCalculateInformationRequest>
+            <!--Optional:-->
+            <lif:invocationBusinessContextTransactional>
+                <!--Optional:-->
+                <typ:companyId>DEVK</typ:companyId>
+                <!--Optional:-->
+                <typ:contractIdExt>26483060500</typ:contractIdExt>
+                <!--Optional:-->
+                <typ:effectiveDate>2021-03-01</typ:effectiveDate>
+                <typ:salesChannel>DEFAULT</typ:salesChannel>
+                <typ:competenceLevel>MITARBEITER</typ:competenceLevel>
+            </lif:invocationBusinessContextTransactional>
+
+            <lif:invocationContext>
+
+                <!--Optional:-->
+                <typ1:userName>Dunkelverarbeitung</typ1:userName>
+                <!--Optional:-->
+                <typ1:userID>12345</typ1:userID>
+                <!--Optional:-->
+                <typ1:callSequenceNo>12</typ1:callSequenceNo>
+                <typ1:clientLocale>de-DE</typ1:clientLocale>
+                <typ1:workflowIdExt>cfd2af86-3dc1-11ea-b77f-2e728ce88125</typ1:workflowIdExt>
+            </lif:invocationContext>
+        </lif:soContractCalculateInformationRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

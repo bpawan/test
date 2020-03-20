@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bsf="http://xmlns.fja.com/ipl/bsf/types" xmlns:docManager="http://xmlns.fja.com/ipl/baf/docmanager/types" xmlns:fndUtil="http://xmlns.fja.com/ipl/foundation/util/types" xmlns:persistence="http://xmlns.fja.com/ipl/persistence" xmlns:util="http://xmlns.fja.com/ipl/util/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.fja.com/ipl/baf/docmanager/types">
+
+  <xs:import namespace="http://xmlns.fja.com/ipl/foundation/util/types" schemaLocation="foundationUtilTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/util/types" schemaLocation="utilTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/bsf/types" schemaLocation="bsfTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/persistence" schemaLocation="persistence.xsd"/>
+
+
+  <xs:element name="docPackage" type="docManager:DocPackage"/>
+  <xs:complexType name="DocPackage">
+    <xs:annotation>
+      <xs:documentation>Represents all documents for a business process.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="persistence:PersistentObject">
+        <xs:sequence>
+          <!-- no xmlId cause the type has an xmlId attribute:  -->
+          <xs:element minOccurs="0" name="businessObjectId" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Unique id of the business object.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="businessProcessId" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Unique id of the businessProcess.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isSystemDocModified" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>has the systemDocument modified defaultValues.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isSystemDocSuppressed" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>was the systemDocument suppressed.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="numberOfDuplicates" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>number of all duplicate (copie) docs (count via docXEnvelop) in the envelop.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="numberOfOriginals" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>number of all original (not duplicate) docs  (count via docXEnvelop) in the envelop.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="createDateTime" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Time stamp of creation of the DocPackage.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="processDateTime" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Time stamp of processing, initial null. If null, the docPackage was not processed yet (is new).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ifcType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Interface type used to send this doc package.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="contact" type="docManager:DocPackageContact">
+            <xs:annotation>
+              <xs:documentation>Represents the responsible person who sends this.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="envelops">
+            <xs:annotation>
+              <xs:documentation>Represents a collection of documents which will be send together.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="docEnvelop" type="docManager:DocEnvelop"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="docs">
+            <xs:annotation>
+              <xs:documentation>Represents all documents. This is a tecnical part relation only, to find the right docs follow the path
+                docPackage -&gt; envelop -&gt; docXEnvelop -&gt; doc. The last arrow is not a part relationship but a link.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="doc" type="docManager:Doc"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- local key stuff for tree DocPackage -->
+  <!-- local key stuff skipped -->
+  <xs:complexType name="DocPackageContact">
+    <xs:annotation>
+      <xs:documentation>Represents the responsible person who sends this.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="persistence:PersistentObject">
+        <xs:sequence>
+          <!-- no xmlId cause the type has an xmlId attribute:  -->
+          <xs:element minOccurs="0" name="name" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>name of contactPerson.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="nameFirst" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>first name of contactPerson.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="nameMiddle" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>middle name of contactPerson.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="title" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>title of contactPerson.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="department" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>department of contactPerson.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="phone" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>phonenumber of contactPerson.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="fax" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>faxnumber of contactPerson.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="email" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>emailaddress of contactPerson.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="contactIdExt" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>identifies an contact by an id in an external system. Can be used to map dokNw.bearbeiterId or the resolve the concrete attributes of a contact in a later step by an external system.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DocEnvelop">
+    <xs:annotation>
+      <xs:documentation>Represents a collection of documents which will be send together.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="persistence:PersistentObject">
+        <xs:sequence>
+          <!-- no xmlId cause the type has an xmlId attribute:  -->
+          <xs:element minOccurs="0" name="documents">
+            <xs:annotation>
+              <xs:documentation>Represents a collection of all participant Documents in this envelop</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="docXEnvelop" type="docManager:DocXEnvelop"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="recipients">
+            <xs:annotation>
+              <xs:documentation>Collection of recipients of this envelop</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="docEnvelopRecipient" type="docManager:DocEnvelopRecipient"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DocXEnvelop">
+    <xs:annotation>
+      <xs:documentation>Represents a collection of documents which will be send together.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="persistence:PersistentObject">
+        <xs:sequence>
+          <!-- no xmlId cause the type has an xmlId attribute:  -->
+          <xs:element minOccurs="0" name="isDocDuplicate" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>is this doc a duplicate and not a original</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isDocUserCreated" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>true: document is created by user
+                false: document is created by system.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="doc">
+            <xs:annotation>
+              <xs:documentation>Which documents are part of the envelop?</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="doc" type="xs:IDREF"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DocEnvelopRecipient">
+    <xs:annotation>
+      <xs:documentation>Represents a recipient for a envelop and details how to send it.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="persistence:PersistentObject">
+        <xs:sequence>
+          <!-- no xmlId cause the type has an xmlId attribute:  -->
+          <xs:element minOccurs="0" name="docEnvelopRecipientId" type="xs:int"/>
+          <xs:element minOccurs="0" name="role" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>role of the partner in contract. For possible values in core see docPartnerRole.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="partnerIdExt" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>unique id of the partner, identifying the partner in an external system (e. g. partnerIdExt for persons, agenturId for agents).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isRoleBased" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>true: get address from partnersystem
+                false: get address from address:DocEnvelopAddress.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="language" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>language of the document. For possible values in core see docLanguage.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="printLocation" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>printlocation (e.g. localprinter) of the document. For possible values in core see docPrintLocation.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="shipmentType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>how to send the document (e.g. letter,fax,email). For possible values in core see docShipmentType.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="shipmentRoute" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>how to route the document (e.g. direct,salespartner). For possible values in core see docShipmentRoute.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="shipmentPriority" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>shipmentpriority of the document. For possible values in core see docShipmentPriority.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="address" type="docManager:DocEnvelopAddress">
+            <xs:annotation>
+              <xs:documentation>address of the recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DocEnvelopAddress">
+    <xs:annotation>
+      <xs:documentation>Represents a address for one envelop.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="persistence:PersistentObject">
+        <xs:sequence>
+          <!-- no xmlId cause the type has an xmlId attribute:  -->
+          <xs:element minOccurs="0" name="name" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>name of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="nameFirst" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>nameFirst of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="nameMiddle" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>nameMiddle of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="title" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>title of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="fax" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>faxnumber of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="email" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>emailaddress of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="country" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>country of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="state" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>state of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="zipcode" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>zipcode of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="city" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>city of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="street1" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>street1 of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="street2" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>street2 of the envelop recipient.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Doc">
+    <xs:annotation>
+      <xs:documentation>Represents a document.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="persistence:PersistentObject">
+        <xs:sequence>
+          <!-- xmlId -->
+          <xs:element minOccurs="1" name="xmlId" type="xs:ID"/>
+          <xs:element minOccurs="0" name="docOrderNr" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>sequencenumber in the envelop.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="docTypeId" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>type of the document (e.g. cobra00006).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="docTypeVersion" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>version of the document (e.g. 1.0.0).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isDocUserModified" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>true, user has modified one documentVar at th minimum.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ifcType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Interface type used to send this document.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="docVars">
+            <xs:annotation>
+              <xs:documentation>all associated docVars</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="docVar" type="docManager:DocVar"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DocVar">
+    <xs:annotation>
+      <xs:documentation>Represents a document.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="persistence:PersistentObject">
+        <xs:sequence>
+          <!-- no xmlId cause the type has an xmlId attribute:  -->
+          <xs:element minOccurs="0" name="docVarTypeId" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>type of the documentVariable - content meaning (e. g. date of birth, date of retirement).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="docVarOrderNr" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>sequencenumber of docVariables, which can't differenced otherwise.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="docTypeData" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>content of the documentVariable.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="docVarDataType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>technical type of the docTypeData (e.g. Date, Integer, XML-String, see docVarDataType).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="docVarDataFormat" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>format of the docTypeData.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="docVarDatalength" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>length of the docTypeData.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="isDocVarUserModified" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>true, user has modified the documentVar.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

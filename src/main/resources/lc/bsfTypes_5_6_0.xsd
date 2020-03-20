@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bsf="http://xmlns.fja.com/ipl/bsf/types" xmlns:util="http://xmlns.fja.com/ipl/util/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.fja.com/ipl/bsf/types">
+
+  <xs:import namespace="http://xmlns.fja.com/ipl/util/types" schemaLocation="utilTypes_5_6_0.xsd"/>
+
+  <xs:complexType name="InvocationContext_5_6_0">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userName" type="xs:string"/>
+      <xs:element minOccurs="0" name="userID" type="xs:string"/>
+      <xs:element minOccurs="0" name="testExecutionDate" type="xs:date"/>
+      <xs:element minOccurs="0" name="testTraceCommand" type="xs:string"/>
+      <xs:element minOccurs="0" name="clientIdentification" type="xs:string"/>
+      <xs:element minOccurs="0" name="callSequenceNo" type="xs:int"/>
+      <xs:element minOccurs="0" name="authorizationContext" type="bsf:AuthorizationContext_3_2_0"/>
+      <xs:element minOccurs="0" name="clientLocale" type="xs:string"/>
+      <xs:element minOccurs="0" name="workflowIdExt" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AuthorizationContext_3_2_0">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="encodedToken" type="xs:base64Binary"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

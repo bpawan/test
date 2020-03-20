@@ -1,0 +1,2334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:applicationFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/applicationfilterdef/types"
+                  xmlns:bsf="http://xmlns.fja.com/ipl/bsf/types"
+                  xmlns:d0="http://xmlns.fja.com/ipl/ccshared/lb/sc/types"
+                  xmlns:d2="http://xmlns.fja.com/ipl/ccshared/lb/types/types"
+                  xmlns:infoFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/infofilterdef/types"
+                  xmlns:lifeContract="http://xmlns.fja.com/ipl/ccshared/lc/sc/types"
+                  xmlns:pcInFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcinfilterdef/types"
+                  xmlns:pcOutFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcoutfilterdef/types"
+                  xmlns:proposalFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/proposalfilterdef/types"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://xmlns.fja.com/ipl/ccshared/lc/sc/lifecontracttransactionalservice"
+                  xmlns:util="http://xmlns.fja.com/ipl/util/types"
+                  xmlns:viewFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/viewfilterdef/types"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/lifecontracttransactionalservice">
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/lifecontracttransactionalservice">
+            <xs:import namespace="http://xmlns.fja.com/ipl/foundation/util/types"
+                       schemaLocation="foundationUtilTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/util/types" schemaLocation="utilTypes_5_6_0.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/bsf/types" schemaLocation="bsfTypes_5_6_0.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/types"
+                       schemaLocation="lifeContractTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lb/sc/types" schemaLocation="lifeBomTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lb/types/types" schemaLocation="lifeUtilTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/applicationfilterdef/types"
+                       schemaLocation="applicationFilterDefTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/infofilterdef/types"
+                       schemaLocation="infoFilterDefTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcinfilterdef/types"
+                       schemaLocation="pcInFilterDefTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcoutfilterdef/types"
+                       schemaLocation="pcOutFilterDefTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/proposalfilterdef/types"
+                       schemaLocation="proposalFilterDefTypes.xsd"/>
+            <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/viewfilterdef/types"
+                       schemaLocation="viewFilterDefTypes.xsd"/>
+            <xs:element name="soProcessApplicationImportRequest" type="tns:soProcessApplicationImportRequest"/>
+            <xs:complexType name="soProcessApplicationImportRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="0" name="lv" type="applicationFilterDef:LvApplication"></xs:element>
+                    <xs:element minOccurs="0" name="isSystemDocSuppressed" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessApplicationImportResponse" type="tns:soProcessApplicationImportResponse"/>
+            <xs:complexType name="soProcessApplicationImportResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer">
+                        <xs:annotation>
+                            <xs:documentation>The return container holding the created external application ID (if not
+                                given by the call) and the resulting effective date.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soOutboundInterfacesAcknowledgeRequest"
+                        type="tns:soOutboundInterfacesAcknowledgeRequest"/>
+            <xs:complexType name="soOutboundInterfacesAcknowledgeRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="worklogId" type="xs:int"></xs:element>
+                    <xs:element minOccurs="0" name="ifcTypes">
+                        <xs:annotation>
+                            <xs:documentation>List of interface types to be acknowledged. The preceding service
+                                operation, which creates the outbound interface, provides a list of interface types.
+                                Theses have to be referenced in this list to be acknowledged.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="string"
+                                            type="xs:string"></xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soOutboundInterfacesAcknowledgeResponse"
+                        type="tns:soOutboundInterfacesAcknowledgeResponse"/>
+            <xs:complexType name="soOutboundInterfacesAcknowledgeResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soInfoContractCompanyRequest" type="tns:soInfoContractCompanyRequest"/>
+            <xs:complexType name="soInfoContractCompanyRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="1" name="contractIDExt" type="xs:string"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soInfoContractCompanyResponse" type="tns:soInfoContractCompanyResponse"/>
+            <xs:complexType name="soInfoContractCompanyResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result" type="d2:CVCompany">
+                        <xs:annotation>
+                            <xs:documentation>Company id for this contract.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soInfoIfcOutboundDataRequest" type="tns:soInfoIfcOutboundDataRequest"/>
+            <xs:complexType name="soInfoIfcOutboundDataRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="1" name="workflowIdExt" type="xs:string"></xs:element>
+                    <xs:element minOccurs="1" name="onlyUnscheduled" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soInfoIfcOutboundDataResponse" type="tns:soInfoIfcOutboundDataResponse"/>
+            <xs:complexType name="soInfoIfcOutboundDataResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result" type="lifeContract:IfcOutboundDataInfos">
+                        <xs:annotation>
+                            <xs:documentation>List of IDs of the interface entry each with its type.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soAssetTransferRequest" type="tns:soAssetTransferRequest"/>
+            <xs:complexType name="soAssetTransferRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="assetTransferInput" type="lifeContract:AssetTransfer"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soAssetTransferResponse" type="tns:soAssetTransferResponse"/>
+            <xs:complexType name="soAssetTransferResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soAssetTransferInboundRequest" type="tns:soAssetTransferInboundRequest"/>
+            <xs:complexType name="soAssetTransferInboundRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="criteria"
+                                type="lifeContract:InboundDataSelectionCriteria"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soAssetTransferInboundResponse" type="tns:soAssetTransferInboundResponse"/>
+            <xs:complexType name="soAssetTransferInboundResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soCocCreateCandidatesFileRequest" type="tns:soCocCreateCandidatesFileRequest"/>
+            <xs:complexType name="soCocCreateCandidatesFileRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="operation" type="d2:CVCocOperation"></xs:element>
+                    <xs:element minOccurs="0" name="outputFolder" type="xs:string"></xs:element>
+                    <xs:element minOccurs="0" name="filename" type="xs:string"></xs:element>
+                    <xs:element minOccurs="0" name="contractIdFrom" type="xs:string"></xs:element>
+                    <xs:element minOccurs="0" name="contractIdTo" type="xs:string"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soCocCreateCandidatesFileResponse" type="tns:soCocCreateCandidatesFileResponse"/>
+            <xs:complexType name="soCocCreateCandidatesFileResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessChangePremiumCollectionStopRequest"
+                        type="tns:soProcessChangePremiumCollectionStopRequest"/>
+            <xs:complexType name="soProcessChangePremiumCollectionStopRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changePremiumCollectionStop"
+                                type="lifeContract:ChangePremiumCollectionStop"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessChangePremiumCollectionStopResponse"
+                        type="tns:soProcessChangePremiumCollectionStopResponse"/>
+            <xs:complexType name="soProcessChangePremiumCollectionStopResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessChangeDisbursementStopRequest"
+                        type="tns:soProcessChangeDisbursementStopRequest"/>
+            <xs:complexType name="soProcessChangeDisbursementStopRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeDisbursementStop"
+                                type="lifeContract:ChangeDisbursementStop"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessChangeDisbursementStopResponse"
+                        type="tns:soProcessChangeDisbursementStopResponse"/>
+            <xs:complexType name="soProcessChangeDisbursementStopResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessChangeReminderStopRequest" type="tns:soProcessChangeReminderStopRequest"/>
+            <xs:complexType name="soProcessChangeReminderStopRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeReminderStop"
+                                type="lifeContract:ChangeReminderStop"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessChangeReminderStopResponse" type="tns:soProcessChangeReminderStopResponse"/>
+            <xs:complexType name="soProcessChangeReminderStopResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessChangePaymentMethodRequest" type="tns:soProcessChangePaymentMethodRequest"/>
+            <xs:complexType name="soProcessChangePaymentMethodRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changePaymentMethod"
+                                type="lifeContract:ChangePaymentMethod"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessChangePaymentMethodResponse" type="tns:soProcessChangePaymentMethodResponse"/>
+            <xs:complexType name="soProcessChangePaymentMethodResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessEndDishonorRequest" type="tns:soProcessEndDishonorRequest"/>
+            <xs:complexType name="soProcessEndDishonorRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessEndDishonorResponse" type="tns:soProcessEndDishonorResponse"/>
+            <xs:complexType name="soProcessEndDishonorResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer">
+                        <xs:annotation>
+                            <xs:documentation>The return container holding the external contract ID.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessEndCancelationRequest" type="tns:soProcessEndCancelationRequest"/>
+            <xs:complexType name="soProcessEndCancelationRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessEndCancelationResponse" type="tns:soProcessEndCancelationResponse"/>
+            <xs:complexType name="soProcessEndCancelationResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer">
+                        <xs:annotation>
+                            <xs:documentation>The return container holding the external contract ID.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessResumeAndReleasePendingModificationRequest"
+                        type="tns:soProcessResumeAndReleasePendingModificationRequest"/>
+            <xs:complexType name="soProcessResumeAndReleasePendingModificationRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="pendingModificationData"
+                                type="lifeContract:PendingModificationData"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessResumeAndReleasePendingModificationResponse"
+                        type="tns:soProcessResumeAndReleasePendingModificationResponse"/>
+            <xs:complexType name="soProcessResumeAndReleasePendingModificationResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessResumeAndRejectPendingModificationRequest"
+                        type="tns:soProcessResumeAndRejectPendingModificationRequest"/>
+            <xs:complexType name="soProcessResumeAndRejectPendingModificationRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="pendingModificationData"
+                                type="lifeContract:PendingModificationData"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessResumeAndRejectPendingModificationResponse"
+                        type="tns:soProcessResumeAndRejectPendingModificationResponse"/>
+            <xs:complexType name="soProcessResumeAndRejectPendingModificationResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProposalCalculateRequest" type="tns:soProposalCalculateRequest"/>
+            <xs:complexType name="soProposalCalculateRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="pcInput" type="pcInFilterDef:LvPcIn"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProposalCalculateResponse" type="tns:soProposalCalculateResponse"/>
+            <xs:complexType name="soProposalCalculateResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result" type="pcOutFilterDef:LvPcOut"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessProposalImportRequest" type="tns:soProcessProposalImportRequest"/>
+            <xs:complexType name="soProcessProposalImportRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="0" name="lv" type="proposalFilterDef:LvProposal"></xs:element>
+                    <xs:element minOccurs="0" name="isSystemDocSuppressed" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessProposalImportResponse" type="tns:soProcessProposalImportResponse"/>
+            <xs:complexType name="soProcessProposalImportResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer">
+                        <xs:annotation>
+                            <xs:documentation>The return container holding the created external application ID (if not
+                                given by the call) and the resulting effective date.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soContractCalculateInformationRequest" type="tns:soContractCalculateInformationRequest"/>
+            <xs:complexType name="soContractCalculateInformationRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="calculateWithProjection" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soContractCalculateInformationResponse"
+                        type="tns:soContractCalculateInformationResponse"/>
+            <xs:complexType name="soContractCalculateInformationResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result" type="infoFilterDef:LvInfo"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soCreateDocumentsRequest" type="tns:soCreateDocumentsRequest"/>
+            <xs:complexType name="soCreateDocumentsRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="logId" type="xs:int"></xs:element>
+                    <xs:element minOccurs="0" name="businessProcessType"
+                                type="d2:CVBusinessProcessTypePrint"></xs:element>
+                    <xs:element minOccurs="0" name="suppressDefaultDocuments" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="0" name="documentSpecifications">
+                        <xs:annotation>
+                            <xs:documentation>Specifications of the documents to be created.</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="documentSpecification"
+                                            type="lifeContract:DocumentSpecification"></xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soCreateDocumentsResponse" type="tns:soCreateDocumentsResponse"/>
+            <xs:complexType name="soCreateDocumentsResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessEndSurrenderRequest" type="tns:soProcessEndSurrenderRequest"/>
+            <xs:complexType name="soProcessEndSurrenderRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeEndSurrender"
+                                type="lifeContract:ChangeEndSurrender"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessEndSurrenderResponse" type="tns:soProcessEndSurrenderResponse"/>
+            <xs:complexType name="soProcessEndSurrenderResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessReactivateVersionRequest" type="tns:soProcessReactivateVersionRequest"/>
+            <xs:complexType name="soProcessReactivateVersionRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="contractVersion" type="xs:int"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessReactivateVersionResponse" type="tns:soProcessReactivateVersionResponse"/>
+            <xs:complexType name="soProcessReactivateVersionResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationCessionaryRequest"
+                        type="tns:soProcessModificationCessionaryRequest"/>
+            <xs:complexType name="soProcessModificationCessionaryRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeModificationCessionary"
+                                type="lifeContract:ChangeModificationCessionary"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationCessionaryResponse"
+                        type="tns:soProcessModificationCessionaryResponse"/>
+            <xs:complexType name="soProcessModificationCessionaryResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPeriodicalIncreaseRequest"
+                        type="tns:soProcessModificationPeriodicalIncreaseRequest"/>
+            <xs:complexType name="soProcessModificationPeriodicalIncreaseRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeModificationPeriodicalIncrease"
+                                type="lifeContract:ChangeModificationPeriodicalIncrease"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPeriodicalIncreaseResponse"
+                        type="tns:soProcessModificationPeriodicalIncreaseResponse"/>
+            <xs:complexType name="soProcessModificationPeriodicalIncreaseResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessPremiumWaiverBeginRequest" type="tns:soProcessPremiumWaiverBeginRequest"/>
+            <xs:complexType name="soProcessPremiumWaiverBeginRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changePremiumWaiverBegin"
+                                type="lifeContract:ChangePremiumWaiverBegin"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessPremiumWaiverBeginResponse" type="tns:soProcessPremiumWaiverBeginResponse"/>
+            <xs:complexType name="soProcessPremiumWaiverBeginResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationTechnicalRequest" type="tns:soProcessModificationTechnicalRequest"/>
+            <xs:complexType name="soProcessModificationTechnicalRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeModificationTechnical"
+                                type="lifeContract:ChangeModificationTechnical"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationTechnicalResponse"
+                        type="tns:soProcessModificationTechnicalResponse"/>
+            <xs:complexType name="soProcessModificationTechnicalResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPaymentFrequencyRequest"
+                        type="tns:soProcessModificationPaymentFrequencyRequest"/>
+            <xs:complexType name="soProcessModificationPaymentFrequencyRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeModificationPaymentFrequency"
+                                type="lifeContract:ChangeModificationPaymentFrequency"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPaymentFrequencyResponse"
+                        type="tns:soProcessModificationPaymentFrequencyResponse"/>
+            <xs:complexType name="soProcessModificationPaymentFrequencyResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPeriodicalIncreaseRevocationRequest"
+                        type="tns:soProcessModificationPeriodicalIncreaseRevocationRequest"/>
+            <xs:complexType name="soProcessModificationPeriodicalIncreaseRevocationRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPeriodicalIncreaseRevocationResponse"
+                        type="tns:soProcessModificationPeriodicalIncreaseRevocationResponse"/>
+            <xs:complexType name="soProcessModificationPeriodicalIncreaseRevocationResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationTechnicalOthersRequest"
+                        type="tns:soProcessModificationTechnicalOthersRequest"/>
+            <xs:complexType name="soProcessModificationTechnicalOthersRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeModificationTechnicalOthers"
+                                type="lifeContract:ChangeModificationTechnicalOthers"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationTechnicalOthersResponse"
+                        type="tns:soProcessModificationTechnicalOthersResponse"/>
+            <xs:complexType name="soProcessModificationTechnicalOthersResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessAdditionalPaymentRequest" type="tns:soProcessAdditionalPaymentRequest"/>
+            <xs:complexType name="soProcessAdditionalPaymentRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="0" name="changeAdditionalPayment"
+                                type="lifeContract:ChangeAdditionalPayment"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessAdditionalPaymentResponse" type="tns:soProcessAdditionalPaymentResponse"/>
+            <xs:complexType name="soProcessAdditionalPaymentResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPremiumInterruptionRequest"
+                        type="tns:soProcessModificationPremiumInterruptionRequest"/>
+            <xs:complexType name="soProcessModificationPremiumInterruptionRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changePremiumInterruption"
+                                type="lifeContract:ChangePremiumInterruption"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPremiumInterruptionResponse"
+                        type="tns:soProcessModificationPremiumInterruptionResponse"/>
+            <xs:complexType name="soProcessModificationPremiumInterruptionResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPolicyLoanRequest"
+                        type="tns:soProcessModificationPolicyLoanRequest"/>
+            <xs:complexType name="soProcessModificationPolicyLoanRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changePolicyLoan" type="lifeContract:ChangePolicyLoan"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessModificationPolicyLoanResponse"
+                        type="tns:soProcessModificationPolicyLoanResponse"/>
+            <xs:complexType name="soProcessModificationPolicyLoanResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessCollectiveReassignRequest" type="tns:soProcessCollectiveReassignRequest"/>
+            <xs:complexType name="soProcessCollectiveReassignRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeCollectiveReassign"
+                                type="lifeContract:ChangeCollectiveReassign"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessCollectiveReassignResponse" type="tns:soProcessCollectiveReassignResponse"/>
+            <xs:complexType name="soProcessCollectiveReassignResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessSurrenderPartialRequest" type="tns:soProcessSurrenderPartialRequest"/>
+            <xs:complexType name="soProcessSurrenderPartialRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeSurrenderPartial"
+                                type="lifeContract:ChangeSurrenderPartial"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessSurrenderPartialResponse" type="tns:soProcessSurrenderPartialResponse"/>
+            <xs:complexType name="soProcessSurrenderPartialResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessCoverExclusionRequest" type="tns:soProcessCoverExclusionRequest"/>
+            <xs:complexType name="soProcessCoverExclusionRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="changeCoverExclusion"
+                                type="lifeContract:ChangeCoverExclusion"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessCoverExclusionResponse" type="tns:soProcessCoverExclusionResponse"/>
+            <xs:complexType name="soProcessCoverExclusionResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessFundsAbsoluteShiftRequest" type="tns:soProcessFundsAbsoluteShiftRequest"/>
+            <xs:complexType name="soProcessFundsAbsoluteShiftRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="fundShiftData" type="lifeContract:FundShiftData"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessFundsAbsoluteShiftResponse" type="tns:soProcessFundsAbsoluteShiftResponse"/>
+            <xs:complexType name="soProcessFundsAbsoluteShiftResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessFundsRelativeShiftRequest" type="tns:soProcessFundsRelativeShiftRequest"/>
+            <xs:complexType name="soProcessFundsRelativeShiftRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="fundSwitchData" type="lifeContract:FundSwitchData"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessFundsRelativeShiftResponse" type="tns:soProcessFundsRelativeShiftResponse"/>
+            <xs:complexType name="soProcessFundsRelativeShiftResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessFundsSwitchRequest" type="tns:soProcessFundsSwitchRequest"/>
+            <xs:complexType name="soProcessFundsSwitchRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="fundSwitchData" type="lifeContract:FundSwitchData"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessFundsSwitchResponse" type="tns:soProcessFundsSwitchResponse"/>
+            <xs:complexType name="soProcessFundsSwitchResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessAutomaticSettlementRequest" type="tns:soProcessAutomaticSettlementRequest"/>
+            <xs:complexType name="soProcessAutomaticSettlementRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="settlementDataInput"
+                                type="lifeContract:SettlementData"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessAutomaticSettlementResponse" type="tns:soProcessAutomaticSettlementResponse"/>
+            <xs:complexType name="soProcessAutomaticSettlementResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result"
+                                type="lifeContract:TransactionalBusinessProcessReturnContainer"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessBenefitDetailsRequest" type="tns:soProcessBenefitDetailsRequest"/>
+            <xs:complexType name="soProcessBenefitDetailsRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="transactionalProcessType"
+                                type="d2:CVTransactionalProcessType"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessBenefitDetailsResponse" type="tns:soProcessBenefitDetailsResponse"/>
+            <xs:complexType name="soProcessBenefitDetailsResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result" type="infoFilterDef:LcRootContainerInfo"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soContractsSelectForAutoSettlementRequest"
+                        type="tns:soContractsSelectForAutoSettlementRequest"/>
+            <xs:complexType name="soContractsSelectForAutoSettlementRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="parameters" type="d0:Parameters"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soContractsSelectForAutoSettlementResponse"
+                        type="tns:soContractsSelectForAutoSettlementResponse"/>
+            <xs:complexType name="soContractsSelectForAutoSettlementResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result">
+                        <xs:annotation>
+                            <xs:documentation>List of external contract identifiers.</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="result" type="xs:string">
+                                    <xs:annotation>
+                                        <xs:documentation>List of external contract identifiers.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessReleaseAutoSettlementRequest" type="tns:soProcessReleaseAutoSettlementRequest"/>
+            <xs:complexType name="soProcessReleaseAutoSettlementRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="settlementData" type="lifeContract:SettlementData"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessReleaseAutoSettlementResponse"
+                        type="tns:soProcessReleaseAutoSettlementResponse"/>
+            <xs:complexType name="soProcessReleaseAutoSettlementResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soGetSettlementAdviceRequest" type="tns:soGetSettlementAdviceRequest"/>
+            <xs:complexType name="soGetSettlementAdviceRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="getSettlementAdviceArgs"
+                                type="lifeContract:GetSettlementAdviceArgs"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soGetSettlementAdviceResponse" type="tns:soGetSettlementAdviceResponse"/>
+            <xs:complexType name="soGetSettlementAdviceResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result" type="lifeContract:SettlementAdvice"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessContractPartialDetailsSearchForPartnerRequest"
+                        type="tns:soProcessContractPartialDetailsSearchForPartnerRequest"/>
+            <xs:complexType name="soProcessContractPartialDetailsSearchForPartnerRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="0" name="partnerData"
+                                type="lifeContract:PreviousPartialContractForPartnerData"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soProcessContractPartialDetailsSearchForPartnerResponse"
+                        type="tns:soProcessContractPartialDetailsSearchForPartnerResponse"/>
+            <xs:complexType name="soProcessContractPartialDetailsSearchForPartnerResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="result"
+                                            type="viewFilterDef:PartialContractInfoForPartnerView"></xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soApplicationCalculateRequest" type="tns:soApplicationCalculateRequest"/>
+            <xs:complexType name="soApplicationCalculateRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invocationBusinessContextTransactional"
+                                type="lifeContract:InvocationBusinessContextTransactional"></xs:element>
+                    <xs:element minOccurs="1" name="input" type="pcInFilterDef:LvPcIn"></xs:element>
+                    <xs:element minOccurs="1" name="invocationContext" type="bsf:InvocationContext_5_6_0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="soApplicationCalculateResponse" type="tns:soApplicationCalculateResponse"/>
+            <xs:complexType name="soApplicationCalculateResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result" type="pcOutFilterDef:LvPcOut"></xs:element>
+                    <xs:element minOccurs="0" name="operationMessages">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="operationMessage"
+                                            type="util:OperationMessage_3_2_0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="soProcessApplicationImportRequest">
+        <wsdl:part element="tns:soProcessApplicationImportRequest" name="soProcessApplicationImportRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessApplicationImportResponse">
+        <wsdl:part element="tns:soProcessApplicationImportResponse"
+                   name="soProcessApplicationImportResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soOutboundInterfacesAcknowledgeRequest">
+        <wsdl:part element="tns:soOutboundInterfacesAcknowledgeRequest"
+                   name="soOutboundInterfacesAcknowledgeRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soOutboundInterfacesAcknowledgeResponse">
+        <wsdl:part element="tns:soOutboundInterfacesAcknowledgeResponse"
+                   name="soOutboundInterfacesAcknowledgeResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soInfoContractCompanyRequest">
+        <wsdl:part element="tns:soInfoContractCompanyRequest" name="soInfoContractCompanyRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soInfoContractCompanyResponse">
+        <wsdl:part element="tns:soInfoContractCompanyResponse" name="soInfoContractCompanyResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soInfoIfcOutboundDataRequest">
+        <wsdl:part element="tns:soInfoIfcOutboundDataRequest" name="soInfoIfcOutboundDataRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soInfoIfcOutboundDataResponse">
+        <wsdl:part element="tns:soInfoIfcOutboundDataResponse" name="soInfoIfcOutboundDataResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soAssetTransferRequest">
+        <wsdl:part element="tns:soAssetTransferRequest" name="soAssetTransferRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soAssetTransferResponse">
+        <wsdl:part element="tns:soAssetTransferResponse" name="soAssetTransferResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soAssetTransferInboundRequest">
+        <wsdl:part element="tns:soAssetTransferInboundRequest" name="soAssetTransferInboundRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soAssetTransferInboundResponse">
+        <wsdl:part element="tns:soAssetTransferInboundResponse" name="soAssetTransferInboundResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soCocCreateCandidatesFileRequest">
+        <wsdl:part element="tns:soCocCreateCandidatesFileRequest" name="soCocCreateCandidatesFileRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soCocCreateCandidatesFileResponse">
+        <wsdl:part element="tns:soCocCreateCandidatesFileResponse" name="soCocCreateCandidatesFileResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessChangePremiumCollectionStopRequest">
+        <wsdl:part element="tns:soProcessChangePremiumCollectionStopRequest"
+                   name="soProcessChangePremiumCollectionStopRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessChangePremiumCollectionStopResponse">
+        <wsdl:part element="tns:soProcessChangePremiumCollectionStopResponse"
+                   name="soProcessChangePremiumCollectionStopResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessChangeDisbursementStopRequest">
+        <wsdl:part element="tns:soProcessChangeDisbursementStopRequest"
+                   name="soProcessChangeDisbursementStopRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessChangeDisbursementStopResponse">
+        <wsdl:part element="tns:soProcessChangeDisbursementStopResponse"
+                   name="soProcessChangeDisbursementStopResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessChangeReminderStopRequest">
+        <wsdl:part element="tns:soProcessChangeReminderStopRequest"
+                   name="soProcessChangeReminderStopRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessChangeReminderStopResponse">
+        <wsdl:part element="tns:soProcessChangeReminderStopResponse"
+                   name="soProcessChangeReminderStopResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessChangePaymentMethodRequest">
+        <wsdl:part element="tns:soProcessChangePaymentMethodRequest"
+                   name="soProcessChangePaymentMethodRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessChangePaymentMethodResponse">
+        <wsdl:part element="tns:soProcessChangePaymentMethodResponse"
+                   name="soProcessChangePaymentMethodResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessEndDishonorRequest">
+        <wsdl:part element="tns:soProcessEndDishonorRequest" name="soProcessEndDishonorRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessEndDishonorResponse">
+        <wsdl:part element="tns:soProcessEndDishonorResponse" name="soProcessEndDishonorResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessEndCancelationRequest">
+        <wsdl:part element="tns:soProcessEndCancelationRequest" name="soProcessEndCancelationRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessEndCancelationResponse">
+        <wsdl:part element="tns:soProcessEndCancelationResponse" name="soProcessEndCancelationResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessResumeAndReleasePendingModificationRequest">
+        <wsdl:part element="tns:soProcessResumeAndReleasePendingModificationRequest"
+                   name="soProcessResumeAndReleasePendingModificationRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessResumeAndReleasePendingModificationResponse">
+        <wsdl:part element="tns:soProcessResumeAndReleasePendingModificationResponse"
+                   name="soProcessResumeAndReleasePendingModificationResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessResumeAndRejectPendingModificationRequest">
+        <wsdl:part element="tns:soProcessResumeAndRejectPendingModificationRequest"
+                   name="soProcessResumeAndRejectPendingModificationRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessResumeAndRejectPendingModificationResponse">
+        <wsdl:part element="tns:soProcessResumeAndRejectPendingModificationResponse"
+                   name="soProcessResumeAndRejectPendingModificationResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProposalCalculateRequest">
+        <wsdl:part element="tns:soProposalCalculateRequest" name="soProposalCalculateRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProposalCalculateResponse">
+        <wsdl:part element="tns:soProposalCalculateResponse" name="soProposalCalculateResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessProposalImportRequest">
+        <wsdl:part element="tns:soProcessProposalImportRequest" name="soProcessProposalImportRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessProposalImportResponse">
+        <wsdl:part element="tns:soProcessProposalImportResponse" name="soProcessProposalImportResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soContractCalculateInformationRequest">
+        <wsdl:part element="tns:soContractCalculateInformationRequest"
+                   name="soContractCalculateInformationRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soContractCalculateInformationResponse">
+        <wsdl:part element="tns:soContractCalculateInformationResponse"
+                   name="soContractCalculateInformationResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soCreateDocumentsRequest">
+        <wsdl:part element="tns:soCreateDocumentsRequest" name="soCreateDocumentsRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soCreateDocumentsResponse">
+        <wsdl:part element="tns:soCreateDocumentsResponse" name="soCreateDocumentsResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessEndSurrenderRequest">
+        <wsdl:part element="tns:soProcessEndSurrenderRequest" name="soProcessEndSurrenderRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessEndSurrenderResponse">
+        <wsdl:part element="tns:soProcessEndSurrenderResponse" name="soProcessEndSurrenderResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessReactivateVersionRequest">
+        <wsdl:part element="tns:soProcessReactivateVersionRequest" name="soProcessReactivateVersionRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessReactivateVersionResponse">
+        <wsdl:part element="tns:soProcessReactivateVersionResponse"
+                   name="soProcessReactivateVersionResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationCessionaryRequest">
+        <wsdl:part element="tns:soProcessModificationCessionaryRequest"
+                   name="soProcessModificationCessionaryRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationCessionaryResponse">
+        <wsdl:part element="tns:soProcessModificationCessionaryResponse"
+                   name="soProcessModificationCessionaryResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPeriodicalIncreaseRequest">
+        <wsdl:part element="tns:soProcessModificationPeriodicalIncreaseRequest"
+                   name="soProcessModificationPeriodicalIncreaseRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPeriodicalIncreaseResponse">
+        <wsdl:part element="tns:soProcessModificationPeriodicalIncreaseResponse"
+                   name="soProcessModificationPeriodicalIncreaseResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessPremiumWaiverBeginRequest">
+        <wsdl:part element="tns:soProcessPremiumWaiverBeginRequest"
+                   name="soProcessPremiumWaiverBeginRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessPremiumWaiverBeginResponse">
+        <wsdl:part element="tns:soProcessPremiumWaiverBeginResponse"
+                   name="soProcessPremiumWaiverBeginResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationTechnicalRequest">
+        <wsdl:part element="tns:soProcessModificationTechnicalRequest"
+                   name="soProcessModificationTechnicalRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationTechnicalResponse">
+        <wsdl:part element="tns:soProcessModificationTechnicalResponse"
+                   name="soProcessModificationTechnicalResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPaymentFrequencyRequest">
+        <wsdl:part element="tns:soProcessModificationPaymentFrequencyRequest"
+                   name="soProcessModificationPaymentFrequencyRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPaymentFrequencyResponse">
+        <wsdl:part element="tns:soProcessModificationPaymentFrequencyResponse"
+                   name="soProcessModificationPaymentFrequencyResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPeriodicalIncreaseRevocationRequest">
+        <wsdl:part element="tns:soProcessModificationPeriodicalIncreaseRevocationRequest"
+                   name="soProcessModificationPeriodicalIncreaseRevocationRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPeriodicalIncreaseRevocationResponse">
+        <wsdl:part element="tns:soProcessModificationPeriodicalIncreaseRevocationResponse"
+                   name="soProcessModificationPeriodicalIncreaseRevocationResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationTechnicalOthersRequest">
+        <wsdl:part element="tns:soProcessModificationTechnicalOthersRequest"
+                   name="soProcessModificationTechnicalOthersRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationTechnicalOthersResponse">
+        <wsdl:part element="tns:soProcessModificationTechnicalOthersResponse"
+                   name="soProcessModificationTechnicalOthersResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessAdditionalPaymentRequest">
+        <wsdl:part element="tns:soProcessAdditionalPaymentRequest" name="soProcessAdditionalPaymentRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessAdditionalPaymentResponse">
+        <wsdl:part element="tns:soProcessAdditionalPaymentResponse"
+                   name="soProcessAdditionalPaymentResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPremiumInterruptionRequest">
+        <wsdl:part element="tns:soProcessModificationPremiumInterruptionRequest"
+                   name="soProcessModificationPremiumInterruptionRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPremiumInterruptionResponse">
+        <wsdl:part element="tns:soProcessModificationPremiumInterruptionResponse"
+                   name="soProcessModificationPremiumInterruptionResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPolicyLoanRequest">
+        <wsdl:part element="tns:soProcessModificationPolicyLoanRequest"
+                   name="soProcessModificationPolicyLoanRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessModificationPolicyLoanResponse">
+        <wsdl:part element="tns:soProcessModificationPolicyLoanResponse"
+                   name="soProcessModificationPolicyLoanResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessCollectiveReassignRequest">
+        <wsdl:part element="tns:soProcessCollectiveReassignRequest"
+                   name="soProcessCollectiveReassignRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessCollectiveReassignResponse">
+        <wsdl:part element="tns:soProcessCollectiveReassignResponse"
+                   name="soProcessCollectiveReassignResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessSurrenderPartialRequest">
+        <wsdl:part element="tns:soProcessSurrenderPartialRequest" name="soProcessSurrenderPartialRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessSurrenderPartialResponse">
+        <wsdl:part element="tns:soProcessSurrenderPartialResponse" name="soProcessSurrenderPartialResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessCoverExclusionRequest">
+        <wsdl:part element="tns:soProcessCoverExclusionRequest" name="soProcessCoverExclusionRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessCoverExclusionResponse">
+        <wsdl:part element="tns:soProcessCoverExclusionResponse" name="soProcessCoverExclusionResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessFundsAbsoluteShiftRequest">
+        <wsdl:part element="tns:soProcessFundsAbsoluteShiftRequest"
+                   name="soProcessFundsAbsoluteShiftRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessFundsAbsoluteShiftResponse">
+        <wsdl:part element="tns:soProcessFundsAbsoluteShiftResponse"
+                   name="soProcessFundsAbsoluteShiftResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessFundsRelativeShiftRequest">
+        <wsdl:part element="tns:soProcessFundsRelativeShiftRequest"
+                   name="soProcessFundsRelativeShiftRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessFundsRelativeShiftResponse">
+        <wsdl:part element="tns:soProcessFundsRelativeShiftResponse"
+                   name="soProcessFundsRelativeShiftResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessFundsSwitchRequest">
+        <wsdl:part element="tns:soProcessFundsSwitchRequest" name="soProcessFundsSwitchRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessFundsSwitchResponse">
+        <wsdl:part element="tns:soProcessFundsSwitchResponse" name="soProcessFundsSwitchResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessAutomaticSettlementRequest">
+        <wsdl:part element="tns:soProcessAutomaticSettlementRequest"
+                   name="soProcessAutomaticSettlementRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessAutomaticSettlementResponse">
+        <wsdl:part element="tns:soProcessAutomaticSettlementResponse"
+                   name="soProcessAutomaticSettlementResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessBenefitDetailsRequest">
+        <wsdl:part element="tns:soProcessBenefitDetailsRequest" name="soProcessBenefitDetailsRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessBenefitDetailsResponse">
+        <wsdl:part element="tns:soProcessBenefitDetailsResponse" name="soProcessBenefitDetailsResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soContractsSelectForAutoSettlementRequest">
+        <wsdl:part element="tns:soContractsSelectForAutoSettlementRequest"
+                   name="soContractsSelectForAutoSettlementRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soContractsSelectForAutoSettlementResponse">
+        <wsdl:part element="tns:soContractsSelectForAutoSettlementResponse"
+                   name="soContractsSelectForAutoSettlementResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessReleaseAutoSettlementRequest">
+        <wsdl:part element="tns:soProcessReleaseAutoSettlementRequest"
+                   name="soProcessReleaseAutoSettlementRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessReleaseAutoSettlementResponse">
+        <wsdl:part element="tns:soProcessReleaseAutoSettlementResponse"
+                   name="soProcessReleaseAutoSettlementResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soGetSettlementAdviceRequest">
+        <wsdl:part element="tns:soGetSettlementAdviceRequest" name="soGetSettlementAdviceRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soGetSettlementAdviceResponse">
+        <wsdl:part element="tns:soGetSettlementAdviceResponse" name="soGetSettlementAdviceResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessContractPartialDetailsSearchForPartnerRequest">
+        <wsdl:part element="tns:soProcessContractPartialDetailsSearchForPartnerRequest"
+                   name="soProcessContractPartialDetailsSearchForPartnerRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soProcessContractPartialDetailsSearchForPartnerResponse">
+        <wsdl:part element="tns:soProcessContractPartialDetailsSearchForPartnerResponse"
+                   name="soProcessContractPartialDetailsSearchForPartnerResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soApplicationCalculateRequest">
+        <wsdl:part element="tns:soApplicationCalculateRequest" name="soApplicationCalculateRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="soApplicationCalculateResponse">
+        <wsdl:part element="tns:soApplicationCalculateResponse" name="soApplicationCalculateResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="lifeContractTransactionalServiceWS">
+        <wsdl:operation name="soProcessApplicationImport">
+            <wsdl:input message="tns:soProcessApplicationImportRequest"
+                        name="soProcessApplicationImportRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessApplicationImportResponse"
+                         name="soProcessApplicationImportResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soOutboundInterfacesAcknowledge">
+            <wsdl:input message="tns:soOutboundInterfacesAcknowledgeRequest"
+                        name="soOutboundInterfacesAcknowledgeRequest"></wsdl:input>
+            <wsdl:output message="tns:soOutboundInterfacesAcknowledgeResponse"
+                         name="soOutboundInterfacesAcknowledgeResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soInfoContractCompany">
+            <wsdl:input message="tns:soInfoContractCompanyRequest" name="soInfoContractCompanyRequest"></wsdl:input>
+            <wsdl:output message="tns:soInfoContractCompanyResponse" name="soInfoContractCompanyResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soInfoIfcOutboundData">
+            <wsdl:input message="tns:soInfoIfcOutboundDataRequest" name="soInfoIfcOutboundDataRequest"></wsdl:input>
+            <wsdl:output message="tns:soInfoIfcOutboundDataResponse" name="soInfoIfcOutboundDataResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soAssetTransfer">
+            <wsdl:input message="tns:soAssetTransferRequest" name="soAssetTransferRequest"></wsdl:input>
+            <wsdl:output message="tns:soAssetTransferResponse" name="soAssetTransferResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soAssetTransferInbound">
+            <wsdl:input message="tns:soAssetTransferInboundRequest" name="soAssetTransferInboundRequest"></wsdl:input>
+            <wsdl:output message="tns:soAssetTransferInboundResponse"
+                         name="soAssetTransferInboundResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soCocCreateCandidatesFile">
+            <wsdl:input message="tns:soCocCreateCandidatesFileRequest"
+                        name="soCocCreateCandidatesFileRequest"></wsdl:input>
+            <wsdl:output message="tns:soCocCreateCandidatesFileResponse"
+                         name="soCocCreateCandidatesFileResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessChangePremiumCollectionStop">
+            <wsdl:input message="tns:soProcessChangePremiumCollectionStopRequest"
+                        name="soProcessChangePremiumCollectionStopRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessChangePremiumCollectionStopResponse"
+                         name="soProcessChangePremiumCollectionStopResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessChangeDisbursementStop">
+            <wsdl:input message="tns:soProcessChangeDisbursementStopRequest"
+                        name="soProcessChangeDisbursementStopRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessChangeDisbursementStopResponse"
+                         name="soProcessChangeDisbursementStopResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessChangeReminderStop">
+            <wsdl:input message="tns:soProcessChangeReminderStopRequest"
+                        name="soProcessChangeReminderStopRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessChangeReminderStopResponse"
+                         name="soProcessChangeReminderStopResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessChangePaymentMethod">
+            <wsdl:input message="tns:soProcessChangePaymentMethodRequest"
+                        name="soProcessChangePaymentMethodRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessChangePaymentMethodResponse"
+                         name="soProcessChangePaymentMethodResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessEndDishonor">
+            <wsdl:input message="tns:soProcessEndDishonorRequest" name="soProcessEndDishonorRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessEndDishonorResponse" name="soProcessEndDishonorResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessEndCancelation">
+            <wsdl:input message="tns:soProcessEndCancelationRequest" name="soProcessEndCancelationRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessEndCancelationResponse"
+                         name="soProcessEndCancelationResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessResumeAndReleasePendingModification">
+            <wsdl:input message="tns:soProcessResumeAndReleasePendingModificationRequest"
+                        name="soProcessResumeAndReleasePendingModificationRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessResumeAndReleasePendingModificationResponse"
+                         name="soProcessResumeAndReleasePendingModificationResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessResumeAndRejectPendingModification">
+            <wsdl:input message="tns:soProcessResumeAndRejectPendingModificationRequest"
+                        name="soProcessResumeAndRejectPendingModificationRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessResumeAndRejectPendingModificationResponse"
+                         name="soProcessResumeAndRejectPendingModificationResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProposalCalculate">
+            <wsdl:input message="tns:soProposalCalculateRequest" name="soProposalCalculateRequest"></wsdl:input>
+            <wsdl:output message="tns:soProposalCalculateResponse" name="soProposalCalculateResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessProposalImport">
+            <wsdl:input message="tns:soProcessProposalImportRequest" name="soProcessProposalImportRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessProposalImportResponse"
+                         name="soProcessProposalImportResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soContractCalculateInformation">
+            <wsdl:input message="tns:soContractCalculateInformationRequest"
+                        name="soContractCalculateInformationRequest"></wsdl:input>
+            <wsdl:output message="tns:soContractCalculateInformationResponse"
+                         name="soContractCalculateInformationResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soCreateDocuments">
+            <wsdl:input message="tns:soCreateDocumentsRequest" name="soCreateDocumentsRequest"></wsdl:input>
+            <wsdl:output message="tns:soCreateDocumentsResponse" name="soCreateDocumentsResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessEndSurrender">
+            <wsdl:input message="tns:soProcessEndSurrenderRequest" name="soProcessEndSurrenderRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessEndSurrenderResponse" name="soProcessEndSurrenderResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessReactivateVersion">
+            <wsdl:input message="tns:soProcessReactivateVersionRequest"
+                        name="soProcessReactivateVersionRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessReactivateVersionResponse"
+                         name="soProcessReactivateVersionResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationCessionary">
+            <wsdl:input message="tns:soProcessModificationCessionaryRequest"
+                        name="soProcessModificationCessionaryRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessModificationCessionaryResponse"
+                         name="soProcessModificationCessionaryResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPeriodicalIncrease">
+            <wsdl:input message="tns:soProcessModificationPeriodicalIncreaseRequest"
+                        name="soProcessModificationPeriodicalIncreaseRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessModificationPeriodicalIncreaseResponse"
+                         name="soProcessModificationPeriodicalIncreaseResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessPremiumWaiverBegin">
+            <wsdl:input message="tns:soProcessPremiumWaiverBeginRequest"
+                        name="soProcessPremiumWaiverBeginRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessPremiumWaiverBeginResponse"
+                         name="soProcessPremiumWaiverBeginResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationTechnical">
+            <wsdl:input message="tns:soProcessModificationTechnicalRequest"
+                        name="soProcessModificationTechnicalRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessModificationTechnicalResponse"
+                         name="soProcessModificationTechnicalResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPaymentFrequency">
+            <wsdl:input message="tns:soProcessModificationPaymentFrequencyRequest"
+                        name="soProcessModificationPaymentFrequencyRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessModificationPaymentFrequencyResponse"
+                         name="soProcessModificationPaymentFrequencyResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPeriodicalIncreaseRevocation">
+            <wsdl:input message="tns:soProcessModificationPeriodicalIncreaseRevocationRequest"
+                        name="soProcessModificationPeriodicalIncreaseRevocationRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessModificationPeriodicalIncreaseRevocationResponse"
+                         name="soProcessModificationPeriodicalIncreaseRevocationResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationTechnicalOthers">
+            <wsdl:input message="tns:soProcessModificationTechnicalOthersRequest"
+                        name="soProcessModificationTechnicalOthersRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessModificationTechnicalOthersResponse"
+                         name="soProcessModificationTechnicalOthersResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessAdditionalPayment">
+            <wsdl:input message="tns:soProcessAdditionalPaymentRequest"
+                        name="soProcessAdditionalPaymentRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessAdditionalPaymentResponse"
+                         name="soProcessAdditionalPaymentResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPremiumInterruption">
+            <wsdl:input message="tns:soProcessModificationPremiumInterruptionRequest"
+                        name="soProcessModificationPremiumInterruptionRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessModificationPremiumInterruptionResponse"
+                         name="soProcessModificationPremiumInterruptionResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPolicyLoan">
+            <wsdl:input message="tns:soProcessModificationPolicyLoanRequest"
+                        name="soProcessModificationPolicyLoanRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessModificationPolicyLoanResponse"
+                         name="soProcessModificationPolicyLoanResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessCollectiveReassign">
+            <wsdl:input message="tns:soProcessCollectiveReassignRequest"
+                        name="soProcessCollectiveReassignRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessCollectiveReassignResponse"
+                         name="soProcessCollectiveReassignResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessSurrenderPartial">
+            <wsdl:input message="tns:soProcessSurrenderPartialRequest"
+                        name="soProcessSurrenderPartialRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessSurrenderPartialResponse"
+                         name="soProcessSurrenderPartialResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessCoverExclusion">
+            <wsdl:input message="tns:soProcessCoverExclusionRequest" name="soProcessCoverExclusionRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessCoverExclusionResponse"
+                         name="soProcessCoverExclusionResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessFundsAbsoluteShift">
+            <wsdl:input message="tns:soProcessFundsAbsoluteShiftRequest"
+                        name="soProcessFundsAbsoluteShiftRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessFundsAbsoluteShiftResponse"
+                         name="soProcessFundsAbsoluteShiftResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessFundsRelativeShift">
+            <wsdl:input message="tns:soProcessFundsRelativeShiftRequest"
+                        name="soProcessFundsRelativeShiftRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessFundsRelativeShiftResponse"
+                         name="soProcessFundsRelativeShiftResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessFundsSwitch">
+            <wsdl:input message="tns:soProcessFundsSwitchRequest" name="soProcessFundsSwitchRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessFundsSwitchResponse" name="soProcessFundsSwitchResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessAutomaticSettlement">
+            <wsdl:input message="tns:soProcessAutomaticSettlementRequest"
+                        name="soProcessAutomaticSettlementRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessAutomaticSettlementResponse"
+                         name="soProcessAutomaticSettlementResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessBenefitDetails">
+            <wsdl:input message="tns:soProcessBenefitDetailsRequest" name="soProcessBenefitDetailsRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessBenefitDetailsResponse"
+                         name="soProcessBenefitDetailsResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soContractsSelectForAutoSettlement">
+            <wsdl:input message="tns:soContractsSelectForAutoSettlementRequest"
+                        name="soContractsSelectForAutoSettlementRequest"></wsdl:input>
+            <wsdl:output message="tns:soContractsSelectForAutoSettlementResponse"
+                         name="soContractsSelectForAutoSettlementResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessReleaseAutoSettlement">
+            <wsdl:input message="tns:soProcessReleaseAutoSettlementRequest"
+                        name="soProcessReleaseAutoSettlementRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessReleaseAutoSettlementResponse"
+                         name="soProcessReleaseAutoSettlementResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soGetSettlementAdvice">
+            <wsdl:input message="tns:soGetSettlementAdviceRequest" name="soGetSettlementAdviceRequest"></wsdl:input>
+            <wsdl:output message="tns:soGetSettlementAdviceResponse" name="soGetSettlementAdviceResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessContractPartialDetailsSearchForPartner">
+            <wsdl:input message="tns:soProcessContractPartialDetailsSearchForPartnerRequest"
+                        name="soProcessContractPartialDetailsSearchForPartnerRequest"></wsdl:input>
+            <wsdl:output message="tns:soProcessContractPartialDetailsSearchForPartnerResponse"
+                         name="soProcessContractPartialDetailsSearchForPartnerResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soApplicationCalculate">
+            <wsdl:input message="tns:soApplicationCalculateRequest" name="soApplicationCalculateRequest"></wsdl:input>
+            <wsdl:output message="tns:soApplicationCalculateResponse"
+                         name="soApplicationCalculateResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="customer.lc.sc.lifeContractTransactionalServiceWSSoap11"
+                  type="tns:lifeContractTransactionalServiceWS">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="soProcessApplicationImport">
+            <wsdl:documentation>Imports an application for further processing either manually by an user or
+                automatically via subsequent service calls. The application attributes provided via LvApplicationHandle
+                are stored in the database, no further validation or business logic is done.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessApplicationImportRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessApplicationImportResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soOutboundInterfacesAcknowledge">
+            <wsdl:documentation>
+                Acknowledge a set of out bound interfaces that were created in a certain modification of the given
+                contract. This is used for an synchroneous communication scenario with an asynchroneous fall back
+                scenario, e.g: An userinterface creates a policy via the propriate conversational service call and
+                updates the contract - partner relation, hold in the partner system, via a service call to this partner
+                component. In case of success the UI calls this service to acknowledge the asynchroneous trigger for the
+                partner component, created by the policy creation. This way the asynchoneous communication is
+                suppressed. In case of an error in synchroneous updating of the partner (e.g. currently not online), the
+                asynchroneous communication is not suppressed and backups the synchroneous mechanism.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soOutboundInterfacesAcknowledgeRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soOutboundInterfacesAcknowledgeResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soInfoContractCompany">
+            <wsdl:documentation>Returns the company id for the contract identified by the given contractIdExt. Returns
+                an error message and no company id if there is no contract for this contractIdExt.
+                IInvocationBusinessContextTransactional is no parameter here since this does not do an business process.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soInfoContractCompanyRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soInfoContractCompanyResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soInfoIfcOutboundData">
+            <wsdl:documentation>Returns the IDs and types of interface entries created with the given workflowIdExt
+                (External reference number from the workflow system). IInvocationBusinessContextTransactional is no
+                parameter here since this does not do an business process.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soInfoIfcOutboundDataRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soInfoIfcOutboundDataResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soAssetTransfer">
+            <wsdl:documentation>Imports asset transfer data (German: Kapitalübernahme). The imported data are passed as
+                an argument.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soAssetTransferRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soAssetTransferResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soAssetTransferInbound">
+            <wsdl:documentation>Imports asset transfer data (German: Kapitalübernahme) selecting input data from the
+                IfcInboundData table.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soAssetTransferInboundRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soAssetTransferInboundResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soCocCreateCandidatesFile">
+            <wsdl:documentation>Computes a set of candidates for the code of conduct operation, according to the given
+                set of input parameters. The candidates are returned as a XML file.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soCocCreateCandidatesFileRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soCocCreateCandidatesFileResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessChangePremiumCollectionStop">
+            <wsdl:documentation>Service operation for stopping or resuming the premium collection for a specific
+                contract until a specific date. Uses the BPT: MODIFICATION_PREMIUM_COLLECTION (German: Änderung
+                Inkassodaten, 502) Compatibility LF4: replaces the LF4 specific mechanism via table sntbuchein.
+                (Inkassostop)
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessChangePremiumCollectionStopRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessChangePremiumCollectionStopResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessChangeDisbursementStop">
+            <wsdl:documentation>Service operation for stopping or resuming the disbursement for a specific contract
+                until a specific date. (Exkassostop) Uses the BPT: MODIFICATION_DISBURSEMENT (German: Änderung
+                Exkassodaten, 503) Compatibility LF4: replaces the LF4 specific mechanism via table sntbuchein.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessChangeDisbursementStopRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessChangeDisbursementStopResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessChangeReminderStop">
+            <wsdl:documentation>Service operation for stopping or resuming the reminder process for a specific contract
+                until a specific date. (Mahnstop) Uses the BPT: MODIFICATION_PREMIUM_COLLECTION (German: Änderung
+                Inkassodaten, 502) Compatibility LF4: replaces the LF4 specific mechanism via table sntbuchein.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessChangeReminderStopRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessChangeReminderStopResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessChangePaymentMethod">
+            <wsdl:documentation>Change the method of payment. Uses the BPT: MODIFICATION_PREMIUM_COLLECTION (German:
+                Änderung Inkassodaten, 502). Compatibility LF4: replaces the LF4 specific mechanism via table
+                sntbuchein. (Zahlwegänderung)
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessChangePaymentMethodRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessChangePaymentMethodResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessEndDishonor">
+            <wsdl:documentation>Process the business process type END_DISHONOR (German: Storno ab Beginn, 301) as a
+                transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessEndDishonorRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessEndDishonorResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessEndCancelation">
+            <wsdl:documentation>Process the business process type END_CANCELATION (German: Widerruf, 302) as a
+                transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessEndCancelationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessEndCancelationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessResumeAndReleasePendingModification">
+            <wsdl:documentation>Resume a given pending modification and release it. This transactional service is
+                independent of the BPT. Typically the pending modification would by created by a preceding transactional
+                service call using the transactionalProcessType SUSPEND_SAVEANDPRINT The modificationIdExt references
+                the pending modification and is a return value of the preceding transaction service call.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessResumeAndReleasePendingModificationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessResumeAndReleasePendingModificationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessResumeAndRejectPendingModification">
+            <wsdl:documentation>Resume a given pending modification and reject it. This transactional service is
+                independant of the BPT. Typically the pending modification would by created by a preceding transactional
+                service call using the transactionalProcessType SUSPEND_SAVEANDPRINT The modificationIdExt references
+                the pending modification and is a return value of the preceding transaction service call.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessResumeAndRejectPendingModificationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessResumeAndRejectPendingModificationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProposalCalculate">
+            <wsdl:documentation>Calculates proposal's relevant values PROPOSAL_CALCULATE (German: Angebot Tarifierung,
+                10) like premium or sum insured.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProposalCalculateRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProposalCalculateResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessProposalImport">
+            <wsdl:documentation>Imports a proposal for further processing either manually by an user or automatically
+                via subsequent service calls. The proposal attributes provided via LvProposalHandle are stored in the
+                database, no further validation or business logic is done.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessProposalImportRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessProposalImportResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soContractCalculateInformation">
+            <wsdl:documentation>Process the business process INFORMATION (German: Wertstandsberechnung, 809) as a
+                transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soContractCalculateInformationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soContractCalculateInformationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soCreateDocuments">
+            <wsdl:documentation>Create documents according to an externally supplied specification.</wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soCreateDocumentsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soCreateDocumentsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessEndSurrender">
+            <wsdl:documentation>Process the business process END_SURRENDER (German: Abgang Rückkauf, 305) as a
+                transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessEndSurrenderRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessEndSurrenderResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessReactivateVersion">
+            <wsdl:documentation>Process the business process REACTIVATE_VERSION (German: Reaktivieren Vertragsstand,
+                401) as a transactional service. Refer to CVBusinessProcessType for further description.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessReactivateVersionRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessReactivateVersionResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationCessionary">
+            <wsdl:documentation>Process the business process MODIFICATION_CESSIONARY (German: Änderung Zession, 505) as
+                a transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessModificationCessionaryRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessModificationCessionaryResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPeriodicalIncrease">
+            <wsdl:documentation>Process the business process MODIFICATION_PERIODICAL_INCREASE (German: Änderung
+                Dynamikdaten, 506) as a transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessModificationPeriodicalIncreaseRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessModificationPeriodicalIncreaseResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessPremiumWaiverBegin">
+            <wsdl:documentation>Process the business process PREMIUM_WAIVER_BEGIN (German: Beitragsfreistellung, 614) as
+                a transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessPremiumWaiverBeginRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessPremiumWaiverBeginResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationTechnical">
+            <wsdl:documentation>Process the business process MODIFICATION_TECHNICAL (German:Allgemeine technische
+                Änderung, 621) as a transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessModificationTechnicalRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessModificationTechnicalResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPaymentFrequency">
+            <wsdl:documentation>Process the business process MODIFICATION_PAYMENT_FREQUENCY (German: Änderung Zahlweise,
+                623) as a transactional service. Refer to CVBusinessProcessType for further description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessModificationPaymentFrequencyRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessModificationPaymentFrequencyResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPeriodicalIncreaseRevocation">
+            <wsdl:documentation>Process the business process MODIFICATION_PERIODICAL_INCREASE_REVOCATION (German:
+                Widerruf Dynamik, 640) as a transactional service. Refer to CVBusinessProcessType for further
+                description
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessModificationPeriodicalIncreaseRevocationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessModificationPeriodicalIncreaseRevocationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationTechnicalOthers">
+            <wsdl:documentation>Process the business process MODIFICATION_TECHNICAL_OTHERS (German: Sonstige technische
+                Änderung, 672) as a transactional service. Refer to CVBusinessProcessType for further description.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessModificationTechnicalOthersRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessModificationTechnicalOthersResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessAdditionalPayment">
+            <wsdl:documentation>Process the business process ADDITIONAL_PAYMENT (German: Zuzahlung, 613) as a
+                transactional service. Refer to CVBusinessProcessType for further description.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessAdditionalPaymentRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessAdditionalPaymentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPremiumInterruption">
+            <wsdl:documentation>Process the business process MODIFICATION_PREMIUM_INTERRUPTION (German:
+                Einrichten/Ändern Beitragspause, 670) as a transactional service. Refer to CVBusinessProcessType for
+                further description.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessModificationPremiumInterruptionRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessModificationPremiumInterruptionResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessModificationPolicyLoan">
+            <wsdl:documentation>Process the business process MODIFICATION_POLICY_LOAN (German: Einrichten/Ändern
+                Policendarlehen, 673) as a transactional service. Refer to CVBusinessProcessType for further
+                description.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessModificationPolicyLoanRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessModificationPolicyLoanResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessCollectiveReassign">
+            <wsdl:documentation>Process the business process COLLECTIVE_REASSIGN (German: Umhängen Einzelvertrag im
+                Kollektiv, 682) as a transactional service. Refer to CVBusinessProcessType for further description.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessCollectiveReassignRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessCollectiveReassignResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessSurrenderPartial">
+            <wsdl:documentation>Process the business process SURRENDER_PARTIAL (German: Teilrückkauf, 617) as a
+                transactional service. Refer to CVBusinessProcessType for further description.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessSurrenderPartialRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessSurrenderPartialResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessCoverExclusion">
+            <wsdl:documentation>Process the business process COVER_EXCLUSION (German: Tarifausschluß, 629) as a
+                transactional service. Refer to CVBusinessProcessType for further description.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessCoverExclusionRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessCoverExclusionResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessFundsAbsoluteShift">
+            <wsdl:documentation>Performs an absolute funds shift. Uses the business process FUND_SWITCH_SHIFT (German:
+                Fondsswitch/-shift, 820). The service assumes that fund allocation objects are related only to the main
+                coverage, so no coverage id must be provided in the service interface.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessFundsAbsoluteShiftRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessFundsAbsoluteShiftResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessFundsRelativeShift">
+            <wsdl:documentation>
+                Performs a relative funds shift. Uses the business process FUND_SWITCH_SHIFT (German:
+                Fondsswitch/-shift, 820). This service performs an absolute shift with shift amounts corresponding to
+                the current relative fund allocations. The amounts are calculated by the service. The service assumes
+                that fund allocation objects are related only to the main coverage, so no coverage id must be provided
+                in the service interface.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessFundsRelativeShiftRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessFundsRelativeShiftResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessFundsSwitch">
+            <wsdl:documentation>Performs a funds switch. Uses the business process MODIFICATION_FUND_FUTURE_INVEST
+                (German: Änderung Verteilungsschlüssel, 552). The service assumes that fund allocation objects are
+                related only to the main coverage, so no coverage id must be provided in the service interface.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessFundsSwitchRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessFundsSwitchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessAutomaticSettlement">
+            <wsdl:documentation>Performs an immediate settlement for a given benefit business process. Uses the business
+                process SETTLEMENT (German: Abrechnung, 801). The settlement is processed automatically for the last
+                benefit business process. The given CdBalance object contains the current balance of the contract in the
+                collection and disbursement system(s) and is used to calculate the correct amount.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessAutomaticSettlementRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessAutomaticSettlementResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessBenefitDetails">
+            <wsdl:documentation>Process the business process BENEFIT_DETAILS (German: Leistungsspiegel, 803)
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessBenefitDetailsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessBenefitDetailsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soContractsSelectForAutoSettlement">
+            <wsdl:documentation>Selects and returns a list of external contract identifiers to be worked up by the
+                autosettlement batch.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soContractsSelectForAutoSettlementRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soContractsSelectForAutoSettlementResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessReleaseAutoSettlement">
+            <wsdl:documentation>Performs the automatic settlement batch for a single contract.</wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessReleaseAutoSettlementRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessReleaseAutoSettlementResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soGetSettlementAdvice">
+            <wsdl:documentation>Get settlement advice for the given contract (Used by the SIL settlement batch to
+                determine whether a cd balance is needed)
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soGetSettlementAdviceRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soGetSettlementAdviceResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soProcessContractPartialDetailsSearchForPartner">
+            <wsdl:documentation>This service operation returns a list of contracts with selected extended details
+                related to the partner and the company passed.
+            </wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soProcessContractPartialDetailsSearchForPartnerRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soProcessContractPartialDetailsSearchForPartnerResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="soApplicationCalculate">
+            <wsdl:documentation>Web-Service für die AntragsTarifierung/Berechnung in LC</wsdl:documentation>
+            <soap:operation soapAction=""/>
+            <wsdl:input name="soApplicationCalculateRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="soApplicationCalculateResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="customer.lc.sc.lifeContractTransactionalServiceWSService">
+        <wsdl:documentation>Transactional services provided by the LifeContract component. In contrast to conversational
+            services these are so-called one-shot services, meaning each (modifying and successfully completed) service
+            call results in a modified contract state in the database. Please refer to
+            'LFJEE-V092-TC-UserGuide-TransactionalServices-vxxx.doc' for how to use these services in general
+        </wsdl:documentation>
+        <wsdl:port binding="tns:customer.lc.sc.lifeContractTransactionalServiceWSSoap11"
+                   name="customer.lc.sc.lifeContractTransactionalServiceWSSoap11">
+            <soap:address location="http://bhvxlif002:8080/service"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

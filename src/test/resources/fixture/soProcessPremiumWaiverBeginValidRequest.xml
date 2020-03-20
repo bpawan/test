@@ -1,0 +1,35 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:lif="http://xmlns.fja.com/ipl/ccshared/lc/sc/lifecontracttransactionalservice"
+                  xmlns:typ="http://xmlns.fja.com/ipl/ccshared/lc/sc/types"
+                  xmlns:typ1="http://xmlns.fja.com/ipl/bsf/types">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <lif:soProcessPremiumWaiverBeginRequest>
+            <lif:invocationBusinessContextTransactional>
+                <typ:companyId>DEVK</typ:companyId>
+                <typ:contractIdExt>26000024100</typ:contractIdExt>
+                <typ:effectiveDate>2019-12-01</typ:effectiveDate>
+                <typ:salesChannel>DEFAULT</typ:salesChannel>
+                <typ:competenceLevel>MITARBEITER</typ:competenceLevel>
+                <typ:workflowIdExt>cfd2af86-3dc1-11ea-b77f-2e728ce88125</typ:workflowIdExt>
+                <typ:lifeGroupTaskId></typ:lifeGroupTaskId>
+                <typ:modificationReasonCV>CUSTOMER_REQUIREMENT</typ:modificationReasonCV>
+                <typ:reportingDate>2019-12-01</typ:reportingDate>
+                <typ:valueDate>2019-12-01</typ:valueDate>
+                <typ:reactUnscheduledModAllowed>false</typ:reactUnscheduledModAllowed>
+
+            </lif:invocationBusinessContextTransactional>
+            <lif:changePremiumWaiverBegin>
+                <typ:isSystemDocSuppressed>false</typ:isSystemDocSuppressed>
+            </lif:changePremiumWaiverBegin>
+            <lif:invocationContext>
+                <typ1:userName>Dunkelverarbeitung</typ1:userName>
+                <typ1:userID>12345</typ1:userID>
+                <typ1:clientIdentification></typ1:clientIdentification>
+                <typ1:callSequenceNo>12</typ1:callSequenceNo>
+                <typ1:clientLocale>de-DE</typ1:clientLocale>
+                <typ1:workflowIdExt>cfd2af86-3dc1-11ea-b77f-2e728ce88125</typ1:workflowIdExt>
+            </lif:invocationContext>
+        </lif:soProcessPremiumWaiverBeginRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

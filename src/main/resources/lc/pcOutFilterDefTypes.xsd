@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bsf="http://xmlns.fja.com/ipl/bsf/types" xmlns:d0="http://xmlns.fja.com/ipl/ccshared/lb/types/types" xmlns:fndUtil="http://xmlns.fja.com/ipl/foundation/util/types" xmlns:pcOutFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcoutfilterdef/types" xmlns:util="http://xmlns.fja.com/ipl/util/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcoutfilterdef/types">
+
+  <xs:import namespace="http://xmlns.fja.com/ipl/foundation/util/types" schemaLocation="foundationUtilTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/util/types" schemaLocation="utilTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/bsf/types" schemaLocation="bsfTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lb/types/types" schemaLocation="lifeUtilTypes.xsd"/>
+
+
+  <xs:element name="lvPcOut" type="pcOutFilterDef:LvPcOut"/>
+  <xs:complexType name="LvPcOut">
+    <xs:annotation>
+      <xs:documentation>Die Rows in Table lv repräsentieren einen oder mehrere Vertragsstände; temporal
+        identifiziert durch das Field lvId. Die Vertragsstände sind von 1 beginnend durchnummeriert,
+        wobei es auch Lücken geben darf. Welche Vertragsstände eine Row repräsentiert ist durch die
+        Fields bearbId und bearbIdAbg determiniert.Constraint prv_kzprod: für Verträge muss es genau
+        einemit kz_prod=1 geben.Constraint kzPF_jurVT: Wenn lv.pd.kzPF gesetzt ist, dann ist bei allen
+        Vertragsteilen das Field vtTypPF gesetzt.Constraint lv_vt_tf_kzH_EXIST: Von den aktiven VTs
+        eines Vertrags muss mindestens ein VT einen Tarif haben, der SLW_HT_H oder SLW_HT_W hat.Constraint
+        lv_vt_vtTypPF_UNIQUE: Innerhalb jener Vertragsteile, denen ein Tarif mit SLW_HT_h zugeordnet
+        ist, ist der vtTypPF UNIQUE.Constraint lv_mandantId: Wenn es in Table slw ein Schlüsselverzeichnis
+        'mandantid' gibt (d.h. mindestens eine Row mit slvId = 'mandantid' case-insensitive), so muss
+        lv.mandantId ungleich 0 sein.Constraint lv_pd_mandantId: Wenn lv.mandantId ungleich 0 ist, so
+        muss pd.mandantId = lv.mandantId sein.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [hvGruppe, jurLV, vp, zulageVerlauf, pdId, generation, waehrungId, lvbegt, lvablt, lvJahrtag, zins_max, zins_mod, modVorg, modSzenario, zuzahlPol] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <xs:element minOccurs="0" name="localKeyEntityData" type="pcOutFilterDef:LvPcOutLocalKeyEntity"/>
+      <xs:element minOccurs="0" name="hvGruppe" type="pcOutFilterDef:HvGruppePcOut">
+      </xs:element>
+      <xs:element minOccurs="0" name="jurLV" type="pcOutFilterDef:JurLVPcOut">
+      </xs:element>
+      <xs:element minOccurs="0" name="vp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="vp" type="pcOutFilterDef:VpPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="zulageVerlauf">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="zulageVerlauf" type="pcOutFilterDef:ZulageVerlaufPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="pdId" type="d0:CVProduct">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifikation des Produkts, das dem LV-Vertrag zugeordnet ist.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="generation" type="d0:CVProductTariffGeneration">
+        <xs:annotation>
+          <xs:documentation>Kennzeichnet die Generationenfolge grundsätzlich identischer Produkte oder Tarife im Zeitablauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="waehrungId" type="d0:CVSlvWaehrung">
+        <xs:annotation>
+          <xs:documentation>Das Attribut dient zur eindeutigen Identifizierung einer Währung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lvbegt" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Erster technischer Beginn des Vertrages.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lvablt" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauftermin des Vertrags</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lvJahrtag" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Hier wird der Jahrestag der Versicherung geführt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zins_max" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Max. Verzinsung bei der Modellrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zins_mod" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zinssatz, der für die Modellrechnung verwendet wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modVorg" type="d0:CVSlvTypModellvorgabe">
+        <xs:annotation>
+          <xs:documentation>Modellvorgabe</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modSzenario" type="d0:CVSlvSzenario">
+        <xs:annotation>
+          <xs:documentation>Modell-Szenario</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zuzahlPol" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zuzahlung bei Policierung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="0" name="lvId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- specific filterLocalKeyEntity for tree Lv -->
+  <xs:complexType name="LvPcOutLocalKeyEntity">
+    <xs:annotation>
+      <xs:documentation>specific filterLocalKeyEntity for Lv</xs:documentation>
+    </xs:annotation>
+
+    <xs:complexContent>
+      <xs:extension base="util:LocalKeyEntityData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="beguenstId" type="xs:short"/>
+          <xs:element minOccurs="0" name="dokNwId" type="xs:int"/>
+          <xs:element minOccurs="0" name="hvGruppeId" type="xs:short"/>
+          <xs:element minOccurs="0" name="vtId" type="xs:short"/>
+          <xs:element minOccurs="0" name="vbId" type="xs:short"/>
+          <xs:element minOccurs="0" name="drittrechtId" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HvGruppePcOut">
+    <xs:annotation>
+      <xs:documentation>Im Rahmen der bAV können unterschiedliche Zahlweisen für Arbeitgeber (AG) und Arbeitnehmer (AN)
+        vorgegeben werden. Die notwendigen Informationen werden pro HV bzw. in einer hvGruppe geführt,
+        die die eigentliche HV und die zugehörigen ZV zusammenfasst. Die hvGruppe entspricht bei
+        Pensionsfondsprodukten der Vertragsschicht für den AG bzw. dem AN. Die Entität hvGruppe enthält
+        die Zahlweise und alle sonstigen Größen, die für die HV und die zugeordneten ZV geführt werden
+        müssen.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [kinderzulage, vt, btgProfilPara, zb, minBtg, uebverr, btg, zweiInk, kzVorg, hvTypId, hauptFaelligkeit, kzGrundzulage, pricingId, vorgabewert, gehZulBerech, gehZulBerSteig, gehZulBerBasjahr, kzBerufEinstBonus, kzBtgAnpassung, kzZulageBerVN, kzZulageBerEheg, eigenBtgEheg, eigenBtgBisJahr, eigenBtgEhegAbw, eigenBtgAbwJahr, btgProfil] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="kinderzulage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="kinderzulage" type="pcOutFilterDef:KinderzulagePcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="vt">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="vt" type="pcOutFilterDef:VtPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="btgProfilPara">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="btgProfilPara" type="pcOutFilterDef:BtgProfilParaPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="zb" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Der je Ratenzahlungsabschnitt (tariflich) fällige Zahlbeitrag. Eine Beitragsreduktion aus überschußanteilen wird im Zahlbeitrag-Zahlweise nicht beachtet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="minBtg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vereinbarter Mindestbeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebverr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Der laufende, vorschüssig zugeteilte überschuß von Vertragsteilen kann zur Verrechnung mit dem laufenden Beitrag verwendet werden. Wenn dies der Fall ist, wird hier der Betrag geführt, um den der ratierliche gesamtvertragliche Zahlbeitrag pro Beitragszahlung reduziert wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="btg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgegebener Beitrag für die SST - Berechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zweiInk" type="d0:CVSlvZahlweise">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung einer Beitragszahlweise.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzVorg" type="d0:CVSlvBerVorgabe">
+        <xs:annotation>
+          <xs:documentation>Bestimmt die Qualität der Vorgabe: z.B. Vorgabe der Leistung, des Beitrags oder der Ablaufleistung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="hvTypId" type="d0:CVSlvVtGruppe">
+        <xs:annotation>
+          <xs:documentation>Hauptversicherungsgruppentyp</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="hauptFaelligkeit" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Hauptfälligkeit - wird produktabhängig bestimmt - enthält das Jahr des Versicherungsbeginns (wg. LF4).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzGrundzulage" type="d0:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob Grundzulage eingerechnet werden soll oder nicht: 0 - Nein, 1 - Ja</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="pricingId" type="d0:CVSlvPricingVar">
+        <xs:annotation>
+          <xs:documentation>Pricing-Variante: globales Attribut zur Festlegung des Pricings (z.B. Haustarif)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vorgabewert" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgegebener Wert für die SST - Berechnung.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gehZulBerech" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Sozialversicherungspflichtiges Vorjahresgehalt auf dessen Basis in der Modellrechnung der Mindesteigenbeitrag und ggf. eine Kürzung der Zulage ermittelt wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gehZulBerSteig" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Jährlicher Steigerungssatz für GehaltZulagenBerech</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gehZulBerBasjahr" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Jahr auf das sich GehaltZulagenBerech bezieht</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzBerufEinstBonus" type="d0:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob der Berufseinsteigerbonus berücksichtigt werden soll</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzBtgAnpassung" type="d0:CVSlvBtgAnpassung">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob bzw. nach welcher Regel eine Beitragsanpassung in der Modellrechnung erfolgt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzZulageBerVN" type="d0:CVSlvZulageberechtigung">
+        <xs:annotation>
+          <xs:documentation>Kennzeichnung, ob der Versicherungsnehmer mittelbar oder unmittelbar zulageberechtigt ist</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzZulageBerEheg" type="d0:CVSlvZulageberechtigung">
+        <xs:annotation>
+          <xs:documentation>Kennzeichnung, ob der Ehegatte mittelbar oder unmittelbar zulageberechtigt ist</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eigenBtgEheg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Eigenbeitrag des (unmittelbar zulageberechtigten) Ehegatten, auf dessen Basis in der Modellrechnung die Kürzung der Zulage für den mittelbar Zulageberechtigten geprüft wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eigenBtgBisJahr" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Jahr, bis zu dem der Eigenbeitrag des (unmittelbar zulageberechtigten) Ehegatten bezahlt wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eigenBtgEhegAbw" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Abweichender Eigenbeitrag des Ehegatten in einem Jahr</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eigenBtgAbwJahr" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Jahr des abweichenden Eigenbeitrags des Ehegatten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="btgProfil" type="d0:CVSlvBtgProfil">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen zur Identifizierung eines Beitragsprofils</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="0" name="hvGruppeId" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KinderzulagePcOut">
+    <xs:annotation>
+      <xs:documentation>Daten zur Riester-Kinderzulage</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [kindId, geburtsjahr, jahrLetzeZulage, zuordnung] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="geburtsjahr" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Geburtsjahr des Kindes</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="jahrLetzeZulage" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Jahr der letzten Zulage</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zuordnung" type="d0:CVSlvZuordnung">
+        <xs:annotation>
+          <xs:documentation>Kennzeichnung, ob die Kinderzulage dem Vertrag des VN oder einem Vertrag des Ehegatten gutgeschrieben wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="kindId" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VtPcOut">
+    <xs:annotation>
+      <xs:documentation>Die Rows in Table vt repräsentieren einen oder mehrere Stände eines; temporal identifiziert durch die Fields lvId und vtId.Für welchediese Row gültig ist, wird durch die Fields bearbId und bearbIdAbg determiniert.Constraint kzrv_ISSET: wenn rvQuote oder rvId gesetzt sind, so ist auch kzRV gesetzt.Constraint pantsum: die Summe der prozentualen Anteile an Fonds müssen zusammen 1.0 ergeben, sofern der Vertragsteilstand überhaupt Fonds hat und nicht beitragsfrei istConstraint proz_antsum: die Summe der prozentualen Anteile der Provisionen müssen zusammen 1.0 ergebenConstraint vpVT_VP1: jeder Vertragsteil muss genau eine erstehaben, es sei denn, er hat keinen ZustandConstraint VP2: ein Vertragsteilstand muss eine VP2 haben, sofern derdies vorsieht.Constraint VP1_NE_VP2: VP1 und VP2 können nicht der selbe Partner sein.Constraint uebSatz_RANGE: uebSatz muss zwischen 0.0 und 1.0 sein, sofern dereine zweite versicherte Person vorsieht.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [bspRech, jurVT, transparenz, vb, vertschl, vpVT, tfId, generation, vtueb, ratzuId, uebSatz, uebVerwSys, uebVerwSysBfr, uebVerwSysLst, labl, gabl, bzabl, vtabl, optabl, rbeg, beginnVT, zweiExk, la1, la2, erhLaProz, vtuebverr, zb, rabattId, zbSum, tbVarTyp, kofakAlpha, portfId, rentBetr, rentGBetr, karenzzeit, flexbeg, la3, kzl1ra, kzl2ra, kzl3ra, lr1, lr2, lr3, vtzbJhl, antsatzFonds, garantieniveau, anlStratId, niveauGuthId, niveauBtgId, garGebuehrEntnTyp, gMxBOption, garGebuehrRelAbw, garGebuehrRel, garGebAbwTermin, kzVorgTfl, kzVorgLabl, kzVorgVtabl, dauerWartezeitJ, wzabl, abschlkoVar, kzBtgProfil, leistungsVarianteVP1, darlTilgSatz, darlZins, flexTeilverrentung, zielNiveauAblaufMmt, garWertVorgabe, kzillness, kzAuLeistung] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="bspRech">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="bspRech" type="pcOutFilterDef:BspRechPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="jurVT" type="pcOutFilterDef:JurVTPcOut">
+      </xs:element>
+      <xs:element minOccurs="0" name="transparenz">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="transparenz" type="pcOutFilterDef:TransparenzPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="vb">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="vb" type="pcOutFilterDef:VbPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="vertschl">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="vertschl" type="pcOutFilterDef:VertschlPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="vpVT">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="vpVT" type="pcOutFilterDef:VpVTPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="tfId" type="d0:CVTariff">
+        <xs:annotation>
+          <xs:documentation>Eindeutiger Identifikator eines LV-Tarifs</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="generation" type="d0:CVProductTariffGeneration">
+        <xs:annotation>
+          <xs:documentation>Kennzeichnet die Generationenfolge grundsätzlich identischer Produkte oder Tarife im Zeitablauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtueb" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Jeder Vertragsteil (mit Ausnahme des 'obersten') hat genau einen übergeordneten Vertragsteil, wodurch sich eine Hierarchie von Vertragsteilen (und daher auch Tarifen) ergibt. Der 'oberste' Vertragsteil, von welchem es immer genau einen geben muß, wirdHauptversicherunggenannt.Da die Hauptversicherung im Laufe des Vertrags wechseln kann und dieser Wechsel revisionssicher sein sollte, ist vtueb keine Column der TablejurVT, sondern der Tablevt.Zusammen mit dem Field lvId identifiziert das Field vtueb temporal den übergeordneten Vertragsteil dieses Vertragsteilstandes, bei der Hauptversicherung zeigt vtueb auf sich selbst (d.h. vtId = vtueb).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ratzuId" type="d0:CVSlvRatenzuschla">
+        <xs:annotation>
+          <xs:documentation>Eindeutigen Identifizierung eines Ratenzu- oder -abschlag-Systems.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebSatz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Das Field uebSatz ist nur sinnvoll bei zwei versicherten Personen; es enthält den Satz (zwischen 0.0 und 1.0), auf den das Field la1 bei Tod des ersten Lebens reduziert werden soll.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebVerwSys" type="d0:CVSlvUeberschuss">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung eines überschußverwendungssystems.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebVerwSysBfr" type="d0:CVSlvUeberschussB">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung eines überschußverwendungssystems für die Beitragsfreie Zeit</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebVerwSysLst" type="d0:CVSlvUeberschussL">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung eines überschußverwendungssystems für die Rentenbezugszeit</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="labl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauftermin der Leistung bei BUZ / HZV</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauftermin der Garantiezeit</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bzabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Zu diesem Datum endet die planmäßige Beitragszahlung für den LV-Vertragsteil. Der Ablauf der Beitragszahlung kann vor, darf aber nicht nach dem Ablauf des Vertrags liegen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Datum, zu dem der LV-Vertragsteil abläuft</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="optabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Termin, an dem die flexible Ablaufphase endet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rbeg" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Rentenbeginntermin</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="beginnVT" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Beginn des Vertragsteils (Termin)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zweiExk" type="d0:CVSlvZahlweiseEx">
+        <xs:annotation>
+          <xs:documentation>Vertraglich vereinbarte Zahlweise der Leistungen für einen Vertragsteil.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la1" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>In der Tarifklasse Klassik-Kapital oder Risiko ist la1 die (anfängliche) Todesfallsumme, bei Rente oder BU die Jahresrente, bei FLV oder FRV die Mindesttodesfall-Leistung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>In der Tarifklasse Klassik-Kapital ist la2 die (abweichende) Erlebensfallsumme, bei Rente die Kapitalabfindung, bei FLV oder FRV die Mindestrisiko-Leistung, ansonsten ist la2 leer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="erhLaProz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Beschreibt eine relative Erhöhung der LeistungBeispiel: Leistungssteigerung der BU-Rente während der Leistungspflicht</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtuebverr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Das Field vtuebverr enthält den Betrag, um den der ratierliche Zahlbeitrag pro Vertragsteilstand bei jeder Beitragszahlung reduziert wird.Das Field vtuebverr wird vomArbeitsschrittüberschussverwendung (Schritt-Id230 oder 231) in einem Vertragsteilstand gesetzt; der gesetzte Wert ist bis zum nächsten Arbeitsschritt überschussverwendung (für diesenVertragsteil) gültig, gleichgültig welche anderen Werte in dazischenliegenden Vertragsteilständen stehen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zb" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Der je Ratenzahlungsabschnitt (tariflich) fällige Zahlbeitrag. Eine Beitragsreduktion aus überschußanteilen wird im Zahlbeitrag-Zahlweise nicht beachtet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rabattId" type="d0:CVSlvSammelrabatt">
+        <xs:annotation>
+          <xs:documentation>Identifizierung von Rabattsystemen über Schlüsselsysteme</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zbSum" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Enthält die voraussichtliche Beitragssumme der Zahlbeiträge für den gesamten Zeitraum des Vertrages. ändert sich der Zahlbeitrag aufgrund einer technischen änderung, so wird dieses Attribut entsprechend angepaßt. Auf der Grundlage dieser Summe läßt sich die aktuelle Beitragssumme dadurch berechnen, indem die noch ausstehenden Zahlbeiträge von der Summe in Abzug gebracht werden.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="tbVarTyp" type="d0:CVSlvTarifvariante">
+        <xs:annotation>
+          <xs:documentation>Variante des Tarifbausteins, z.B. Standard oder Kollektiv</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kofakAlpha" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Hiermit können die rechnungsmäßigen Abschlußkosten von außen (also vertragsseitig) verändert werden</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="portfId" type="d0:CVSlvRisKlasse">
+        <xs:annotation>
+          <xs:documentation>Gibt die Art eines Portefeuilles an: frei wählbar - Sicherheit - Wachstum - Dynamik</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rentBetr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Wert (Höhe) einer laufenden Rente</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rentGBetr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Wert (Höhe) einer laufenden Garantie-Rente</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="karenzzeit" type="d0:CVSlvKarenzzeit">
+        <xs:annotation>
+          <xs:documentation>Karenzzeit bei BU-Versicherung in Monaten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="flexbeg" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>flexbeg ist das Datum, an dem die flexible Abrufphase beginnt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la3" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anfangstodesfallleistung bei Tarifen mit Leistungssprung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl1ra" type="d0:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob die Leistung 1 relativ oder absolut vorgegeben wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl2ra" type="d0:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob die Leistung 2 relativ oder absolut vorgegeben wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl3ra" type="d0:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob die Leistung 3 relativ oder absolut vorgegeben wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lr1" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>relative Leistung 1</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lr2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>relative Leistung 2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lr3" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>relative Leistung 3</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtzbJhl" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährlicher Zahlbeitrag eines VT</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="antsatzFonds" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Das Attribut antsatzFonds legt fest, welcher Teil des Beitrags, nach Abzug des Anteils für die klassische Reserve, in Fonds fließt. Damit ist auch festgelegt, welcher Anteil in das Ansammlungsguthaben eingezahlt wird. Die Aufteilung auf die Fonds erfolgt anhand der Entität vertschl.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="garantieniveau" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Niveau der Beitragsgarantie</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="anlStratId" type="d0:CVSlvAnlagestrategie">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung eines Anlagestrategie-Typs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="niveauGuthId" type="d0:CVSlvVerlNiveauGuth">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung eines Anpassungsmodus für das Niveau der Guthabengarantie.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="niveauBtgId" type="d0:CVSlvVerlNiveauBtg">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung eines Anpassungsmodus für das Niveau der Beitragsgarantie</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="garGebuehrEntnTyp" type="d0:CVSlvGARGEBUEHR">
+        <xs:annotation>
+          <xs:documentation>Die Garantiegebuehr in absoluter Höhe wird von . garGebuehrRel und garGebuehrEntnahmeTyp und Einmalbeitrag oder Fondsvermögen festgelegt. garGebuehrEntnahmeTyp sagt auch aus, ob die Gebuehr einmal oder laufend entnommen wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gMxBOption" type="d0:CVSlvGMXB_OPTION">
+        <xs:annotation>
+          <xs:documentation>Zusaetzliche Optionen zu den Garantien GMxB.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="garGebuehrRelAbw" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garGebuehrRelAbw kann durch Vorgabe eines abweichenden Termins garAbwTermin oder direkt belegt werden. Falls garGebuehrRelAbw belegt ist, wird nicht die kalkulierte Gebuehr garGebuehrRel verwendet, sondern die spezifisch vorgegebene abweichende Garantiegebuehr.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="garGebuehrRel" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Die Garantiegebuehr ist eine einmalige oder laufende Gebuehr, die aus dem Beitrag oder dem Fondsvermögen entnommen wird um die vereinbarte Garantie zu finanzieren. Die Angabe ist relativ zum Einmalbeitrag oder relativ zum Fondsvermögen, je nach vt.garGebuehrEntnahmeTyp.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="garGebAbwTermin" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Normalerweise ist der Bearbeitungstermin als Grundlage für die Bestimmung der Garantiegebuehr zu verwenden, für besondere Fälle kann hier ein davon abweichender Termin vorgegeben werden. Dann wird auf Grundlage der Kapitalmarkdaten zu diesem Termin die Garantiegebuehr bestimmt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzVorgTfl" type="d0:CVSlvKzVorgTfl">
+        <xs:annotation>
+          <xs:documentation>Vorgabekennzeichen für die Art der Todesfallleistung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzVorgLabl" type="d0:CVSlvKzVorgAblauf">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für Vorgabe einer Leistungsdauer (0 = keine Vorgabesteuerung; 1 = abgekürzte Leistungsdauer; 2 = lebenslange Leistungsdauer)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzVorgVtabl" type="d0:CVSlvKzVorgAblauf">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für Vorgabe einer Versicherungsdauer (0 = keine Vorgabesteuerung; 1 = abgekürzte Versicherungsdauer; 2 = lebenslange Versicherungsdauer)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dauerWartezeitJ" type="d0:CVSlvWartezeit">
+        <xs:annotation>
+          <xs:documentation>Dauer der Wartezeit in Jahren</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="wzabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauf der Wartezeit</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="abschlkoVar" type="d0:CVSlvAbschlusskostenVar">
+        <xs:annotation>
+          <xs:documentation>Variante der Abschlusskostenmodifikation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzBtgProfil" type="d0:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Das Kennzeichen legt fest, ob das Vertragsteil an dem (auf HvGruppe-Ebene festgelegten) Beitragsprofil teilnehmen soll oder nicht.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="leistungsVarianteVP1" type="d0:CVSlvLeistungsVariante">
+        <xs:annotation>
+          <xs:documentation>Gewählte Leistungsvariante</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="darlTilgSatz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Tilgungssatz fuer Darlehen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="darlZins" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zinssatz fuer Darlehen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="flexTeilverrentung" type="d0:CVSlvFlexPartialAnnuity">
+        <xs:annotation>
+          <xs:documentation>jährlich anteilige Verrentung des Fondsguthabens in %</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zielNiveauAblaufMmt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zielniveau des Guthabenanteils in der Reserve zum Ende des Ablaufmanagements</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="garWertVorgabe">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="garWertVorgabe" type="pcOutFilterDef:GarWertVorgabePcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzillness" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen zur Steuerung, ob der Tarif eine Ausprägung zur 'illness' (terminal, critical, ...) bekommt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAuLeistung" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen zur Steuerung, ob der Tarif eine Ausprägung zur AU-Leistung bekommt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="0" name="vtId" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BspRechPcOut">
+    <xs:annotation>
+      <xs:documentation>Eine Row in Table bspRech repräsentiert das Ergebnis einer Beispielrechnung. Dieses wird je, zu bestimmten Zeitpunkten (im Regelfall einmal jährlich zu den Versicherungsjahrestagen) und - sofern tariflich vorgesehen - mit verschiedenen Varianten der überschussentwicklung ermittelt.Die Ergebnisse der Varianten der überschussentwicklung werden nicht für den gesamten Hochrechnungszeitraum ermittelt, sondern nur zum Ablauftermin bzw. für einen flexiblen Abrufzeitraum.Dargestellt werden die für denwichtigsten Werte einer, also insbesondere die Entwicklung von Beitrag, Rückkaufswert (inkl. überschussbeteiligung) und Todesfallleistung (inkl. überschussbeteiligung). Werte von eventuellensind zu den Werten derdazu addiert.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [jahr, zbBsp, uebverrBsp, vtla1Bsp, vtla2Bsp, bonlabsp, lsttg, lsttu, lsttsu, lstUnfTodGar, lstrg, lstru, lstrsu, lstag, lstalu, lstasu, kzAblauf, verblbfr, lstogar, lstoue, lstokap, akt_alt, gueTermin, lsttuBUZ, lstruBUZ, lfdnr, uebVar, fvm, fvmUeb, lstZul, rentBetrGarZwei, rentBetrGesZwei, kapentw_erw, saldo_NDK, gesZinsSatz, modellvorgabe, szenario, zinsuebsatz, stornoabschlag, lstUebBR, gesBtgVerz, sumGezBtg, bfrsumgar, bfrsum2gar, bfrsumbuzgar, lsterlgar, lsttodgar, lstrkwgar, fvmWertSicher, zulageBsp, lstUebBrTod, lstauebbr, entnKumuliert, kostenabs, gebWertSicher, kosten_buz, kosten_sonzv, errGarGutHab, zuzahlBsp, stoabbfrKonten, stoabDkBfr, rentBetrGarAkt, lstRzvTodGar, bfrsumRzvGar, bfrsumKSHVGar, rentFaktAkt] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="jahr" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Angabe einer Jahreszahl (JJJJ)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zbBsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zahlbeitrag im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebverrBsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Beitragsverrechnung aus überschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtla1Bsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung 1 der HV (Tod oder Erleben) im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtla2Bsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung 2 der HV (Tod, Kapitalabfindung, ...) im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bonlabsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bonusleistung (z.B. Bonusrente) im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte Leistung bei Tod im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Tod aus laufendem überschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttsu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Tod aus Schlußüberschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstUnfTodGar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte (über alle VT) garantierte Leistung bei Unfalltod (z.B. für Beispielrechnung)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstrg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte Leistung bei Rückkauf im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstru" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Rückkauf aus laufendem überschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstrsu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Rückkauf aus Schlußüberschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstag" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte Ablaufleistung pro Hauptversicherungsteil, idR also eines Vertrags insgesamt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstalu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Ablauf aus laufendem überschuß pro Hauptversicherungsteil</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstasu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Ablauf aus Schlußüberschuß pro Hauptversicherungsteil</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAblauf" type="d0:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für Erreichen des Endes der Vertragslaufzeit.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="verblbfr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>verbleibende beitragsfreie Rente bei Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstogar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Garantierte Leistung bei Ausübung der Option</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstoue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus überschuß bei Ausübung der Option</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstokap" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Kapitalleistung bei Ausübung der Option</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akt_alt" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Versicherungstechnisch ermitteltes aktuelles Alter.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gueTermin" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Gueltigkeitstermin eines Eintrages oder Satzes in einer Entitaet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttuBUZ" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>überschuss BUZ bei Tod</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstruBUZ" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>überschuss BUZ bei Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebVar" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Schlüsselwerte für die überschuss-Variante, die für die Hochrechnung verwendet wurde</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fvm" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Wert (in Landeswaehrung) der Fondsanteile.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fvmUeb" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Fondsvermögen aus Überschüssen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstZul" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Zulagen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rentBetrGarZwei" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Garantierte Rente, die zu Beginn der Rentenphase garantiert ist.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rentBetrGesZwei" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>prognostizierter Rentenbetrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kapentw_erw" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zinssatz mit dem die Fondskonten hochgerechnet werden (ohne Wertsicherungsfonds)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="saldo_NDK" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Saldo der NDK-Konten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gesZinsSatz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamtverzinsungssatz</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modellvorgabe" type="d0:CVSlvTypModellvorgabe">
+        <xs:annotation>
+          <xs:documentation>Typ der Modellvorgabe</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="szenario" type="d0:CVSlvSzenario">
+        <xs:annotation>
+          <xs:documentation>Hochgerechnetes Szenario</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zinsuebsatz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anteilssatz für den Zinsüberschuss</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="stornoabschlag" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Stornoabschlag bei Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstUebBR" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Bewertungsreserven bei Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gesBtgVerz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamtwert der mit dem Gesamtverzinsungssatz aufgezinsten gezahlten Beiträge</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="sumGezBtg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Summe der gezahlten (Eigen-)Beiträge, Zuzahlungen und Zulagen abzgl. rückgeforderter Zulagen zzgl. Kapital aus Anbieterwechsel und Versorgungsausgleich</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bfrsumgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte beitragsfreie Summe der HV</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bfrsum2gar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte beitragsfreie Summe der HV zur Leistung 2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bfrsumbuzgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte beitragsfreie Summe der BUZ-Renten für die erste VP</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsterlgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte Erlebensfallleistung bei Ablauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttodgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte Leistung im Todesfall</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstrkwgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierter Rückkaufswert</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fvmWertSicher" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Wert der Anteile der wertgesicherten Anlage</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zulageBsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Wert der Zulage in der Beispielsrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstUebBrTod" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Bewertungsreserven bei Tod</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstauebbr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Bewertungsreserven bei Ablauf.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="entnKumuliert" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>kumullierte verzinste Entnahmen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kostenabs" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährliche Kosten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gebWertSicher" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährliche Gebühren für Wertsicherung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kosten_buz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährliche Kosten für die Versicherung der Berufsunfähigkeit</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kosten_sonzv" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährliche Kosten für sonstige Zusatzversicherungen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="errGarGutHab" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>erreichtes garantiertes Guthaben</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zuzahlBsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zuzahlung </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="stoabbfrKonten" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Stornoabschlag bei Beitragsfreistellung zur Entnahme aus kontenbasiertem Vermögen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="stoabDkBfr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Stornoabschlag auf DK bei der Beitragsfreistellung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rentBetrGarAkt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Garantierte Rente zum Zeitpunkt der aktuellen Berechnung.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstRzvTodGar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Garantierte aktuelle Leistung der RZV bei Tod</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bfrsumRzvGar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Garantierte Leistung 1 der RZV bei Beitragsfreistellung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bfrsumKSHVGar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Garantierte Leistung 1 der KSHV bei Beitragsfreistellung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rentFaktAkt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Aktueller Rentenfaktor</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="lfdnr" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="JurVTPcOut">
+    <xs:annotation>
+      <xs:documentation>Die Rows in Table jurVT repräsentieren jeweils genau einen Vertragsteil.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [wfrist, kzdyn, kzKWVereinb] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="wfrist" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Dieses Attribut enthält bei BUZ-Vertragsteilen die vertraglich vereinbarte Wartefrist für die Leistung bei Berufsunfähigkeit (Angabe in Monaten).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzdyn" type="d0:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Das Kennzeichen legt fest, ob der Vertragsteil an der (auf Vertragsebene festgelegten) planmäßigen Erhöhung gemäß Dynamikvereinbarung teilnehmen soll oder nicht.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzKWVereinb" type="d0:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Vertragsvereinbarung über Kapitalwahl</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransparenzPcOut">
+    <xs:annotation>
+      <xs:documentation>Eine Zeile in der Tabelle 'transparenz' repräsentiert eine Information, die an den Versicherungsnehmer weitergegeben werden muss.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [infotyp, infobetrag, infobezug, varianteId, gueAb] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="infobetrag" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Information in Form einer Zahl</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="infobezug" type="d0:CVSlvInfobezug">
+        <xs:annotation>
+          <xs:documentation>Bezugsgröße, auf die sich die ermittelten Werte zu dem Typ beziehen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gueAb" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Gültig ab, Beginntermin der Zuordnung, Zuordnung ist zum Beginntermin und ab dem Beginntermin gültig.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="infotyp" type="d0:CVSlvInfotyp"/>
+      <xs:element minOccurs="0" name="varianteId" type="d0:CVTariffVariant"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VbPcOut">
+    <xs:annotation>
+      <xs:documentation>vb</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [pbSum] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="pbSum" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Provisionsbeitragssumme-gesamt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="0" name="vbId" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VertschlPcOut">
+    <xs:annotation>
+      <xs:documentation>Prozentuale Verteilung der Zahlungsströme auf die FondsHistorie-streng: Attribute, die zur strengen Historienführung am Vertrag benötigt werdenVerteilungsschluessel: Angaben zur prozentualen Verteilung auf die Fonds</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [fondsId, pant, kzWertSicher] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="pant" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Proz. Anteil zu dem der Sparbeitrag in einen Fonds fliesst.Constraint pant_RANGE: die prozentualen Fondsanteile sind zwischen 0.0 und 1.0.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="fondsId" type="xs:int"/>
+      <xs:element minOccurs="1" name="kzWertSicher" type="d0:CVSlvKzWertsicherung"/>
+      <xs:element minOccurs="1" name="investType" type="d0:CVSlvInvestmentType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VpVTPcOut">
+    <xs:annotation>
+      <xs:documentation>Die in einem LV versicherten Personen werden den Vertragsteilen zugeordnet.Historie-streng: Attribute, die zur strengen Historienführung am Vertrag benötigt werdenVersicherte-Person-VT: Mit Hilfe dieser Entität werden die in einem LV-Vertrag versicherten Personen den Vertragsteilen zugeordnet, in denen sie versichert sind. Durch diese Modellierung wird ein Partner in seiner Rolle als versicherte Person nur einmal gespeichert, ist aber dennoch verschiedenen Vertragsteilen zugeordnet. Außerdem können Vorbehalte so zwar einer versicherten Person als solcher (für alle ihre Vertragsteile) zugeordnet werden (so wird es von der Benutzeroberfläche her umgesetzt), sie lassen sich jedoch auch (wie es fachlich korrekt ist) auf die in einem bestimmten Vertragsteil versicherte Person beziehen. Damit kann ein und derselbe Partner z.B. bei nachträglichem Einschluß einer Zusatzversicherung unterschiedliche Vorbehalte bekommen.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [risMerkmal, risSchaetz, vtPflege, partnerId, rollenId, vpTypId, gebDat, sex, berufId, partnerIdExt] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="risMerkmal">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="risMerkmal" type="pcOutFilterDef:RisMerkmalPcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="risSchaetz" type="pcOutFilterDef:RisSchaetzPcOut">
+      </xs:element>
+      <xs:element minOccurs="0" name="vtPflege">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="vtPflege" type="pcOutFilterDef:VtPflegePcOut">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="vpTypId" type="d0:CVSlvVpTypID">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung eines Typs von versicherter Person. Es gibt die Typen VP1(1) und VP(2).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gebDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Das Geburtsdatum ist der Termin, an dem die natürliche Person geboren wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="sex" type="d0:CVSlvGeschlecht">
+        <xs:annotation>
+          <xs:documentation>Identifizierender Schlüssel für das Geschlecht einer natürlichen Person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="berufId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Eindeutiger Bezeichner fuer einen Beruf.
+            (In der Standard Implementierung enthält dieses Attribut Werte aus der Enumeration CVSlvBeruf.
+            Es wird aber im Core Modell als Spezialfall bewusst als Integer definiert,
+            da die Wertemenge in Customer-Projekten häufig so groß ist, dass Sonderlösungen eingesetzt werden müssen.)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="partnerIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>externe Darstellung der Identifikation eines Partners</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="0" name="partnerId" type="xs:int"/>
+      <xs:element minOccurs="1" name="rollenId" type="d0:CVSlvPartnerrolle"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RisMerkmalPcOut">
+    <xs:annotation>
+      <xs:documentation>Risiko-Merkmale sind personenbezogene Merkmale zur Einschätzung des Risikos.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [risMerkmalId, risMerkmalDate, risMerkmalDouble, risMerkmalInteger] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="risMerkmalDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Gibt den Wert des Risikomerkmals als Date an.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="risMerkmalDouble" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gibt den Wert des Risikomerkmals als Double an.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="risMerkmalInteger" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Gibt den Wert des Risikomerkmals als Integer an.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="risMerkmalId" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RisSchaetzPcOut">
+    <xs:annotation>
+      <xs:documentation>Die Risiko-Einschätzung ist das Ergebnis der Risikoprüfung auf der Grundlage der Risikobeschreibung.Historie-streng: Attribute, die zur strengen Historienführung am Vertrag benötigt werdenRisikoeinschaetzung: Die Risiko-Einschätzung ist das Ergebnis der Risikoprüfung auf der Grundlage der Risikobeschreibung. In der Risiko-Einschätzung werden die Informationen geführt, anhand derer geprüft werden kann, welches Risiko es darstellt, eine Person in der von ihr gewünschten Weise zu versichern. Die Risikoprüfung wird sowohl bei der Antragsprüfung als auch bei einer Erhöhung des Risikos durchgeführt. Die Risikoeinschätzung ist vertragsteilbezogen. D.h., sie gilt für eine Person, die durch einen bestimmten Vertragsteil versichert ist. Die Risikoprüfung kann zu Erhöhung des Beitrags, zu Ein-bzw. Ausschlüssen, zur Begrenzung des Endalters oder zur Ablehnung führen.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [rizumed, ablrizumed, rizuson, ablrizuson, rizuzus, ablrizuzus, uebsterb, staffelung, risikogruppe, berufsgruppe, risikoklasse, kzManuell] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="rizumed" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Beitragszuschlag, der aufgrund eines erhöhten gesundheitlichen Risikos vergeben wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ablrizumed" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauftermin des medizinischen Risikozuschlags</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rizuson" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Beitragszuschlag, der aufgrund eines erhöhten sonstigen Risikos vergeben wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ablrizuson" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauftermin der Risikozuschläge, die nicht medizinischer oder zusätzlich temporärer Art sind</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rizuzus" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zusätzlicher sonstiger Risikozuschlag, der im Regelfall nur temporär gültig ist.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ablrizuzus" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauftermin für den zusätzlichen temporären Risikozuschlag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebsterb" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Prozentangabe der übersterblichkeit. Dieser Wert geht in die Ermittlung der Ausscheidewahrscheinlichkeiten ein, auf deren Grundlage dann schließlich der erhöhte Beitrag berechnet wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="staffelung" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Angabe einer von der VP abhängigen linearen Leistungsstaffel bei Tod in den ersten Versicherungsjahren.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="risikogruppe" type="d0:CVSlvRisikogruppe">
+        <xs:annotation>
+          <xs:documentation>Eine Risikogruppe bezeichnet eine Gruppe von Risiken, die unter dem Gesichtspunkt der Risikoschätzung für eine versicherte Person gleichartig behandelt werden sollen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="berufsgruppe" type="d0:CVSlvBerufsgruppe">
+        <xs:annotation>
+          <xs:documentation>Eine Berufsgruppe bezeichnet eine Menge von Berufen, die unter dem Gesichtspunkt der Risikoschätzung gleichartig behandelt werden sollen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="risikoklasse" type="d0:CVSlvRisikoklasse">
+        <xs:annotation>
+          <xs:documentation>Die Risikoklasse ist das Ergebnis der Risikoselektion. für eine versicherte Person bezogen auf den jeweiligen Tarif</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzManuell" type="d0:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob die Risikoklasse vom Sachbearbeiter direkt erfasst wurde</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VtPflegePcOut">
+    <xs:annotation>
+      <xs:documentation>Speichert die am Vertragsteil für eine versicherte Person versicherten Leistungen je Pflegestufe, sowie das jeweilige Eintrittsdatum der einzelnen Pflegestufen</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [pflegeStufe, leistungsSatz, rang] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="leistungsSatz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bestimmt die Höhe der Leistung für die konkrete Pflegestufe in Prozent von der versicherten Jahresrente</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="rang" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Rangfolge der Pflegestufe, eindeutig innerhalb vpVT</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="pflegeStufe" type="d0:CVSlvPflegeStufe"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GarWertVorgabePcOut">
+    <xs:annotation>
+      <xs:documentation>Die Tabelle garWertVorgabe kann im Zuge einer Migration mit vorgegebenen Garantiewerten gefüllt werden. In der Life Factory werden die Werte ausgelesen. Im Customizing können sie berücksichtigt und bei bestimmten Bearbeitungen als ungültig kennzeichnet werden. Die Tabelle wird streng historisch geführt.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [gueTermin, rentfakt] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="rentfakt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Rentenfaktor</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="gueTermin" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BtgProfilParaPcOut">
+    <xs:annotation>
+      <xs:documentation>Enthält Parameter für ein Beitragsprofil</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [paraTyp, paraDouble, paraInt, paraDate] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="paraDouble" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Double-Parameter für das eingestellte Beitragsprofil</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="paraInt" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Integer-Parameter für das eingestellte Beitragsprofil</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="paraDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date-Parameter für das eingestellte Beitragsprofil</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="paraTyp" type="d0:CVSlvBtgProfilPara"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="JurLVPcOut">
+    <xs:annotation>
+      <xs:documentation>Die Rows in Table jurLV repräsentieren jeweils genau einen Vertrag. Der 'Vertrag' kann aktiv oder abgegangen oder auch ein bearbeiteter oder abgelehnter Antrag sein; maßgebend dafür ist das Field lvStatus desjenigen zugehörigen, der die höchste Bearbeitungsnummer in Field bearbId hat.Constraint mandId_lvIdExt_UNI: Die Kombination ausundbilden nebem dem Primary Key auch eine eineindeutige Identifizierungsmöglichkeit.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [kzbAV, kzKapSt, dynId, satz, zykDynamik, kzDynZu] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="kzbAV" type="d0:CVSlvBAVKz">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für betriebliche Altersversorgung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzKapSt" type="d0:CVSlvSteuRecht">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für die Kapitalertragssteuer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dynId" type="d0:CVSlvDynamik">
+        <xs:annotation>
+          <xs:documentation>Qualität der Dynamikvereinbarung gemäß Schlüsselsystem</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="satz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Fest vereinbarter Prozentsatz, um den sich die Bezugsgröße (z.B. Zahlbeitrag) erhöhen soll.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zykDynamik" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Planmäßiger Zyklus der dynamischen Anpassungen in Jahren</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzDynZu" type="d0:CVSlvKzDynZu">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, zu welchem Zeitpunkt dynamisiert werden soll (Hauptfälligkeit, erste Fälligkeit ....)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VpPcOut">
+    <xs:annotation>
+      <xs:documentation>Versicherte Person.Historie-streng: Attribute, die zur strengen Historienführung am Vertrag benötigt werdenVersicherte-Person: Die versicherte Person ist ein Partner, der durch den Vertragsteil versichert ist und damit die Grundlage für die Risikoprüfung darstellt.</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [partnerId, rollenId, gebDat, partnerIdExt] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="gebDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Das Geburtsdatum ist der Termin, an dem die natürliche Person geboren wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="partnerIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>externe Darstellung der Identifikation eines Partners</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="0" name="partnerId" type="xs:int"/>
+      <xs:element minOccurs="1" name="rollenId" type="d0:CVSlvPartnerrolle"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulageVerlaufPcOut">
+    <xs:annotation>
+      <xs:documentation>zulageVerlauf</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [jahr, zulageAnspruch, gehaltVjDyn, eigenBtgJahr, zulageZahlung, mindestEigenBtg, eigenBtgZw, zulageAnsprEheg, eigenBtgEheg] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="zulageAnspruch" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Höhe des vollen Zulagenanspruchs für das Kalenderjahr = Jahr(gueTermin)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gehaltVjDyn" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Sozialversicherungspflichtiges Vorjahresgehalt unter Berücksichtigung der Gehaltsdynamik. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eigenBtgJahr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamter Eigenbeitrag abgegrenzt auf das Kalenderjahr</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zulageZahlung" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Erwartete, ggf. gekürzte Zulagenzahlung im Kalenderjahr unter Berücksichtigung des Mindeseigenbeitrags. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="mindestEigenBtg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Mindesteigenbeitrag abgegrenzt auf das Kalenderjahr</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eigenBtgZw" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Eigenbeitrag pro Zahlweise</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zulageAnsprEheg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Höhe des Zulagenanspruchs des Ehegatten (der bei mittelbarer Zulageberechtigung beim Mindesteigenbeitrag zu berücksichtigen ist) für das Kalenderjahr = Jahr(gueTermin)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eigenBtgEheg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamter Eigenbeitrag des Ehegatten im Kalenderjahr; relevant bei mittelbarer Zulageberechtigung des VN für die Berücksichtigung wegfallender Kinderzulage</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- id properties -->
+      <xs:element minOccurs="1" name="jahr" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="aktStandPcOut" type="pcOutFilterDef:AktStandPcOut"/>
+  <xs:complexType name="AktStandPcOut">
+    <xs:annotation>
+      <xs:documentation>Für einige Vertragsdaten vergibt Life Factory Kunstschlüssel. Die Rows in Table aktStand enthalten jeweils die letzten vergebenen Nummern eines Vertrages:</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [genLast, sbIdLast, ktoBewIdLast, zahlEmpfId, ktoBelegIdLast, mahnIdLast, eaKlauselIdLast, schwebeIdLast, regIdLast, kindIdLast, schichtIdLast, regIdBtgLast, tabselbv, sntNwId, prvIdLast] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="genLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Letzte vergebene Generationsnummer am VB</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="sbIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Letzte vergebene Kennzeichnung einer Sammelbewegung (=sbId)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ktoBewIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Nummer der letzten durchgefuehrten Kontobewegung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zahlEmpfId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Nummer des zuletzt erzeugten Zahlungsempfängers</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ktoBelegIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>ktoBelegIdLast</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="mahnIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die ID der zuletzt erzeugten Mahnung in einem Vertrag.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eaKlauselIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die letzte vergebene laufende Nummer in eaKlausel (lfdnr).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="schwebeIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die letzte vergebene Identifikation für Schwebenachweise.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="regIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die letzte vergebene laufende Nummer in steuAuftReg</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kindIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die letzte vergebene kindId</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="schichtIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die letzte vergebene schichtId</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="regIdBtgLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die letzte vergebene regIdBtgLast</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="tabselbv" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Performanceoptimierung: In der Tabelle AKTSTAND wird in einem Bitfeld die Informationen gehalten wird, ob eine Tabelle für diesen Vertrag schon beschreiben wurde. Dadurch kann das Anlesen der Tabelle teilweise enfallen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="sntNwId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Letzte vergebene Identifikation für Schnittstellennachweise</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="prvIdLast" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die letzte vergebene laufende Nummer in prv</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AngDatenVPPcOut">
+    <xs:annotation>
+      <xs:documentation>Enthält die berechnungsrelevanten Daten der VP für die Angebotsberechnung</xs:documentation>
+    </xs:annotation>
+    <!-- all properties: [name, vorname, gebDat, sex] -->
+    <xs:sequence>
+      <!-- xmlId -->
+      <!-- no xmlId required -->
+      <!-- localKeyEntity -->
+      <!-- no localKeyEntity available -->
+      <xs:element minOccurs="0" name="name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Nachname (VP)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vorname" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Vorrname (VP)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gebDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Das Geburtsdatum ist der Termin, an dem die natürliche Person geboren wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="sex" type="d0:CVSlvGeschlecht">
+        <xs:annotation>
+          <xs:documentation>Identifizierender Schlüssel für das Geschlecht einer natürlichen Person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

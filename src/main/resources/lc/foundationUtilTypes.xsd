@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fndUtil="http://xmlns.fja.com/ipl/foundation/util/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.fja.com/ipl/foundation/util/types">
+
+  <xs:complexType name="ExternalReference">
+    <xs:sequence>
+      <xs:element name="referenceID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="EmptyBase"/>
+
+</xs:schema>

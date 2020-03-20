@@ -1,0 +1,3738 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:applicationFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/applicationfilterdef/types" xmlns:bsf="http://xmlns.fja.com/ipl/bsf/types" xmlns:d0="http://xmlns.fja.com/ipl/ccshared/lb/sc/types" xmlns:d2="http://xmlns.fja.com/ipl/ccshared/lb/types/types" xmlns:defaultValueResultFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/defaultvalueresultfilterdef/types" xmlns:detailsFilterSpec="http://xmlns.fja.com/ipl/ccshared/lc/sc/detailsfilterspec/types" xmlns:fndUtil="http://xmlns.fja.com/ipl/foundation/util/types" xmlns:fundsFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/fundsfilterdef/types" xmlns:infoFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/infofilterdef/types" xmlns:lifeContract="http://xmlns.fja.com/ipl/ccshared/lc/sc/types" xmlns:manualModificationFilterSpec="http://xmlns.fja.com/ipl/ccshared/lc/sc/manualmodificationfilterspec/types" xmlns:pcInFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcinfilterdef/types" xmlns:pcOutFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcoutfilterdef/types" xmlns:proposalFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/proposalfilterdef/types" xmlns:util="http://xmlns.fja.com/ipl/util/types" xmlns:viewFilterDef="http://xmlns.fja.com/ipl/ccshared/lc/sc/viewfilterdef/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/types">
+
+  <xs:import namespace="http://xmlns.fja.com/ipl/foundation/util/types" schemaLocation="foundationUtilTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/util/types" schemaLocation="utilTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/bsf/types" schemaLocation="bsfTypes_5_6_0.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lb/sc/types" schemaLocation="lifeBomTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lb/types/types" schemaLocation="lifeUtilTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/applicationfilterdef/types" schemaLocation="applicationFilterDefTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/defaultvalueresultfilterdef/types" schemaLocation="defaultValueResultFilterDefTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/detailsfilterspec/types" schemaLocation="detailsFilterSpecTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/fundsfilterdef/types" schemaLocation="fundsFilterDefTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/infofilterdef/types" schemaLocation="infoFilterDefTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/manualmodificationfilterspec/types" schemaLocation="manualModificationFilterSpecTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcinfilterdef/types" schemaLocation="pcInFilterDefTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/pcoutfilterdef/types" schemaLocation="pcOutFilterDefTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/proposalfilterdef/types" schemaLocation="proposalFilterDefTypes.xsd"/>
+  <xs:import namespace="http://xmlns.fja.com/ipl/ccshared/lc/sc/viewfilterdef/types" schemaLocation="viewFilterDefTypes.xsd"/>
+
+
+  <xs:element name="accountMovement" type="lifeContract:AccountMovement"/>
+  <xs:complexType name="AccountMovement">
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="logId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Worklog identifier for which the account movement was created.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="cancellingLogId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Worklog identifier which cancelled the account movement.
+            Null in case the account movement is not cancelled.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="amount" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>The amount for this account movement.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="accountMovementType" type="d2:CVAccountMovementType">
+        <xs:annotation>
+          <xs:documentation>The account movement type semantically defining the amount.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="accountType" type="d2:CVAccountType">
+        <xs:annotation>
+          <xs:documentation>The account type defines a business </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="coverageId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Identifier of the coverage for which this account movement was created.
+            Null in case the account movement is not specific for one coverage.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="currencyId" type="d2:CVSlvWaehrung">
+        <xs:annotation>
+          <xs:documentation>Identifier of the currency.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="effectiveBegin" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Effective begin.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="effectiveEnd" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Effective end. May equal effectiveBegin in which case the account movement is valid for an effective date instead of a period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="chargingFeeReason" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Charging fee reason.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="accountMovementSearchCriteria" type="lifeContract:AccountMovementSearchCriteria"/>
+  <xs:complexType name="AccountMovementSearchCriteria">
+    <xs:annotation>
+      <xs:documentation>Criteria for the account movement search.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="accountType" type="d2:CVAccountType">
+        <xs:annotation>
+          <xs:documentation>Type of account  to be searched for.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="coverageId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Identifier of the coverage to be searched for.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="minEffectiveBegin" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Minimum effective begin.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="maxEffectiveBegin" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Maximum effective begin.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="fundsSearchCriteria" type="lifeContract:FundsSearchCriteria"/>
+  <xs:complexType name="FundsSearchCriteria">
+    <xs:annotation>
+      <xs:documentation>criteria to look up a funds.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="filterIsin" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>International Securities Identification Number.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="filterWkn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>National Securities Identification Number (Wertpapierkennummer) used in Germany.&lt;p/&gt;
+            WKN was replaced by ISIN in 2003. However, for technical and practical reasons it is still in use.
+            Even newly introduced papers do have a WKN.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="filterFundsName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Filter for the name of the funds.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="filterFondsIDExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Filter for the external funds identification</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="inboundDataSelectionCriteria" type="lifeContract:InboundDataSelectionCriteria"/>
+  <xs:complexType name="InboundDataSelectionCriteria">
+    <xs:annotation>
+      <xs:documentation>Criteria for search of inbound data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="dataType" type="d2:CVInboundDataType">
+        <xs:annotation>
+          <xs:documentation>The type of the records to be selected.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="boType" type="d2:CVInboundBOType">
+        <xs:annotation>
+          <xs:documentation>The business object type of the records to be selected.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="businessObjectIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The external business object id of the records to be selected. May be &lt;code&gt;null&lt;/code&gt; if the selection should not be limited to certain business object ids.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="isBusinessObjectIdWildcard" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Indicates whether the parameter businessObjectIdExt should be interpreted as a wildcard. This parameter is ignored if businessObjectIdExt is &lt;code&gt;null&lt;/code&gt;.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="companyId" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>The company id of the records to be selected.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="assetTransfer" type="lifeContract:AssetTransfer"/>
+  <xs:complexType name="AssetTransfer">
+    <xs:annotation>
+      <xs:documentation>Input parameter for asset transfer. The type and the types of its children is modelled according to ZVBF06.dtd
+        (COR.FJA Zulagenverwaltung interface type), however with Life Contract compatible types of the attributes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="uebernahme">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="uebernahme" type="lifeContract:Uebernahme"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Uebernahme">
+    <xs:annotation>
+      <xs:documentation>Part of asset transfer data. See documentation of AssetTransfer.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="kapital" type="lifeContract:Kapital"/>
+      <xs:element minOccurs="0" name="steuerWerteHistorie">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="steuerWerte" type="lifeContract:SteuerWerte"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="vertragsdatenBAV" type="lifeContract:VertragsdatenBAV"/>
+      <xs:element minOccurs="0" name="uebertragungEhegatte" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="versorgungsausgleich" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="vorgangsnummer" type="xs:string"/>
+      <xs:element minOccurs="0" name="datumFristablauf" type="xs:date"/>
+      <xs:element minOccurs="1" name="mandantenID" type="d2:CVCompany"/>
+      <xs:element minOccurs="1" name="anbieternummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="bestandsverwaltungssystemnummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="vertragsIDintern" type="xs:string"/>
+      <xs:element minOccurs="1" name="vertragsIDextern" type="xs:string"/>
+      <xs:element minOccurs="0" name="organummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="inexkassosystemnummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="partnersystemnummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="partnerID" type="xs:string"/>
+      <xs:element minOccurs="0" name="kundennummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="anbieternummerAlt" type="xs:string"/>
+      <xs:element minOccurs="1" name="vertragsnummerAlt" type="xs:string"/>
+      <xs:element minOccurs="0" name="zertifizierungsnummerAlt" type="xs:string"/>
+      <xs:element minOccurs="0" name="vertragsIDinternUE" type="xs:string"/>
+      <xs:element minOccurs="0" name="mandantenIDAlt" type="d2:CVCompany"/>
+      <xs:element minOccurs="0" name="meldegrund" type="d2:CVSlvMeldegrund"/>
+      <xs:element minOccurs="1" name="meldemerkmal" type="d2:CVReasonOfModificationsType"/>
+      <xs:element minOccurs="0" name="prozUeb" type="xs:double"/>
+      <xs:element minOccurs="1" name="datumUebertragung" type="xs:date"/>
+      <xs:element minOccurs="0" name="sumZulGes" type="xs:double"/>
+      <xs:element minOccurs="0" name="sumBeiZul" type="xs:double"/>
+      <xs:element minOccurs="0" name="dtErst" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="dtErstAlt" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Kapital">
+    <xs:annotation>
+      <xs:documentation>Part of asset transfer data. See documentation of AssetTransfer.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="sumAVmGGes" type="xs:double"/>
+      <xs:element minOccurs="0" name="sumGefKap" type="xs:double"/>
+      <xs:element minOccurs="0" name="sumUngefKap" type="xs:double"/>
+      <xs:element minOccurs="0" name="urkap" type="xs:double"/>
+      <xs:element minOccurs="0" name="vertragVersicherungsFoermig" type="d2:CVSlvVertragVersicherungsFoermig"/>
+      <xs:element minOccurs="0" name="datErsterVertragsAbschluss" type="xs:date"/>
+      <xs:element minOccurs="0" name="steuerlicherVertragsbeginn" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SteuerWerte">
+    <xs:annotation>
+      <xs:documentation>Part of asset transfer data. See documentation of AssetTransfer.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="anzKi" type="xs:int"/>
+      <xs:element minOccurs="0" name="bavFoerd" type="xs:string"/>
+      <xs:element minOccurs="0" name="beitragsjahr" type="xs:int"/>
+      <xs:element minOccurs="1" name="beitrag" type="xs:double"/>
+      <xs:element minOccurs="0" name="beitragNachTod" type="xs:double"/>
+      <xs:element minOccurs="0" name="beiZul" type="xs:double"/>
+      <xs:element minOccurs="0" name="beiZulAusserEhe" type="xs:double"/>
+      <xs:element minOccurs="0" name="btrGruZul" type="xs:double"/>
+      <xs:element minOccurs="0" name="btrKiZul" type="xs:double"/>
+      <xs:element minOccurs="0" name="ertGef" type="xs:double"/>
+      <xs:element minOccurs="0" name="ertUngef" type="xs:double"/>
+      <xs:element minOccurs="0" name="ertUngefSteuerfrei" type="xs:double"/>
+      <xs:element minOccurs="0" name="ertUngefStpfl" type="xs:double"/>
+      <xs:element minOccurs="0" name="faktorSteuerfrei" type="xs:double"/>
+      <xs:element minOccurs="0" name="gefKap" type="xs:double"/>
+      <xs:element minOccurs="0" name="kapitalUebertragung" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="nachzahlungIn" type="xs:double"/>
+      <xs:element minOccurs="0" name="nachzahlungFuer" type="xs:double"/>
+      <xs:element minOccurs="0" name="rZahlZul" type="xs:double"/>
+      <xs:element minOccurs="0" name="ungefKap" type="xs:double"/>
+      <xs:element minOccurs="0" name="zahlZul" type="xs:double"/>
+      <xs:element minOccurs="0" name="zinsGef" type="xs:double"/>
+      <xs:element minOccurs="0" name="zinsUngef" type="xs:double"/>
+      <xs:element minOccurs="0" name="zulage" type="xs:double"/>
+      <xs:element minOccurs="0" name="zulageAusserEhe" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VertragsdatenBAV">
+    <xs:annotation>
+      <xs:documentation>Part of asset transfer data. See documentation of AssetTransfer.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="sumBeitrStFrei" type="xs:double"/>
+      <xs:element minOccurs="0" name="sumBeitrStPauschal" type="xs:double"/>
+      <xs:element minOccurs="0" name="sumBeitrStFreiWg" type="xs:double"/>
+      <xs:element minOccurs="0" name="sumBeitrRuerupStIndividuell" type="xs:double"/>
+      <xs:element minOccurs="0" name="sumBeitrStIndiNichtGefoerd" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="deficitInPayment" type="lifeContract:DeficitInPayment"/>
+  <xs:complexType name="DeficitInPayment">
+    <xs:annotation>
+      <xs:documentation>Input parameter for contracts the insurance company wants to end. (German for deficit in payment: Zahlungsausfall).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="contractInDefaultList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="contractInDefault" type="lifeContract:ContractInDefault"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContractInDefault">
+    <xs:annotation>
+      <xs:documentation>Contract to be handled in automatically end surrender (German for default: Zahlungsverzug).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="creationDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date this entry was created</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="contractIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>External contract number</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="companyId" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>Company ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="unpaidItems" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>amount of unpaid items from central collection system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="currencyId" type="d2:CVSlvWaehrung">
+        <xs:annotation>
+          <xs:documentation>Currency of the unpaid items amount</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="effectiveDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Planned effective date of the end of the contract</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="collection" type="lifeContract:Collection"/>
+  <xs:complexType name="Collection">
+    <xs:annotation>
+      <xs:documentation>Input parameter for import data from collection system</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="paymentList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="payment" type="lifeContract:Payment"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Payment">
+    <xs:annotation>
+      <xs:documentation>Part of collection system data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="contractIDExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>External contract number</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="companyID" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>Company ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="bookingDirective" type="d2:CVBookingDirective">
+        <xs:annotation>
+          <xs:documentation>The booking directive</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="bookingNumber" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The unique identification ID for each entry</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="batchID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Identification ID of the external Application, which created the entry</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bookingEntryToCancel" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The identification id of the entry to be cancelled</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="valueDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>The value on the day on which the directive is effectively</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="amount" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Amount of money</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="yearOfPremInvest" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The year of premium invest</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="paymentRequestFlag" type="d2:CVPaymentRequestFlagType">
+        <xs:annotation>
+          <xs:documentation>qualifies the type of the payment request flag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ifcOutboundDataInfos" type="lifeContract:IfcOutboundDataInfos"/>
+  <xs:complexType name="IfcOutboundDataInfos">
+    <xs:annotation>
+      <xs:documentation>List of info objects for of IfcOutboundData entries.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="datas">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="ifcOutboundDataInfo" type="lifeContract:IfcOutboundDataInfo"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IfcOutboundDataInfo">
+    <xs:annotation>
+      <xs:documentation>Represents info of a IfcOutboundData entry.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="primaryKey" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Primary key of a IfcOutboundData (TriggerId).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="ifcType" type="d2:CVIfcType">
+        <xs:annotation>
+          <xs:documentation>Type of the interface entry.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="companyId" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>CompanyId of the interface entry.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="processingStatusCV" type="d2:CVIfcOutboundProcessingStatus">
+        <xs:annotation>
+          <xs:documentation>Current status in the processing life cycle.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="invocationBusinessContext" type="lifeContract:InvocationBusinessContext"/>
+  <xs:complexType name="InvocationBusinessContext">
+    <xs:annotation>
+      <xs:documentation>The InvocationBusinessContext contains common input for most life contract service operation requests.
+        It contains business process specific information.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="contextSpecificArguments" type="lifeContract:ContextSpecificArguments">
+        <xs:annotation>
+          <xs:documentation>Container for context specific arguments.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="businessProcessType" type="d2:CVBusinessProcessType">
+        <xs:annotation>
+          <xs:documentation>Type of business process (GevoTyp).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="competenceLevel" type="d2:CVCompetenceLevel">
+        <xs:annotation>
+          <xs:documentation>Competence level of the user.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="companyId" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>The identifier of the insurance company / client organization (the tenant in sense of multi-tenancy).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Externally known contract identifier (in contrast to the LifeContract internal contract ID).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="folderIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Externally known proposal identifier (in contrast to the LifeContract internal proposal ID).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="proposalIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Externally known proposal folder identifier (german: klammerIdExt, in contrast to the LifeContract internal proposal proposal ID).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modificationIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Externally known modification identifier. This field is to be set in case the service operation calls are based on a pending modification.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractVersion" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Contract version on which the business process is based (bearbId).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="effectiveDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date for which the business process shall be made effective (Wirksamkeitsdatum).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="valueDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Differing effective date the business process shall be made effective for (Wertstellungsdatum).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="reportingDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date of the reception of a report (Meldedatum).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="productId" type="d2:CVProduct">
+        <xs:annotation>
+          <xs:documentation>Identification for the insurance product. This attribute is required for the application process.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modificationReasonCV" type="d2:CVReasonOfModificationsType">
+        <xs:annotation>
+          <xs:documentation>Definition of why a business process was triggered.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modificationReference" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Reference to contract modification to which this business process is applied (bearbidref) TODO Ank 2014-05-16: workaround for CR   lf4!16584 </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="salesChannel" type="d2:CVSalesChannel">
+        <xs:annotation>
+          <xs:documentation>Sales channel identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="workflowIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Id sent from a workflow system identifying the cause for this action, for example unique id for each customer letter.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="partnerIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>External id of the chosen partner object. Used in those business processes that depend on a partner specification (e.g. END_DEATH).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dateOfDeath" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date of death. This attribute is required for END_DEATH only</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="readOnlyGUI" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>If this flag is set to true, if GUI is set to read only (needed for invitatio and 4-eye principle).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="beginOfMarriage" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Begin of Marriage. This attribute is required for INFORMATION_PENSION_RIGHTS_ADJUSTMENT only. TODO Abo 2013-11-15: workaround for CR   lf4!16584  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="endOfMarriage" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Begin of Marriage. This attribute is required for INFORMATION_PENSION_RIGHTS_ADJUSTMENT only TODO Abo 2013-11-15: workaround for CR   lf4!16584 </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="executeBusinessValidations" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>This flag controls if business validations specified in defining data should be called for this invocation. If this flag is set it always overwrites the globally defined flag in validation component.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="simulateBusinessProcess" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>This flag marks a businessProcessType as simulated. If this flag is set it is only possible to calculate or cancel the actual business process.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="selDatJurHist" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>If this flag is set, all entities with juristic data (historizationType: weak) are loaded from database using the given contract version.
+            Otherwise, the current state is loaded.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lastProcessedBusinessProcessType" type="d2:CVBusinessProcessType">
+        <xs:annotation>
+          <xs:documentation>The business process type that was processed last in this service operation call, set via OSProcessSwitchInvocationBusinessConext</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="migDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Migrationsstichtag = Wirksamkeitstermin des PolMig Schrittes.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="schwebefallBewert" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Schwebefallbewertung - Wahrscheinlichkeit, daß der Vorgang in Leistung geht. Übersteuert die Durchschnittswerte des Aktuariats. Wird benötigt bei der Ermittlung der Schadensreserve.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bewertResTerm" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>abweichender Bewertungsreservetermin.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eintrittLeistfall" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Vom Sachbearbeiter eingegebene EU/BU/AU An-/Abmeldedatum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="todesursache" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die Ursache des Todes.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="businessProcessTypeOriginal" type="d2:CVBusinessProcessType">
+        <xs:annotation>
+          <xs:documentation>Der urspruengliche GevoTyp.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="userAction" type="d2:CVUserAction">
+        <xs:annotation>
+          <xs:documentation>Benutzeraktion.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="c_kzHrVpu" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für die Hochrechnung. Wird nur im Webservicerahmen von der VPU verwendet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="invocationBusinessContextTransactional" type="lifeContract:InvocationBusinessContextTransactional"/>
+  <xs:complexType name="InvocationBusinessContextTransactional">
+    <xs:annotation>
+      <xs:documentation>The InvocationBusinessContextTransactional contains common input for most life contract transactional service operation requests. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="companyId" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>The identifier of the insurance company / client organization (the tenant in sense of multi-tenancy).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Externally known contract identifier (in contrast to the LifeContract internal contract ID).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="effectiveDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date for which the business process shall be made effective (Wirksamkeitsdatum).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="salesChannel" type="d2:CVSalesChannel">
+        <xs:annotation>
+          <xs:documentation>Sales channel identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="competenceLevel" type="d2:CVCompetenceLevel">
+        <xs:annotation>
+          <xs:documentation>Competence level with which the service is called.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="workflowIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Id sent from a workflow system identifying the cause for this action, for example unique id for each customer letter.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lifeGroupTaskId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Id sent from life group (lg) component for identifying lg bulk workflows. This attribute is only allowed to be used in context of lg bulk workflows and has to be NULL in any other cases.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modificationReasonCV" type="d2:CVReasonOfModificationsType">
+        <xs:annotation>
+          <xs:documentation>Definition of why a business process was triggered (Bearbeitungsgrund).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="reportingDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date of the reception of a report (Meldedatum).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="valueDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Differing effective date the business process shall be made effective for (Wertstellungsdatum).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="reactUnscheduledModAllowed" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>This flag indicates whether a business process is allowed to reactivate unscheduled modifications. A null value is interpreted as 'false'</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modificationType" type="d2:CVSlvSchwTyp">
+        <xs:annotation>
+          <xs:documentation>The type of a pending modification</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="c_kzHrVpu" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für die Hochrechnung. Wird nur im Webservicerahmen von der VPU verwendet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="invocationInfoContext" type="lifeContract:InvocationInfoContext"/>
+  <xs:complexType name="InvocationInfoContext">
+    <xs:annotation>
+      <xs:documentation>The InvocationInfoContext contains common input for Info transactional service operation requests. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="companyId" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>The identifier of the insurance company / client organization (the tenant in sense of multi-tenancy).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>LifeContract internal contract ID.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Externally known contract identifier (in contrast to the LifeContract internal contract ID).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="ifcType" type="d2:CVIfcType">
+        <xs:annotation>
+          <xs:documentation>The interface type for which the info data are requested.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="logId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Worklog id - it uniquelly identifies the state of the contract for which the data are requested</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="logIdJur" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Worklog id for which the Jur data should be read</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="refLogId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Worklog id for the reference contract state</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="refLogIdJur" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Worklog id for which the Jur data should be read for the reference contract state</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="cancelledToLogId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Worklog id to which the contract was cancelled</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="effectiveDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date for which identifies the requested contract state (Wirksamkeitsdatum).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="histJur" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flag for reading the juridic data (default current = false, historic = true).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="reverse" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flag for reading the interface in REVERSE direction (default reverse = false - the execute version will be returned).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changePremiumCollectionStop" type="lifeContract:ChangePremiumCollectionStop"/>
+  <xs:complexType name="ChangePremiumCollectionStop">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessChangePremiumCollectionStop</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="kzInkassostop" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Flag if the premium collection should be stopped.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="inkStopVonDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Start date for the stop of premium collection .</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="inkStopBisDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date when the stop of premium collection end. Null mean that there is no enddate.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeDisbursementStop" type="lifeContract:ChangeDisbursementStop"/>
+  <xs:complexType name="ChangeDisbursementStop">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessChangeDisbursementStop</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="kzEkassoStop" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Flag if the disbursement should be stopped.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="exkStopVonDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date when the stop of disbursement starts. Null means: from now on.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="exkStopBisDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date when the stop of disbursement ends. Null means that there is no enddate.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAbrRegel" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob Regelwerk für die  automatische Ermittlung des Zahlungsempfängers und der  Verrechnungsbeträge  für diesen Vertrag anzuwenden ist.	Verallgemeinerung des Kennzeichen -&gt; Umbennenung (noch nicht in Verwendung; keine Code-Anpassung notwendig)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeReminderStop" type="lifeContract:ChangeReminderStop"/>
+  <xs:complexType name="ChangeReminderStop">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessChangeReminderStop</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="kzMahnstop" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Flag if the reminder process should be stopped.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="mahnStopVonDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date when the stop of reminder starts. Null means: from now on.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="mahnStopBisDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date when the stop of reminder ends. Null means that there is no enddate.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changePaymentMethod" type="lifeContract:ChangePaymentMethod"/>
+  <xs:complexType name="ChangePaymentMethod">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessChangePaymentMethod</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="zahlwegId" type="d2:CVSlvZahlweg">
+        <xs:annotation>
+          <xs:documentation>The keyvalue of the new method of payment.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="mandatId" type="d2:CVSlvMandat">
+        <xs:annotation>
+          <xs:documentation>The keyvalue of the new mandate.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="partnerIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The external id of the new partner object used for payment</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="unterschriftDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date when the mandate is signed.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="abwBtgEinzugTag" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Day of month when the payment is due</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kontoId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>ID of the bank account used for payment</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="pendingModificationData" type="lifeContract:PendingModificationData"/>
+  <xs:complexType name="PendingModificationData">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional services dealing with pending modifications</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="modificationIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The external identifier of a pending modification.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="transactionalBusinessProcessReturnContainer" type="lifeContract:TransactionalBusinessProcessReturnContainer"/>
+  <xs:complexType name="TransactionalBusinessProcessReturnContainer">
+    <xs:annotation>
+      <xs:documentation>Base Returncontainer for transactional services called with a transactional process type to perform a business process.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="modificationIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The modificationIdExt for a new pending modification, null if irrelevant. modificationIdExt is a reference to the created pending modification state of a contract.
+            Subsequent service calls (e.g. Reject modification) can use it as a reference</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The contractIdExt for application import, null if irrelevant. Returns the actually created contractIdExt for further referencing</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="calculatedEffectiveDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>The effective date calculated be the server. It may differ from given effective date.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractVersion" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Contract version on which the business process is completed (bearbId).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="settlementAdvice" type="lifeContract:SettlementAdvice">
+        <xs:annotation>
+          <xs:documentation>Optional element that indicates, that as a result of this operation a settlement process might be feasible</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeEndSurrender" type="lifeContract:ChangeEndSurrender"/>
+  <xs:complexType name="ChangeEndSurrender">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessEndSurrender</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="vtId" type="xs:int"/>
+      <xs:element minOccurs="0" name="stpflKE" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Steuerpflichtiger Kapitalertrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAbrRegel" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob Regelwerk für die  automatische Ermittlung des Zahlungsempfängers und der  Verrechnungsbeträge  für diesen Vertrag anzuwenden ist.	Verallgemeinerung des Kennzeichen -&gt; Umbennenung (noch nicht in Verwendung; keine Code-Anpassung notwendig)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="changeSteuAuftReg" type="lifeContract:ChangeSteuAuftReg"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeModificationCessionary" type="lifeContract:ChangeModificationCessionary"/>
+  <xs:complexType name="ChangeModificationCessionary">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessModificationCessionary</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="partnerIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Das Field partnerId identifiziert den Partner, zu dem diese Row eine Aussage macht.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="rollenId" type="d2:CVSlvPartnerrolle">
+        <xs:annotation>
+          <xs:documentation>Identifikation einer Partnerrolle in einer Partner-Vertrags-Beziehung.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="partnerStatus" type="d2:CVTransactionalStatusType">
+        <xs:annotation>
+          <xs:documentation>Gibt an, ob das Objekt neu angelegt, geändert oder gelöscht werden soll.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="drittrechtStatus" type="d2:CVTransactionalStatusType">
+        <xs:annotation>
+          <xs:documentation>Gibt an, ob und auf welche Weise ein Drittrecht bei dem Gevo berücksichtigt werden soll.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="drittrechtId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Id des Drittrechts, wird zur Identifikation des Objekts benötigt. Muss gesetzt sein, falls ein Drittrechtobjekt geändert oder gelöscht werden soll.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="drittrechtTypId" type="d2:CVSlvDrittrecht">
+        <xs:annotation>
+          <xs:documentation>Beschreibt den Typ des Drittrechts.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="beginn" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Termin, ab dem die Vereinbarung wirksam wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="drittrechtBez" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Referenz, auf die sich das Drittrecht bezieht, z.B. Aktenzeichen, Darlehensnummer oder Grundbuchnummer bei einer Hypothekenvergabe o.ä.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="drittrechtErl" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Betrag der Drittberechtigung beim Erleben.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="drittrechtTod" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Betrag der Drittberechtigung im Todesfall.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzStSchaedZession" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob eine steuerschädliche Zession vorliegt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rang" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Rangfolge des Drittrechtes, eindeutig innerhalb eines Vertrages.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="abwHoehe" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Abweichende Höhe der Drittrechtsumme</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uaSumme" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Summe, bis zu der eine Unanfechtbarkeitsklausel gewährt wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uaSummeRel" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Relative Vorgabe, bis zu der eine Unanfechtbarkeitsklausel gewährt wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uaVP1" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>VP1 hat die Unanfechtbarkeitsklausel abgeschlossen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uaVP2" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>VP2 hat die Unanfechtbarkeitsklausel abgeschlossen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uaErhSumme" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Erhöhungssumme, um die die Unanfechtbarkeitssumme aufgestockt wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vorgUaErhSumme" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgabe der Erhöhungssumme, um die die Unanfechtbarkeitssumme aufgestockt wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeCollectiveReassign" type="lifeContract:ChangeCollectiveReassign"/>
+  <xs:complexType name="ChangeCollectiveReassign">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessCollectiveReassign</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="kollNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Kollektiv-Nummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lfdKollNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Laufende Nummer als Ergänzung zur Kollektiv-Nummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="verwGrpNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Verwaltungsgruppennummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="musterId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Muster-Kennung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="isSystemDocSuppressed" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Should be the system documents global suppressed?</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changePolicyLoan" type="lifeContract:ChangePolicyLoan"/>
+  <xs:complexType name="ChangePolicyLoan">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessModificationPolicyLoan</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="abwZinssatz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Deviation from interest rate (percentage).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="betragRueckz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Amount of loans increase or repayment.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zahlwegPolDarl" type="d2:CVSlvZahlwegExka">
+        <xs:annotation>
+          <xs:documentation>Payment method of a policy loan.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zahlwegZins" type="d2:CVSlvZahlweg">
+        <xs:annotation>
+          <xs:documentation>Payment method-rate of a payer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zinsAb" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date from which the policy loan is subject to interest.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zweiZins" type="d2:CVSlvZahlweiseZins">
+        <xs:annotation>
+          <xs:documentation>Agreed payment method of the interest on the policy loan.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zahlwegRueckz" type="d2:CVSlvZahlweg">
+        <xs:annotation>
+          <xs:documentation>Payment method of repayment on the policy loan.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeSteuAuftReg">
+    <xs:annotation>
+      <xs:documentation>Parameter object for some transactional services.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="auftlgFormel" type="d2:CVSlvAuftlgFormel">
+        <xs:annotation>
+          <xs:documentation>Formel / Formelausprägung als Verweis auf die steuerliche Aufteilungsregel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="beitragsTyp" type="d2:CVSlvBtgTyp">
+        <xs:annotation>
+          <xs:documentation>Steuerlicher Beitragstyp</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="betragsArt" type="d2:CVSlvBetragsArt">
+        <xs:annotation>
+          <xs:documentation>Betragsart: z.B. Beitrag, Auszahlung, Abfluss, Zufluss</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gueab" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Beitragstyp und Aufteilungsformel wird erst ab Zeitpunkt 'Gültig ab' berücksichtigt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="guebis" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Beitragstyp und Aufteilungsformel wird zu Zeitpunkten ab dem 'Gültig bis' - Datum nicht mehr berücksichtigt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAktBearb" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob ein Datensatz (z.B. ein VT) vom SB in der aktuellen Bearbeitung angelegt wurde</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="parAnteil" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Parameter Anteil für Aufteilungsformel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="parUnterGr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Parameter Untergrenze für Aufteilungsformel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="parOberGr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Parameter Obergrenze für Aufteilungsformel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeBtgAuftReg">
+    <xs:annotation>
+      <xs:documentation>Parameter object for some transactional services.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="auftlgFormel" type="d2:CVSlvAuftlgFormelAGAN">
+        <xs:annotation>
+          <xs:documentation>Formel / Formelausprägung als Verweis auf die Aufteilungsregel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="betragsArt" type="d2:CVSlvBetragsArtAGAN">
+        <xs:annotation>
+          <xs:documentation>Betragsart: z.B. Beitrag, Auszahlung, Abfluss, Zufluss</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="finTyp" type="d2:CVSlvFinTyp">
+        <xs:annotation>
+          <xs:documentation>Finanzierungstyp</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gueab" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Finanzierungstyp und Aufteilungsformel wird erst ab Zeitpunkt 'Gültig ab' berücksichtigt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="guebis" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Finanzierungstyp und Aufteilungsformel wird zu Zeitpunkten ab dem 'Gültig bis' - Datum nicht mehr berücksichtigt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzErlaub" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für Änderungserlaubnis</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAktBearb" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob ein Datensatz (z.B. ein VT) vom SB in der aktuellen Bearbeitung angelegt wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzInitialKBF" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob ein Datensatz (z.B. ein VT) mit Daten aus Muster vorbelegt wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="parAnteil" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Parameter Anteil für Aufteilungsformel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="parUnterGr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Parameter Untergrenze für Aufteilungsformel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="parOberGr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Parameter Obergrenze für Aufteilungsformel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="regId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Die letzte vergebene laufende Nummer in btgAuftReg</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zahlweise" type="d2:CVSlvZahlweise">
+        <xs:annotation>
+          <xs:documentation>Zahlweise, auf die sich die in parOberGr (und parUnterGr) eingegebenen Werte beziehen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeAdditionalPayment" type="lifeContract:ChangeAdditionalPayment"/>
+  <xs:complexType name="ChangeAdditionalPayment">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessAdditionalPayment</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="zuzahl" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgegebene Zuzahlung für die SST - Berechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gwgIdent" type="d2:CVSlvGWGIdent">
+        <xs:annotation>
+          <xs:documentation>Gibt an, ob eine Identifizierung des Beitragszahlers entsprechend dem Geldwäschegesetz erforderlich ist.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vorgTeilnovation" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Steuert im jeweiligen Gevo, ob diese Bearbeitung der Teilnov unterliegt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="isSystemDocSuppressed" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Should be the system documents global suppressed?</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeModificationTechnical" type="lifeContract:ChangeModificationTechnical"/>
+  <xs:complexType name="ChangeModificationTechnical">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessModificationTechnical</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="btg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgegebener Beitrag für die SST - Berechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzVorg" type="d2:CVSlvBerVorgabe">
+        <xs:annotation>
+          <xs:documentation>Bestimmt die Qualität der Vorgabe: z.B. Vorgabe der Leistung, des Beitrags oder der Ablaufleistung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="minBtg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vereinbarter Mindestbeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vorgTeilnovation" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Steuert im jeweiligen Gevo, ob diese Bearbeitung der Teilnov unterliegt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="isSystemDocSuppressed" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Should be the system documents global suppressed?</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="changeVt">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="changeVt" type="lifeContract:ChangeVt"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changePrv" type="lifeContract:ChangePrv"/>
+  <xs:complexType name="ChangePrv">
+    <xs:annotation>
+      <xs:documentation>Parameter object for some transactional services</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="kz_prod" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichnet, ob die Agentur der Produzent ist.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="proz_ant" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Prozentualer Anteil an einer Größe.Constraint proz_ant_RANGE: die prozentualen Provisionsanteile sind zwischen 0.0 und 1.0.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rollenId" type="d2:CVSlvVermRolle">
+        <xs:annotation>
+          <xs:documentation>Identifikation einer Partnerrolle in einer Partner-Vertrags-Beziehung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeAnreWerte" type="lifeContract:ChangeAnreWerte"/>
+  <xs:complexType name="ChangeAnreWerte">
+    <xs:annotation>
+      <xs:documentation>Parameter object for some transactional services</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="akKalkVol" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Kalkulatorisches abschlusskostenvolumen bei FLV oder Hybrid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akBilVol" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bilanzielles Abschlusskostenvolumen bei FLV oder Hybrid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akKalkFin" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Finanzierte kalkulatorische Abschlusskosten bei FLV oder Hybrid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akBilFin" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Finanzierte bilanzielle Abschlusskosten bei FLV oder Hybrid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akMrkwVol" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Abschlusskostenvolumen für Garantiereserve als Bezugsgröße für Mindestrückkaufswerte</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akMrkwFin" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Finanzierte Abschlusskosten für Garantiereserve als Bezugsgröße für Mindestrückkaufswerte</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="aknzTbAlt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Alte nicht-gezillmerte Abschlußkosten für den Tarifbeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="aknzTbFin" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Finanzierte nicht-gezillmerte Abschlußkosten für den Tarifbeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akzTbAlt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Alte gezillmerte Abschlußkosten für den Tarifbeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akzTbFin" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Finanzierte gezillmerte Abschlußkosten für den Tarifbeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="anrFvm" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbares Fondsvermögen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="anrSga" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbare Schlussgewinnanwartschaft</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="anrUebBR" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbare Basisgroesse für die Beteiligung an Ueberschuessen aus Bewertungsreserven</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="anrUebg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbares Überschussguthaben</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="anr_ke" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbarer Kapitalertrag.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="antKostenVersAusgl" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anteilige Kosten für den Zugang Versorgungsausgleich bei einer internen Teilung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="minBtgSumAkt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bisherige Mindestbeitragsumme für Hybridprodukte</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="nettobAnrWert" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbarer Wert für den Nettoreservebeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="steuBeg" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Maßgeblicher Beginntermin für die Berechnung der Kapitalertragsteuer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="tbAnrWert" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbarer Wert für den Tarifbeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="tbBtgsum" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bisherige Tarifbeitragsumme</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="versAusglBeschlDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Datum des Beschlusses des Familiengerichts zu einem Versorgungsausgleich.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vorVtrnr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Vorvertragsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zbBtgsum" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bisherige Zahlbeitragsumme</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zbBtgsum_vt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bisherige Zahlbeitragsumme auf Ebene Vertragsteil.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zillbAnrWert" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbarer Wert für den Zillmerreservebeitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeVt">
+    <xs:annotation>
+      <xs:documentation>Parameter object for some transactional services</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="vtId" type="xs:int"/>
+      <xs:element minOccurs="0" name="la1" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>In der Tarifklasse Klassik-Kapital oder Risiko ist la1 die (anfängliche) Todesfallsumme, bei Rente oder BU die Jahresrente, bei FLV oder FRV die Mindesttodesfall-Leistung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>In der Tarifklasse Klassik-Kapital ist la2 die (abweichende) Erlebensfallsumme, bei Rente die Kapitalabfindung, bei FLV oder FRV die Mindestrisiko-Leistung, ansonsten ist la2 leer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la3" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anfangstodesfallleistung bei Tarifen mit Leistungssprung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lr1" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>relative Leistung 1</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lr2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>relative Leistung 2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lr3" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>relative Leistung 3</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl1ra" type="d2:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob die Leistung 1 relativ oder absolut vorgegeben wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl2ra" type="d2:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob die Leistung 2 relativ oder absolut vorgegeben wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl3ra" type="d2:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob die Leistung 3 relativ oder absolut vorgegeben wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="changeVtLstg">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="changeVtLstg" type="lifeContract:ChangeVtLstg"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeVtLstg">
+    <xs:annotation>
+      <xs:documentation>Parameter object for SoProcessModificationTechnical</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="lstgTyp" type="d2:CVSlvBenefitType">
+        <xs:annotation>
+          <xs:documentation>Leistungsart</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstgWertAkt" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Aktueller Leistungswert</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstgWertRel" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Relativer Leistungswert</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vorgTyp" type="d2:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Steuert, ob die Leistung relativ oder absolut vorgegeben wird</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vorgWert" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistungsvorgabe relativ oder absolut für die Berechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstgProfil" type="d2:CVSlvLstgProfil">
+        <xs:annotation>
+          <xs:documentation>Leistungsprofil für die aktuelle Leistungsart</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeModificationTechnicalOthers" type="lifeContract:ChangeModificationTechnicalOthers"/>
+  <xs:complexType name="ChangeModificationTechnicalOthers">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service soProcessModificationTechnicalOthers</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="vtId" type="xs:int"/>
+      <xs:element minOccurs="0" name="changeBtgAuftReg" type="lifeContract:ChangeBtgAuftReg"/>
+      <xs:element minOccurs="0" name="kzGrundzulage" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob Grundzulage eingerechnet werden soll oder nicht: 0 - Nein, 1 - Ja</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="partnerId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Das Field partnerId identifiziert dieversicherte Person, zu der diese Row eine Aussage macht.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="rollenId" type="d2:CVSlvPartnerrolle">
+        <xs:annotation>
+          <xs:documentation>Identifikation einer Partnerrolle in einer Partner-Vertrags-BeziehungConstraint rollenId_RANGE: nur die Rolle 'versicherte Person' darf vorkommen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="avb3Id" type="d2:CVSlvAVB3">
+        <xs:annotation>
+          <xs:documentation>Drittes Schlüsselfeld für allgemeine Vertragsbedingungen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="avb4Id" type="d2:CVSlvAVB4">
+        <xs:annotation>
+          <xs:documentation>Viertes Schlüsselfeld für allgemeine Vertragsbedingungen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="avb5Id" type="d2:CVSlvAVB5">
+        <xs:annotation>
+          <xs:documentation>Fünftes Schlüsselfeld für allgemeine Vertragsbedingungen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="geburtsjahr" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Geburtsjahr des Kindes</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="jahrLetzeZulage" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Jahr der letzten Zulage</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="changeRisSchaetz" type="lifeContract:ChangeRisSchaetz"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeRisSchaetz">
+    <xs:annotation>
+      <xs:documentation>Parameter object for some transactional services.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="anomalie1Id" type="d2:CVSlvAnomalie">
+        <xs:annotation>
+          <xs:documentation>Verschlüsselung einer Anomalie des Versicherten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="anomalie2Id" type="d2:CVSlvAnomalie">
+        <xs:annotation>
+          <xs:documentation>Verschlüsselung einer weiteren Anomalie des Versicherten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebsterb" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Prozentangabe der übersterblichkeit. Dieser Wert geht in die Ermittlung der Ausscheidewahrscheinlichkeiten ein, auf deren Grundlage dann schließlich der erhöhte Beitrag berechnet wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeModificationPaymentFrequency" type="lifeContract:ChangeModificationPaymentFrequency"/>
+  <xs:complexType name="ChangeModificationPaymentFrequency">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service soProcessModificationPaymentFrequency</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="zweiInk" type="d2:CVSlvZahlweise">
+        <xs:annotation>
+          <xs:documentation>Eindeutige Identifizierung einer Beitragszahlweise.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changePremiumWaiverBegin" type="lifeContract:ChangePremiumWaiverBegin"/>
+  <xs:complexType name="ChangePremiumWaiverBegin">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessPremiumWaiverBegin</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="anreWertTae" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anrechenbarer Wert bei Beitragsfreistellung und technischen Aenderungen, der von außen übergeben werden kann (z.B. zum Ausgleich des Inkasso- oder Vorauszahlungskontos)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="isSystemDocSuppressed" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Should be the system documents global suppressed?</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeSurrenderPartial" type="lifeContract:ChangeSurrenderPartial"/>
+  <xs:complexType name="ChangeSurrenderPartial">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessSurrenderPartial</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="vtId" type="xs:int"/>
+      <xs:element minOccurs="0" name="trk_entn" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgabe für die sonstige Entnahme bei Teilrückkaufoder Versorgungsausgleich. Hinweis: das vorhandene Attribut wird verwendet; es wird nur die Beschreibung erweitert, dass das Attribut auch für den Versorgungsausgleich gilt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="trk_entn_ANSAMM" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgabe für die Entnahme aus dem festverzinslichen Reservekonto bei Teilrückkauf (bei Hybrid)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="trk_entn_FA" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgabe für die Entnahme aus Fondsguthaben bei Teilrückkauf (bei Hybrid)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="trk_entn_OP" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Vorgabe für die Entnahme wegen offener Posten bei Teilrückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAbrRegel" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen, ob Regelwerk für die  automatische Ermittlung des Zahlungsempfängers und der  Verrechnungsbeträge  für diesen Vertrag anzuwenden ist.	Verallgemeinerung des Kennzeichen -&gt; Umbennenung (noch nicht in Verwendung; keine Code-Anpassung notwendig)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="changeSteuAuftReg" type="lifeContract:ChangeSteuAuftReg"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeCoverExclusion" type="lifeContract:ChangeCoverExclusion"/>
+  <xs:complexType name="ChangeCoverExclusion">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessCoverExclusion</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="vtIds">
+        <xs:annotation>
+          <xs:documentation>Id der Vertragsteilen, die ausgeschlossen werden müssen.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="integer" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="pricingId" type="d2:CVSlvPricingVar">
+        <xs:annotation>
+          <xs:documentation>Pricing-Variante: neues globales Attribut zur Festlegung des Pricings (z.B. Haustarif)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gwgIdent" type="d2:CVSlvGWGIdent">
+        <xs:annotation>
+          <xs:documentation>Gibt an, ob eine Identifizierung des Beitragszahlers entsprechend dem Geldwäschegesetz erforderlich ist.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAusZV" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Steuert den Bearbeitungsfluß der Werte ausgeschlossener ZV's: z.B. Umbuchung auf HV oder Auszahlung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changePremiumInterruption" type="lifeContract:ChangePremiumInterruption"/>
+  <xs:complexType name="ChangePremiumInterruption">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessModificationPremiumInterruption</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="paymentAmount" type="xs:double"/>
+      <xs:element minOccurs="0" name="startOfPremiumPayment" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>End of the premium interruption.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="endOfPremiumPayment" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>End of the premium interruption.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="changeModificationPeriodicalIncrease" type="lifeContract:ChangeModificationPeriodicalIncrease"/>
+  <xs:complexType name="ChangeModificationPeriodicalIncrease">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service SoProcessModificationPeriodicalIncrease</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="dynId" type="d2:CVSlvDynamik">
+        <xs:annotation>
+          <xs:documentation>Qualität der Dynamikvereinbarung gemäß Schlüsselsystem</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="satz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Fest vereinbarter Prozentsatz, um den sich die Bezugsgröße (z.B. Zahlbeitrag) erhöhen soll.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zykDynamik" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Planmäßiger Zyklus der dynamischen Anpassungen in Jahren</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="infoResult" type="lifeContract:InfoResult"/>
+  <xs:complexType name="InfoResult">
+    <xs:annotation>
+      <xs:documentation>Return type for soInfo service operation.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="ifcVersion" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The version of the returned interface data</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ifcData" type="lifeContract:IfcData">
+        <xs:annotation>
+          <xs:documentation>The returned data - interface specific</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IfcData">
+    <xs:annotation>
+      <xs:documentation>Type for InfoResult.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="bearbnw" type="xs:anyType">
+        <xs:annotation>
+          <xs:documentation>The version of the returned interface data</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lv" type="xs:anyType">
+        <xs:annotation>
+          <xs:documentation>The lv Filter</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lvRef" type="xs:anyType">
+        <xs:annotation>
+          <xs:documentation>The lv Filter</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="cancelation" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>cancelation flag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="coverageCreateContainer" type="lifeContract:CoverageCreateContainer"/>
+  <xs:complexType name="CoverageCreateContainer">
+    <xs:annotation>
+      <xs:documentation>A container object for the result of a coverage creation.
+        The creation of a new coverage may involve the modification of attributes/objects not contained in the new coverage.
+        This container contains the newly created coverage and allows to add information on any other necessary contract modifications.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="coverage" type="viewFilterDef:VtView">
+        <xs:annotation>
+          <xs:documentation>The coverage (Vt) object created and to be added to the existing contract (Lv).
+            This "template" coverage is not necessarily ready for release.
+            It 	typically contains all mandatory values; other values are to be added by the consumer (e.g. UI user).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ruleSets" type="lifeContract:RuleSets"/>
+  <xs:complexType name="RuleSets">
+    <xs:annotation>
+      <xs:documentation>Container object for the rule sets to be executed before and aftter calculation.
+        This object is necessary for customers performing validation within the deprecated TBF component.
+        In case all validation rules are implemented within the LFJEE validation component,
+        this complex type is not relevant.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="before">
+        <xs:annotation>
+          <xs:documentation>List of rule sets to be executed prior to calculation.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="cVRuleSetType" type="d2:CVRuleSetType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="after">
+        <xs:annotation>
+          <xs:documentation>List of rule sets to be executed after calculation.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="cVRuleSetType" type="d2:CVRuleSetType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="fundShiftData" type="lifeContract:FundShiftData"/>
+  <xs:complexType name="FundShiftData">
+    <xs:annotation>
+      <xs:documentation>Root Parameter object for transactional service soProcessFundsAbsoluteShift</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="fundShift">
+        <xs:annotation>
+          <xs:documentation>Eine Liste mit Switch/Shift Angaben für jeden einzelnen Fond.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="fundShift" type="lifeContract:FundShift"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FundShift">
+    <xs:annotation>
+      <xs:documentation>Parameter object for switch/shift of an individual funds</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="fundsID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Fonds-ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="portfID" type="d2:CVSlvRisKlasse">
+        <xs:annotation>
+          <xs:documentation>Portfolio-ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzWertSicher" type="d2:CVSlvKzWertsicherung">
+        <xs:annotation>
+          <xs:documentation>Verwendungscharakter des Fonds im Vertrag (auch ein Garantiefonds kann als freier Fonds verwendet werden): freier Fonds 0, Garantiefonds 1, Garantiefonds periodisch 2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ent_dm" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Aenderungsbetrag fuer diesen Fond, negativ fuer Entnahme, positiv fuer Zufuehrung.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="fundSwitchData" type="lifeContract:FundSwitchData"/>
+  <xs:complexType name="FundSwitchData">
+    <xs:annotation>
+      <xs:documentation>Root Parameter object for transactional service soProcessFundsSwitch</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="portfID" type="d2:CVSlvRisKlasse">
+        <xs:annotation>
+          <xs:documentation>Portfolio-ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fundSwitch">
+        <xs:annotation>
+          <xs:documentation>Eine Liste mit SwitchAngaben für jeden einzelnen Fond.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="fundSwitch" type="lifeContract:FundSwitch"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FundSwitch">
+    <xs:annotation>
+      <xs:documentation>Parameter object for switch/shift of an individual funds</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="fundsID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Fonds-ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzWertSicher" type="d2:CVSlvKzWertsicherung">
+        <xs:annotation>
+          <xs:documentation>Verwendungscharakter des Fonds im Vertrag (auch ein Garantiefonds kann als freier Fonds verwendet werden): freier Fonds 0, Garantiefonds 1, Garantiefonds periodisch 2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="pant" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Neuer prozentualer Anteil fuer diesen Fond, zwischen 0.0 und 1.0. Die Summe der Anteile fuer alle Fonds muss 1.0 sein.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="previousPartialContractForPartnerData" type="lifeContract:PreviousPartialContractForPartnerData"/>
+  <xs:complexType name="PreviousPartialContractForPartnerData">
+    <xs:annotation>
+      <xs:documentation>Parameter Object for transactional service for extended information on previous contracts for a partner.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="partnerIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>External id of the partner object.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CdBalance">
+    <xs:annotation>
+      <xs:documentation>Payment balance of the contract in the collection and disbursement system used in the transactional service soProcessSettlement</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="balance" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Total balance of the contract in collection and dibursement system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="numberProcessedCollection" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Reference number of last processes collection record.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SettlementData">
+    <xs:annotation>
+      <xs:documentation>Parameter object for transactional service soProcessSettlement.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="cdBalance" type="lifeContract:CdBalance">
+        <xs:annotation>
+          <xs:documentation>Payment balance and number of processed records.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="payeeBankAccountData" type="lifeContract:PayeeBankAccountData">
+        <xs:annotation>
+          <xs:documentation>Payee information.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PayeeBankAccountData">
+    <xs:annotation>
+      <xs:documentation>Parameter object containing information about payee's (Zahlungsempfaenger) bank account.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="partnerId" type="xs:int"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="street" type="xs:string"/>
+      <xs:element minOccurs="0" name="zipCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="city" type="xs:string"/>
+      <xs:element minOccurs="0" name="iban" type="xs:string"/>
+      <xs:element minOccurs="0" name="big_swift" type="xs:string"/>
+      <xs:element minOccurs="0" name="accountNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="bankCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="bankName" type="xs:string"/>
+      <xs:element minOccurs="0" name="taxIdentCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SettlementAdvice">
+    <xs:annotation>
+      <xs:documentation>Parameter object that contains information whether a settlement is feasible and under what condition.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="kzAutoAbr" type="d2:CVSlvAbrechnArt">
+        <xs:annotation>
+          <xs:documentation>Indicates if and what kind of automatic settlement can be execute, after this business process
+            MANUELLE_ABRECHNUNG(0) -&gt; no automatic settlement possible -&gt; do it manually
+            SOFORTIGE_ABRECHNUNG(1) -&gt; yes, automatic settlement ist possible
+            BATCH_ABRECHNUNG(2)  -&gt; no, do automatic settlement in batch processing.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAbrRegel" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Indicates that the balance from the collection and dibursement system can and shall be provided
+            (JA -&gt; yes, NEIN -&gt; no)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="effectiveDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Effective date for the settlement (Wirksamkeitsdatum).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="payeeBankAccountAdvice" type="lifeContract:PayeeBankAccountAdvice">
+        <xs:annotation>
+          <xs:documentation>If in the business process a zahlEmpf is implicitely determined, but not all required information are available,
+            these information have to be fetched later before processing the settlement.
+            When set (!= null) this field indicates that the missing partner information have to be fetched.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PayeeBankAccountAdvice">
+    <xs:annotation>
+      <xs:documentation>Parameter object that contains information allowing fetching payee bank account data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="partnerId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The partnerId of the payee to use.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="accountId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The account number of the payee to use.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getSettlementAdviceArgs" type="lifeContract:GetSettlementAdviceArgs"/>
+  <xs:complexType name="GetSettlementAdviceArgs">
+    <xs:annotation>
+      <xs:documentation>Parameter object that contains arguments for the operation soGetSettlementAdvice.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="companyId" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>Company of the contract.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>External contract identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="periodicalProcessingOptions" type="lifeContract:PeriodicalProcessingOptions"/>
+  <xs:complexType name="PeriodicalProcessingOptions">
+    <xs:annotation>
+      <xs:documentation>Contains options for performing the periodical processing of a contract.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="saveContract" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Allows to simulate periodical processing of a contract.In case the saveContract is set to FALSE, the modified
+            contract will not be persisted.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="stopStepId" type="d2:CVSlvSchrittID">
+        <xs:annotation>
+          <xs:documentation>By setting this option, the contract modification identified by the given stopStepId is the last one. This means
+            that contracts are periodically processed (here: positioned regarding time model) such that periodical processing
+            ends after the modification (the given stopStepId will be executed). It is irrelevant whether the modification is
+            relevant for the contract: periodical processing will always stop.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="stopBeforeStepId" type="d2:CVSlvSchrittID">
+        <xs:annotation>
+          <xs:documentation> By setting this option, the contract modification identified by the given stopBeforeStepId is the next one. This
+            means that contracts are periodically processed (here: positioned regarding time model) such that periodical
+            processing ends immediately before the modification (the given stopBeforeStepId will not be executed). In case
+            the given stopStepId is not relevant for the contract, periodical processing will not stop.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="iplPendingModificationInterfaceBIGData" type="lifeContract:IPLPendingModificationInterfaceBIGData"/>
+  <xs:complexType name="IPLPendingModificationInterfaceBIGData">
+    <xs:annotation>
+      <xs:documentation>We distinguish between temporary and effective business object (BO) versions. Effective versions are stored in the BO
+        tree. Temporary versions are - in most cases - based on an effective version and need the service request input data
+        in order to be created/restored. PendingModification stores information on the service request data and the
+        RequestData object itself.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="util:BusinessObjectBase">
+        <xs:sequence>
+          <!-- no xmlId cause the type has an xmlId attribute:  -->
+          <xs:element minOccurs="1" name="modificationIdExt" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>In case a temporary BO version is made known externally (e.g. when sending an offer to a customer), the external
+                known identification is stored in this attribute (e.g. offer number). The content of this attribute may contain
+                customer specific semantics (e.g. [insurance policy number] / [consecutive number]) and is subject to
+                customization.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="businessProcessType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Type of the business process for which the pending modification is created.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="schrittId" type="d2:CVSlvSchrittID">
+            <xs:annotation>
+              <xs:documentation>Zum BusinessProcessType zugehörige SchrittId</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="modificationType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Sets the parent BO version number.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="modificationStatus" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Holds the status of this pending modification (answers the question whether this pending modification is valid
+                and - if not - why).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="modificationEffectiveDate" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>In case the temporary version and the modification linked with it do have an effective date already known (e.g.
+                predated modification), the date is stored in this attribute.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="userId" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Id of the user who is responsible for the last update of the pending modification.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="modifiedAt" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>Date of the last modification of this pending modification.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="acceptanceDecisionType" type="d2:CVAcceptanceDecisionType">
+            <xs:annotation>
+              <xs:documentation>Information about the business process decision of the user (ACCEPT, REJECT, SUPEND, ...)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="taxValues" type="lifeContract:TaxValues"/>
+  <xs:complexType name="TaxValues">
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="beitragGefoerdert363AktJahr" type="xs:double"/>
+      <xs:element minOccurs="0" name="beitragUngefoerdertAktJahr" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContextSpecificArguments">
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="settlementData" type="lifeContract:SettlementData">
+        <xs:annotation>
+          <xs:documentation>Data for automatic settlement.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="churchTaxInformation" type="lifeContract:ChurchTaxInformation"/>
+  <xs:complexType name="ChurchTaxInformation">
+    <xs:annotation>
+      <xs:documentation>Input parameter for church tax information</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="requestList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="request" type="lifeContract:Request"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Request">
+    <xs:annotation>
+      <xs:documentation>Part of church tax information</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="contractIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Contract identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="companyId" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>The identifier of the insurance company / client organization (the tenant in sense of multi-tenancy).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="churchTax" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Church tax to pay</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="religion" type="d2:CVSlvReligionszugeh">
+        <xs:annotation>
+          <xs:documentation>Religious community</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="logIdRef" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>LogId of the corresponding BFTC02-request</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="partnerID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Identification ID of the tax payer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="returnCodeTC" type="d2:CVSlvReturnCodeTC">
+        <xs:annotation>
+          <xs:documentation>ReturnCode of TaxConnect</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="returnCodeBzst" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>ReturnCode of BZSt (GERMAN: Bundeszentralamt fuer Steuern)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="contractModification" type="lifeContract:ContractModification"/>
+  <xs:complexType name="ContractModification">
+    <xs:annotation>
+      <xs:documentation>Input parameter for non technical modification</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="modificationList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="modification" type="lifeContract:Modification"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Modification">
+    <xs:annotation>
+      <xs:documentation>Part of InboundContractModification</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="contractIDExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>External contract number</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="companyID" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>Company ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="bookingDirective" type="d2:CVBookingDirective">
+        <xs:annotation>
+          <xs:documentation>The booking directive</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="effectiveDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Effective date</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="paymentMethod" type="d2:CVSlvZahlweg">
+        <xs:annotation>
+          <xs:documentation>Payment method</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="mandatID" type="d2:CVSlvMandat">
+        <xs:annotation>
+          <xs:documentation>Unique identification of a mandate for SEPA Direct Debit.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="signatureDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Date of signature</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="collectionStop" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Stop of collection</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="collectionStopTill" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Stop of collection till</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="payoutStop" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Payout stop</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="payoutStopTill" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Payout stop till</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dunningStop" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Dunning stop</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dunningStopTill" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Dunning stop till</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DocumentSpecification">
+    <xs:annotation>
+      <xs:documentation>Specification of a document to be created.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="docType" type="d2:CVDocType">
+        <xs:annotation>
+          <xs:documentation>The document type</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="printRequest" type="lifeContract:PrintRequest"/>
+  <xs:complexType name="PrintRequest">
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="companyID" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>Mandant</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="contractIdExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Vertragsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="contractVersion" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>BearbID des Standes für Auskunftsbriefe. 0 für aktueller Stand, nicht relevant für andere BPT.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="effectiveDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Wirksamkeitsdatum für Leistungsspiegelbriefe. Nicht relevant für andere BPT.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="businessProcessType" type="d2:CVBusinessProcessTypePrint">
+        <xs:annotation>
+          <xs:documentation>Der Gerschäftsvorfall, der die Grundlage für die Briefschreibung bilden soll.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="supressDefaultDocument" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Sollen Standarddokumente des Geschäftsvorfalls unterdrückt werden? Diese kämen sonst zu den spezifizierten Dokumenten hinzu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="documentSpecificationList">
+        <xs:annotation>
+          <xs:documentation>Zu erstellende Dokumente.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="documentSpecification" type="lifeContract:DocumentSpecification"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="inboundPayment" type="lifeContract:InboundPayment"/>
+  <xs:complexType name="InboundPayment">
+    <xs:annotation>
+      <xs:documentation>Input parameter for inbound payment</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="paymentOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="paymentOrder" type="lifeContract:PaymentOrder"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PaymentOrder">
+    <xs:annotation>
+      <xs:documentation>Part of inbound payment data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="contractIDExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>External contract number</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="companyID" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>Company ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="bookingDirective" type="d2:CVBookingDirective">
+        <xs:annotation>
+          <xs:documentation>The booking directive</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="bookingNumber" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The unique identification ID for each entry</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bookingEntryToCancel" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The identification id of the entry to be cancelled</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="batchID" type="d2:CVBatchID">
+        <xs:annotation>
+          <xs:documentation>Identification ID of the external Application, which created the entry</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="valueDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>The value on the day on which the directive is effectively</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="amount" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Amount of money</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="previousAmount" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Previous premium (amount) which was subventioned</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="yearOfPremInvest" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The year of premium invest</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="paymentRequestFlag" type="d2:CVPaymentRequestFlagType">
+        <xs:annotation>
+          <xs:documentation>qualifies the type of the payment request flag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="contractIDAdjacentSystem" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unique Contract identifier in adjacent system German: Eindeutige Kennung eines Untervertrages im Nachbarsystem</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="correctionValue" type="lifeContract:CorrectionValue"/>
+  <xs:complexType name="CorrectionValue">
+    <xs:annotation>
+      <xs:documentation>Input parameter for correction value transfer</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="correctionValueList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="correctionValueEntry" type="lifeContract:CorrectionValueEntry"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CorrectionValueEntry">
+    <xs:annotation>
+      <xs:documentation>Part of correction value data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="contractIDExt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>External contract number</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="companyID" type="d2:CVCompany">
+        <xs:annotation>
+          <xs:documentation>Company ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="correctionType" type="d2:CVSlvKorrekturTyp">
+        <xs:annotation>
+          <xs:documentation>The correction type</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="bookingNumber" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The unique identification ID for each entry</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bookingEntryToCancel" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The identification id of the entry to be cancelled</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="coverageId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>coverage ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="segmentId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>segment ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fundId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>fund ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="valueDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>The value on the day on which the directive is effectively</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="correctionValue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Given correction value</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="createDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>creation date</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="promotionAssociation" type="lifeContract:PromotionAssociation"/>
+  <xs:complexType name="PromotionAssociation">
+    <xs:annotation>
+      <xs:documentation>Input parameter for association of promotion after pension rights adjustment
+        The type is modelled according to ZVBF00/ZVBF10.dtd
+        (COR.FJA Zulagenverwaltung interface type), however with Life Contract compatible types of the attributes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="datumUebertragung" type="xs:date"/>
+      <xs:element minOccurs="1" name="meldemerkmal" type="d2:CVSlvMeldemerkmal"/>
+      <xs:element minOccurs="1" name="meldegrund" type="d2:CVSlvMeldegrund"/>
+      <xs:element minOccurs="1" name="anbieternummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="vertragsIDextern" type="xs:string"/>
+      <xs:element minOccurs="1" name="prozUebVA" type="xs:double"/>
+      <xs:element minOccurs="0" name="zuordnung">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="zuordnung" type="lifeContract:Zuordnung"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Zuordnung">
+    <xs:annotation>
+      <xs:documentation>Part of Promotion Association data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="outOfMarriage" type="xs:boolean"/>
+      <xs:element minOccurs="1" name="btJahr" type="xs:int"/>
+      <xs:element minOccurs="0" name="beiZul" type="xs:double"/>
+      <xs:element minOccurs="0" name="zugeordneteZulage" type="xs:double"/>
+      <xs:element minOccurs="0" name="beiZulAusserEhe" type="xs:double"/>
+      <xs:element minOccurs="0" name="zulageAusserEhe" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="promotionInfo" type="lifeContract:PromotionInfo"/>
+  <xs:complexType name="PromotionInfo">
+    <xs:annotation>
+      <xs:documentation>Input parameter for promotion info transfer before change of provider.
+        The type is modelled according to ZVBF24.dtd
+        (COR.FJA Zulagenverwaltung interface type), however with Life Contract compatible types of the attributes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="datumUebertragung" type="xs:date"/>
+      <xs:element minOccurs="1" name="vorgangsnummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="datumFristablauf" type="xs:date"/>
+      <xs:element minOccurs="1" name="vertragsnummerNeu" type="xs:string"/>
+      <xs:element minOccurs="1" name="anbieterNeu" type="xs:string"/>
+      <xs:element minOccurs="1" name="zertifizierungsnummerNeu" type="xs:string"/>
+      <xs:element minOccurs="0" name="berechnungsdatenZA02ZA03">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="berechnungsdatenZA02ZA03" type="lifeContract:BerechnungsdatenZA02ZA03"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="berechnungsdatenZA04">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="berechnungsdatenZA04" type="lifeContract:BerechnungsdatenZA04"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BerechnungsdatenZA02ZA03">
+    <xs:annotation>
+      <xs:documentation>Part of Promotion Info data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="quartal" type="xs:int"/>
+      <xs:element minOccurs="1" name="beitragsjahr" type="xs:int"/>
+      <xs:element minOccurs="1" name="dtErst" type="xs:dateTime"/>
+      <xs:element minOccurs="1" name="vertragsnummer" type="xs:string"/>
+      <xs:element minOccurs="0" name="beitrag" type="xs:double"/>
+      <xs:element minOccurs="0" name="beiZul" type="xs:double"/>
+      <xs:element minOccurs="0" name="zulage" type="xs:double"/>
+      <xs:element minOccurs="0" name="btrQAusz" type="xs:double"/>
+      <xs:element minOccurs="0" name="btrQRueck" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BerechnungsdatenZA04">
+    <xs:annotation>
+      <xs:documentation>Part of Promotion Info data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="vertragsnummer" type="xs:string"/>
+      <xs:element minOccurs="1" name="beitragsjahr" type="xs:int"/>
+      <xs:element minOccurs="1" name="dtErst" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="beiZul" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="allowanceData" type="lifeContract:AllowanceData"/>
+  <xs:complexType name="AllowanceData">
+    <xs:annotation>
+      <xs:documentation>Input parameter for allowance data transfer.
+        The type is modelled according to ZVDW02.dtd
+        (COR.FJA Zulagenverwaltung interface type), however with Life Contract compatible types of the attributes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="effectiveDate" type="xs:date"/>
+      <xs:element minOccurs="1" name="zulageberechtigung" type="d2:CVSlvZulageberechtigung"/>
+      <xs:element minOccurs="0" name="kinder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="kind" type="lifeContract:kind"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="kind">
+    <xs:annotation>
+      <xs:documentation>Part of Promotion Info data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="geburtsjahr" type="xs:int"/>
+      <xs:element minOccurs="1" name="zuordnung" type="d2:CVSlvZuordnung"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="bestaetigungUebermittlung" type="lifeContract:BestaetigungUebermittlung"/>
+  <xs:complexType name="BestaetigungUebermittlung">
+    <xs:annotation>
+      <xs:documentation>Root Element der Eingangsdaten für die Erklärungsbestätigung von FinanzOnline.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="infoDaten" type="lifeContract:InfoDaten">
+        <xs:annotation>
+          <xs:documentation>Infodaten zur Übermittlung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="foerderungsBestaetigung">
+        <xs:annotation>
+          <xs:documentation>Einzelne Vertragsbezogene Erklärungen</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="foerderungsBestaetigung" type="lifeContract:FoerderungsBestaetigung"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InfoDaten">
+    <xs:annotation>
+      <xs:documentation>Infodaten der Übermittlung.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="jahrUeb" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>In diesem Feld wird das Jahr, für das die übermittelten Daten gelten, bekannt gegeben
+            (Beispiel: Im Jahr 2004 werden die Erklärungen des Jahres 2003 übermittelt).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FoerderungsBestaetigung">
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="vertragnr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Die Vertragsnummer des Antragsteller ist einzugeben.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="praemieGez" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation>Erhaltene Förderung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="sumeinzahl" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation>Summe gezahlter Beitrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="proposalCalculateInput" type="lifeContract:ProposalCalculateInput"/>
+  <xs:complexType name="ProposalCalculateInput">
+    <xs:annotation>
+      <xs:documentation>Representing a single proposal.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="pcInVp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcInVp" type="lifeContract:PcInVp"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="pcInVt">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcInVt" type="lifeContract:PcInVt"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="pcInKinderzulage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcInKinderzulage" type="lifeContract:PcInKinderzulage"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="lvbegt" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Begin date of the contract.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lvablt" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Termination date of the contract.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zins_max" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Maximun interest simulation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zins_mod" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Interest used for simulation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modVorg" type="d2:CVSlvTypModellvorgabe">
+        <xs:annotation>
+          <xs:documentation>Simulation parameter.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modSzenario" type="d2:CVSlvSzenario">
+        <xs:annotation>
+          <xs:documentation>Simulation scenario.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="pdId" type="d2:CVProduct">
+        <xs:annotation>
+          <xs:documentation>Identifier of the product.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="btg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Premium.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zweiInk" type="d2:CVSlvZahlweise">
+        <xs:annotation>
+          <xs:documentation>The payment mode for the premium payments.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzVorg" type="d2:CVSlvBerVorgabe">
+        <xs:annotation>
+          <xs:documentation>Presetting for the calculation of a proposal.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="pricingId" type="d2:CVSlvPricingVar">
+        <xs:annotation>
+          <xs:documentation>Definition of the pricing rules.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dynId" type="d2:CVSlvDynamik">
+        <xs:annotation>
+          <xs:documentation>Qualität der Dynamikvereinbarung gemäß Schlüsselsystem</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zykDynamik" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Scheduled period of index-linked increase in years.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="satz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Commited interest of index-linked increase.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcInVp">
+    <xs:annotation>
+      <xs:documentation>Representing a insured person of a proposal.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="partnerId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Identifier of the insured person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gebDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Birthdate of the insured person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="sex" type="d2:CVSlvGeschlecht">
+        <xs:annotation>
+          <xs:documentation>Sex of the insured person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="berufId" type="d2:CVSlvBeruf">
+        <xs:annotation>
+          <xs:documentation>Identification of an occupation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="risikogruppe" type="d2:CVSlvRisikogruppe">
+        <xs:annotation>
+          <xs:documentation>Group of risk which should be handled equal for a insured person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcInVt">
+    <xs:annotation>
+      <xs:documentation>Representing a coverage of the proposal.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="pcInVpVT">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcInVpVT" type="lifeContract:PcInVpVT"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="pcInVertschl">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcInVertschl" type="lifeContract:PcInVertschl"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="tfId" type="d2:CVTariff">
+        <xs:annotation>
+          <xs:documentation>Identifier of a tariff.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="generation" type="d2:CVProductTariffGeneration">
+        <xs:annotation>
+          <xs:documentation>Identification of the generation sequence of identical products and tariffs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="tbVarTyp" type="d2:CVSlvTarifvariante">
+        <xs:annotation>
+          <xs:documentation>Segment type</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtueb" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Main coverage of the coverage (in case of main coverage vtueb=vtId).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebVerwSys" type="d2:CVSlvUeberschuss">
+        <xs:annotation>
+          <xs:documentation>Identifier of the surplus appropriation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="labl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauftermin der Leistung bei BUZ / HZV.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bzabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>End of premium payment for a coverage.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>End of the coverage.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="beginnVT" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Beginn date of the coverage.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la1" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>In the tariff Classical or Risk la1 is the (initial) death sum,
+            with pension or BU the the annuity with FLV or FRV the least death achievement.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>In the tariff Classical la2 is the (divergent) experience case sum,
+            with pension the lump-sum compensation and with FLV or FRV the least risk achievement
+            , otherwise la2 is empty.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rabattId" type="d2:CVSlvSammelrabatt">
+        <xs:annotation>
+          <xs:documentation>Identification of discounts.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="portfId" type="d2:CVSlvRisKlasse">
+        <xs:annotation>
+          <xs:documentation>Identification of portfolio.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl1ra" type="d2:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Identification if benefit one (la1) is relative or absolute.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl2ra" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Identification if benefit two (la2) is relative or absolute.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>In case of main coverage the end of guarantee period,
+            in case of inheritors annuity the end of deferment period of the first insured persion.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rbeg" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Begin of annuity.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zweiExk" type="d2:CVSlvZahlweiseEx">
+        <xs:annotation>
+          <xs:documentation>period of paying out</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzdyn" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Identifier for scheduled index-linked increasing of the coverage.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="abschlkoVar" type="d2:CVSlvAbschlusskostenVar">
+        <xs:annotation>
+          <xs:documentation>Variante der Abschlusskostenmodifikation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcInVpVT">
+    <xs:annotation>
+      <xs:documentation>The assignment of insured persons of a proposal to the coverages of a proposal.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="partnerId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Identification of a partner.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vpTypId" type="d2:CVSlvVpTypID">
+        <xs:annotation>
+          <xs:documentation>Type of an insured person. Only 1 or 2 for first or second insured person are possible.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcInVertschl">
+    <xs:annotation>
+      <xs:documentation>Distribution of new money to the funds of the contract in percent.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="fondsId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Internal ID of a funds.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="pant" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Percentage of new money (written as 0.0 to 1.0) which is invested into this funds.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcInKinderzulage">
+    <xs:annotation>
+      <xs:documentation>Child benefit information for Riester pension products.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="geburtsjahr" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Year of birth.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="proposalCalculateOutput" type="lifeContract:ProposalCalculateOutput"/>
+  <xs:complexType name="ProposalCalculateOutput">
+    <xs:annotation>
+      <xs:documentation>Representing the result of a proposal calculation.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="pcOutVt">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcOutVt" type="lifeContract:PcOutVt"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="lvbegt" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Begin date of the contract.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lvablt" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Termination date of the contract.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="btg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Premium.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zweiInk" type="d2:CVSlvZahlweise">
+        <xs:annotation>
+          <xs:documentation>The payment mode for the premium payments.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzVorg" type="d2:CVSlvBerVorgabe">
+        <xs:annotation>
+          <xs:documentation>Presetting for the calculation of a proposal.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcOutVt">
+    <xs:annotation>
+      <xs:documentation>Representing a coverage of the proposal.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="pcOutVertschl">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcOutVertschl" type="lifeContract:PcOutVertschl"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="pcTransparenz">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcOutTransparenz" type="lifeContract:PcOutTransparenz"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="pcOutBspRech">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="pcOutBspRech" type="lifeContract:PcOutBspRech"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtueb" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Main coverage of the coverage (in case of main coverage vtueb=vtId).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="labl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Ablauftermin der Leistung bei BUZ / HZV.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bzabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>End of premium payment for a coverage.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>End of the coverage.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la1" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>In the tariff Classical or Risk la1 is the (initial) death sum,
+            with pension or BU the the annuity with FLV or FRV the least death achievement.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="la2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>In the tariff Classical la2 is the (divergent) experience case sum,
+            with pension the lump-sum compensation and with FLV or FRV the least risk achievement
+            , otherwise la2 is empty.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl1ra" type="d2:CVSlvKzl1ra">
+        <xs:annotation>
+          <xs:documentation>Identification if benefit one (la1) is relative or absolute.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzl2ra" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Identification if benefit two (la2) is relative or absolute.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gabl" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>In case of main coverage the end of guarantee period,
+            in case of inheritors annuity the end of deferment period of the first insured persion.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rbeg" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Begin of annuity.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zweiExk" type="d2:CVSlvZahlweiseEx">
+        <xs:annotation>
+          <xs:documentation>period of paying out</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcOutVertschl">
+    <xs:annotation>
+      <xs:documentation>Distribution of new money to the funds of the contract in percent.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="fondsId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Internal ID of a funds.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="pant" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Percentage of new money (written as 0.0 to 1.0) which is invested into this funds.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcOutTransparenz">
+    <xs:annotation>
+      <xs:documentation>Eine Zeile in der Tabelle 'transparenz' repräsentiert eine Information, die an den Versicherungsnehmer weitergegeben werden muss.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="1" name="infotyp" type="d2:CVSlvInfotyp">
+        <xs:annotation>
+          <xs:documentation>Art einer Information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="infobetrag" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Information in Form einer Zahl</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="infobezug" type="d2:CVSlvInfobezug">
+        <xs:annotation>
+          <xs:documentation>Bezugsgröße, auf die sich die ermittelten Werte zu dem Typ beziehen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="varianteId" type="d2:CVTariffVariant">
+        <xs:annotation>
+          <xs:documentation>Attribut zur eindeutigen Identifizierung einer Tarifvariante (wie in sb und sk)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PcOutBspRech">
+    <xs:annotation>
+      <xs:documentation>Eine Row in Table bspRech repräsentiert das Ergebnis einer Beispielrechnung. Dieses wird je, zu bestimmten Zeitpunkten (im Regelfall einmal jährlich zu den Versicherungsjahrestagen) und - sofern tariflich vorgesehen - mit verschiedenen Varianten der überschussentwicklung ermittelt.Die Ergebnisse der Varianten der überschussentwicklung werden nicht für den gesamten Hochrechnungszeitraum ermittelt, sondern nur zum Ablauftermin bzw. für einen flexiblen Abrufzeitraum.Dargestellt werden die für denwichtigsten Werte einer, also insbesondere die Entwicklung von Beitrag, Rückkaufswert (inkl. überschussbeteiligung) und Todesfallleistung (inkl. überschussbeteiligung). Werte von eventuellensind zu den Werten derdazu addiert.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- no xmlId cause the type has an xmlId attribute:  -->
+      <xs:element minOccurs="0" name="jahr" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Angabe einer Jahreszahl (JJJJ)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bearbDat" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Termin, an dem das Objekt bearbeitet wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zbBsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zahlbeitrag im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebverrBsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Beitragsverrechnung aus überschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtla1Bsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung 1 der HV (Tod oder Erleben) im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="vtla2Bsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung 2 der HV (Tod, Kapitalabfindung, ...) im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bonlabsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bonusleistung (z.B. Bonusrente) im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte Leistung bei Tod im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Tod aus laufendem überschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttsu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Tod aus Schlußüberschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstUnfTodGar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte (über alle VT) garantierte Leistung bei Unfalltod (z.B. für Beispielrechnung)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstrg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte Leistung bei Rückkauf im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstru" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Rückkauf aus laufendem überschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstrsu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Rückkauf aus Schlußüberschuß im Rahmen der Beispielrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstag" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte Ablaufleistung pro Hauptversicherungsteil, idR also eines Vertrags insgesamt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstalu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Ablauf aus laufendem überschuß pro Hauptversicherungsteil</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstasu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Ablauf aus Schlußüberschuß pro Hauptversicherungsteil</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kzAblauf" type="d2:CVSlvJaNein">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen für Erreichen des Endes der Vertragslaufzeit.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="verblbfr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zusätzliche beitragsfreie Rente - z.B. pro Hauptversicherungsteil in den Garantiewerten bei Rentenversicherungen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstogar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Garantierte Leistung bei Ausübung der Option</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstoue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus überschuß bei Ausübung der Option</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstokap" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Kapitalleistung bei Ausübung der Option</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="akt_alt" type="xs:short">
+        <xs:annotation>
+          <xs:documentation>Versicherungstechnisch ermitteltes aktuelles Alter.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gueTermin" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Gueltigkeitstermin eines Eintrages oder Satzes in einer Entitaet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttuBUZ" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>überschuss BUZ bei Tod</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstruBUZ" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>überschuss BUZ bei Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="lfdnr" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>In diesem Attribut wird eine 'laufende Nummer' (natürliche Zahl) geführt, die als Teil von Primärschlüsseln benötigt wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="uebVar" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Schlüsselwerte für die überschuss-Variante, die für die Hochrechnung verwendet wurde</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fvm" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Wert (in Landeswaehrung) der Fondsanteile.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fvmUeb" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Fondsvermögen aus Überschüssen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstZul" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Zulagen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rentBetrGarZwei" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierter Rentenbetrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rentBetrGesZwei" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>prognostizierter Rentenbetrag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kapentw_erw" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zinssatz mit dem die Fondskonten hochgerechnet werden (ohne Wertsicherungsfonds)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="custom1" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Attribut zur freien Verwendung im Customizing.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="custom2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Attribut zur freien Verwendung im Customizing.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="custom3" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Attribut zur freien Verwendung im Customizing.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="risiko_art" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Art des versicherten Risikos</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zusBeitragsvereinb" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zusätzliche Beitragsvereinbarung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttg2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte Leistung bei Tod der VP2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttu2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung bei Tod aus Schlußüberschuß</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstsu2" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>null</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="saldo_KF" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Saldo der KF-Konten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="saldo_NDK" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Saldo der NDK-Konten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gesZinsSatz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamtverzinsungssatz</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="modellvorgabe" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Typ der Modellvorgabe</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="szenario" type="d2:CVSlvSzenario">
+        <xs:annotation>
+          <xs:documentation>Hochgerechnetes Szenario</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zinsuebsatz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Anteilssatz für den Zinsüberschuss</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="stornoabschlag" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Stornoabschlag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstUebBR" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Bewertungseserven bei Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gesBtgVerz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamtwert der mit dem Gesamtverzinsungssatz aufgezinsten gezahlten Beiträge</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="sumGezBtg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Summe der gezahlten (Eigen-)Beiträge</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bfrsumgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte beitragsfreie Summe der HV</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bfrsum2gar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte beitragsfreie Summe der HV zur Leistung 2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="bfrsumbuzgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte beitragsfreie Summe der BUZ-Renten für die erste VP</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsterlgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte Erlebensfallleistung bei Ablauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lsttodgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierte Leistung im Todesfall</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstrkwgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>garantierter Rückkaufswert</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="verblbfrgar" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zusätzliche garantierte beitragsfreie Rente</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fvmWertSicher" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Wert der Anteile der wertgesicherten Anlage</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zulageBsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Wert der Zulage in der Beispielsrechnung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstUebBrTod" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Bewertungsreserven bei Tod</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstauebbr" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Bewertungsreserven bei Ablauf.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="entnKumuliert" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>kumullierte verzinste Entnahmen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kostenabs" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährliche Kosten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="gebWertSicher" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährliche Gebühren für Wertsicherung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kosten_buz" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährliche Kosten für die Versicherung der Berufsunfähigkeit</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kosten_sonzv" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>jährliche Kosten für sonstige Zusatzversicherungen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kapentwWS_erw" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zinssatz mit dem die Wertsicherungsfonds hochgerechnet werden.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="errGarGutHab" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>erreichtes garantiertes Guthaben</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstazul" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Kapital bei Ablauf aus Zulagen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstUebBrAnbWecR" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Bewertungsreserven bei Anbieterwechsel Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstAnbWecRsu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus Schlussüberschuss bei Anbieterwechsel Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstAnbWecRu" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Leistung aus laufendem Überschuss bei Anbieterwechsel Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="lstAnbWecRg" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Gesamte Leistung bei Anbieterwechsel Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="stoAbAnbWecR" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Stornoabschlag bei Anbieterwechsel Rückkauf</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="stornoabschlagVA" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Stornoabschlag auf das Ansammlungsguthaben</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="btgLfdSEPA" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Beitrag mit laufendem Charakter für SEPA</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="btgEbSEPA" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Beitrag mit Einmalbeitragscharakter für SEPA</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="zuzahlBsp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Zuzahlung </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
